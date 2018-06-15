@@ -1,0 +1,110 @@
+
+html{
+  max-width: 100vw;
+  background: #b9c6b7b0;
+  display: flex;  
+  justify-content: space-around;
+  }
+body {
+  
+  background-color: #9f2a0159;
+
+}
+
+header,
+footer{
+  grid-column: 1 / span 2;
+  background: #cdc;
+  background-size: cover;
+  color: white;
+  font-family: 'Vidaloka', serif;
+}
+header{
+  grid-column: 1 / span 2;
+  background: no-repeat url("../img/hlogo.png");
+  background-size: cover;
+  color: white;
+  font-family: 'Vidaloka', serif;
+}
+
+body{
+  margin:  auto;
+  padding:15px;
+  max-width: 80em;
+  padding: 0em 0;
+  font-family: 'Vidaloka', serif; 
+  height:100vh;
+  background:no-repeat url("../img/hlogo.png");
+}
+
+#root{
+  display: grid;
+  grid-template-columns: 30rem repeat(auto-fill, minmax(100px, 56vw));
+  grid-template-rows: 20vw auto 20vw;
+  grid-gap: 0.50em;
+}
+
+.app {
+  height:95vh;
+  color: #fff;
+  background: rgba(70, 99, 87, 0.4);
+  padding: 10px;
+}
+nav, .navbar{
+  width:80pc;
+  height: 4rem;
+  text-align:center;
+  display: inline;
+  list-style: none;
+  text-decoration: none;
+  background:pink;
+  position: absolute;
+  margin: 1rem 0rem;
+ }
+
+ .navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.net{
+  color: #000;
+  background: #ccc;
+}
+.asset{  
+height:100%;
+color:#000;
+background:rgb(80, 53, 75);
+padding:15px;
+}
+
+form {
+  form-field{
+  margin: 15px;
+  padding: 12px;
+  }
+}
+footer {
+  div {
+  width: 200px;
+  height: 200px;
+  display: block;
+  position: relative;
+  }
+  div::after {
+    content: "";
+    background: url("../img/hlogo.png");
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
+}
