@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './logout.scss'
 
 class Logout extends React.Component {
   
@@ -10,7 +10,7 @@ class Logout extends React.Component {
   
   handleLogout(e) {
     e.preventDefault();
-    let that = this
+    let self = this
     let email = this.props.currentUser
 
     fetch('/users/sign_out', {
@@ -19,7 +19,7 @@ class Logout extends React.Component {
       body: JSON.stringify(data)
     })
     .then((res) => {
-      that.props.changePage("login")
+      self.props.changePage("login")
     })
     .catch(function(error){
       console.log(error)
@@ -28,7 +28,9 @@ class Logout extends React.Component {
 
   render() {
     return (
-      <button onClick={this.handleLogout}>Sign Out</button>
+      <div id="exit">
+      <button className="btn-out" onClick={this.handleLogout}>Sign Out</button>
+      </div>
     );
   };
 }

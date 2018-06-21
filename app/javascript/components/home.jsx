@@ -1,4 +1,5 @@
 import React from 'react'
+import './home.scss'
 
 
 class Home extends React.Component {
@@ -15,7 +16,7 @@ class Home extends React.Component {
 
   render() {
     return(
-      <div>
+      <div className="home">
        <header>
         <nav>
         <h2>Welcome Home</h2>

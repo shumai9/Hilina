@@ -1,5 +1,5 @@
 import React from 'react'
-import './regst.scss'
+import './signup.scss'
 
 
 class Signup extends React.Component{
@@ -16,30 +16,33 @@ class Signup extends React.Component{
   }
 
   handleSignup =(e) => {
+    let self = this
     e.preventDefault();
-    let data = { user: {
+    let data = { user:{ 
       first_name: document.getElementById('first_name').value,
       last_name: document.getElementById('last_name').value,
       birth_date: document.getElementById('birth_date').value,
       email: document.getElementById('email').value,
       password: document.getElementById('password').value
       }
-    }
+    };
 
-    fetch('/api/v1/users/', {
-      method: "POST", headers: {
-      'Content-Type': 'application/json', mode: 'cors' },
+    fetch('/users', {
+      method: "POST", 
       body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json; charset=UTF-8', mode: 'cors' },
       credentials: 'include'    
     })
-    .then((response) =>{
-      self.props.changePage("delete");
-      self.props.updateCurrentUser(email);
-    })
+    .then((response) =>{ 
+      if (response.status == 'ok') {
+        self.props.updateCurrentUser(email);
+        self.props.changePage("delete");
+      }else{self.props.changePage("home");}
+      })
     .catch(function(error){
-      console.log(error)
+      console.log(data)
     })
-  }
+  }   
   
   render() {
     return (
@@ -82,7 +85,7 @@ class Signup extends React.Component{
             type="password" id="password_confirmation" name="password_confirmation" placeholder="Retype paswword"/>
           </label>
           </div><br />
-            <button>Create Account</button>
+            <button className="btn-signup">Create Account</button>
           <br/>
            <a href="#" onClick={() => this.props.changePage("login")}>Already have an account?</a> 
         </form>
@@ -93,4 +96,4 @@ class Signup extends React.Component{
   };
 };
 
-export default Signup;
+export default Signup

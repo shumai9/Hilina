@@ -1,4 +1,5 @@
 import React from 'react'
+import './login.scss'
 
 
 
@@ -16,25 +17,28 @@ class Login extends React.Component {
   }
 
   handleLogin = (e) => {
+    let self = this
     let data = {
       user: {
-        email: e.target.value,
-        password: e.target.value
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
       }
     }
     e.preventDefault();
-    fetch('api/v1/users/', {
-      method: 'post',
-      header: 'Content-Type: application/json',
+    fetch('/users/sign_in', {
+      method: "POST", 
       body: JSON.stringify(data),
-      credentials: 'same-origin'
-    })
-    .then((response) =>{
-      self.props.changePage("delete");
-      self.props.updateCurrentUser(email);
-    })
-    .catch(function(error){
-      console.log(error)
+      headers: { 'Content-Type': 'application/json; charset=UTF-8', mode: 'cors' },
+      credentials: 'include'
+    }).then(res => res.json()).then((response) => {        
+      if(response.email){
+        self.props.changePage("delete");
+        self.props.updateCurrentUser(response.email);
+      } else {
+        alert('Sign in was not succesful', response.error);
+      }
+    }).catch(function(error){
+      
     })
   }
 
@@ -55,10 +59,10 @@ class Login extends React.Component {
             type="password" id="password" name="password" placeholder=""/>
           </div>
           <br/>          
-            <button >Submit</button>
+            <button className="btn-login">Login</button>
         </form>
         <br/>
-        <button onClick={() => this.props.changePage("signup")}>New here Signup</button>
+        <button className="btn-new" onClick={() => this.props.changePage("signup")}>New here Signup</button>
       </div>
     )
   }

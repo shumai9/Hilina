@@ -28,6 +28,7 @@ gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'foreman'
 gem 'devise_token_auth'
 gem 'react-rails'
+gem 'multi_json', '~> 1.13', '>= 1.13.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

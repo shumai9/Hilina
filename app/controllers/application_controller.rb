@@ -1,7 +1,21 @@
+require "application_responder"
+require 'multi_json'
+
 class ApplicationController < ActionController::Base
-  protect_from_forgery unless: -> { request.format.json? }
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  self.responder = ApplicationResponder
+  respond_to :json
+
+  # protect_from_forgery unless: -> { request.format.json? }
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
   respond_to :json 
-  # might need to change api iinherit from base
+
+  
+  protected
+
+  def configure_permitted_parameters 
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :birth_date, :email])
+  end
 end
+
