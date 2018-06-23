@@ -11,12 +11,12 @@ class Logout extends React.Component {
   handleLogout(e) {
     e.preventDefault();
     let self = this
-    let email = this.props.currentUser
+    let email = this.props.current_user
 
     fetch('/users/sign_out', {
       method: 'delete',
       header: 'Content-Type: application/json',
-      body: JSON.stringify(data)
+      body: JSON.stringify(email)
     })
     .then((res) => {
       self.props.changePage("login")

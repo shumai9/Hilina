@@ -1,8 +1,22 @@
 
 html{
-  background: url("../img/cool.jpg");
+  background: no-repeat url("../img/lavacrp.png");
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 1);
   width: 100%;
   height: 100%;
+
+  .baner{
+  color:#fff;
+  background: rgba(170, 199, 187, 0.7);
+    }
+   span.baner {
+    width:100%;
+    height: 50px;
+    display: block;
+    position: relative;
+    }
+
   }
 #root, body {
   height:100vh;
@@ -18,7 +32,7 @@ footer{
   font-family: 'Vidaloka', serif;
 }
 header{
-  background: no-repeat url("../img/hlogo.png");
+  background: url("../img/hlogo.png");
   background-size: cover;
   color: white;
   font-family: 'Vidaloka', serif;
@@ -48,11 +62,7 @@ body{
   text-align: left;
 }
 nav, .navbar{
-  width:95vw;
-  height: 4rem;
   text-align:center;
-  display: inline;
-  list-style: none;
   text-decoration: none;
   background: palegreen;
   margin: 1rem 0rem;
@@ -104,7 +114,6 @@ form {
     z-index: -1;   
   }
 }
-*{
-box-sizing: border-box;
-}
+
+
   

@@ -62,11 +62,14 @@ class Login extends React.Component {
             <button className="btn-login">Login</button>
         </form>
         <br/>
-        <button className="btn-new" onClick={() => this.props.changePage("signup")}>New here Signup</button>
+        <button className="btn-new" onClick={() => this.props.changePage("signup")}>No account? Signup</button>
       </div>
     )
   }
 }
+
+
+
 
 export default Login;
 

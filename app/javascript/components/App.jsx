@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Header from '../components/header'
+import Nav from '../components/nav'
+import {BrowserRouter as Router} from 'react-router-dom'
 import './App.scss'
 
 
@@ -41,7 +43,8 @@ class App extends React.Component {
   render(){
     return (
       <div className="app">
-        <h1 id="logo"><img className="logo"></img>Hilina</h1>
+        <Nav></Nav>
+        <h1 id="logo"><img className="logo"></img></h1>
         <a href={this.page || '#'} onClick={() => this.changePage("home")}>Home</a>
         <Header updateCurrentUser={this.updateCurrentUser}/>
         <div id="footer"></div>
