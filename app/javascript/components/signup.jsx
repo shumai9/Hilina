@@ -9,10 +9,18 @@ class Signup extends React.Component{
    
     this.handleSignup = this.handleSignup.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.errorHander  = this.errorHander.bind(this);
   }
 
   handleChange = (e) => {
     this.setState({value: e.target.value});
+  }
+
+  errorHander = (e) =>{
+    e.preventDefault();
+
+
+
   }
 
   handleSignup =(e) => {
@@ -27,26 +35,36 @@ class Signup extends React.Component{
       }
     };
 
-    fetch('/users', {
-      method: "POST", 
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json; charset=UTF-8', mode: 'cors' },
-      credentials: 'include'    
-    })
-    .then((response) =>{ 
-      if (response.status == 'ok') {
-        self.props.updateCurrentUser(email);
-        self.props.changePage("delete");
-      }else{self.props.changePage("home");}
+    if(this.state.value === '' ){
+      alert("Please type in details to register");
+
+    } else { 
+
+    console.log(this.state.value);
+      fetch('/users', {
+        method: "POST", 
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json; charset=UTF-8', mode: 'cors' },
+        credentials: 'include'    
       })
-    .catch(function(error){
-      console.log(data)
-    })
-  }   
+      .then((res)=> res.json())
+      .then((result) =>{ 
+        if (result.status == 'ok') {
+          self.props.updateCurrentUser(email);
+          self.props.changePage("delete");
+        }else{ console.log(result.errors)}
+        })
+      .catch(function(error){
+        console.log(data)
+      })
+    }
+  }
+
   
   render() {
     return (
       <div className="form form-signup">
+        <a href="#" onClick={() => this.props.changePage("home")}>Home</a> 
         <h1>Sign-up</h1>
         <form onSubmit={this.handleSignup}>
           <div className="form-field ">
@@ -85,7 +103,7 @@ class Signup extends React.Component{
             type="password" id="password_confirmation" name="password_confirmation" placeholder="Retype paswword"/>
           </label>
           </div><br />
-            <button className="btn-signup">Create Account</button>
+            <button className="btn-signup" onChange={this.handleSignup}>Create Account</button>
           <br/>
            <a href="#" onClick={() => this.props.changePage("login")}>Already have an account?</a> 
         </form>

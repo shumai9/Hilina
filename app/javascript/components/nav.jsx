@@ -7,8 +7,13 @@ class Nav extends React.Component {
   render(){ 
     return( 
       <span className="baner">
-        <nav className="nav nav-bar">Nav
-        </nav>
+        <nav className="nav nav-bar"> 
+        <span>About</span>
+        <span>Home</span>
+        <span>SignUp</span>
+        <span>Login</span>
+        <span>About</span> 
+        </nav> 
       </span> 
     )
   }

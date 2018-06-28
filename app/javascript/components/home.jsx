@@ -1,4 +1,5 @@
 import React from 'react'
+import Nav from '../components/nav'
 import './home.scss'
 
 
@@ -18,14 +19,14 @@ class Home extends React.Component {
     return(
       <div className="home">
        <header>
-        <nav>
+        <Nav>
         <h2>Welcome Home</h2>
           <a href='#' onClick={() => this.props.changePage("signup")}>
             New here Signup</a>
           <a href='#' onClick={() => this.props.changePage("login")}>
             Back to Login</a>
-        </nav>
-      </header>
+        </Nav>
+        </header>
       </div>
     )
   }
