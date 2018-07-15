@@ -1,42 +1,49 @@
 import React from 'react'
-import Assets from '../components/Assets'
-import Commitments from '../components/Commitments'
+import Assets from '../components/assets'
+import Commitments from '../components/commitments'
 import PropTypes from 'prop-types'
 
 
 class Account extends React.Component {
   constructor(props) {
     super(props);
+    this.state = ({
+      isLoaded: false,
+      bucks: [],
+      errors: []
+    })
     
   }
   
-  
   componentDidMount() {
-    let self = this
-    fetch("http://localhost:3000/api/v1/account")
+    fetch("http://localhost:3000/api/v1/accounts")
     .then(res => res.json())
     .then((result) => {
-      self.props.setState({
+      this.setState({
           isLoaded: true,
-          items: result[0]
+          bucks: result[0]
         });
       },
-      (error) => {self.props.setState({ isLoaded: true, error})} 
+      (error) => {
+        this.setState({
+          isLoaded: true,
+          errors: error.message
+        })
+      } 
     )
   }
 
   render() {    
-    const { error, isLoaded, items } = this.props.state;
     
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
+    if (!this.state.errors) {
+      return <div> Error: {this.state.errors}</div>;
+    } else if (!this.state.isLoaded) {
+      return <div> Loading...</div>;
     } else {
       return (
         <div className='appStyle'>
-            <Assets />
-            <Commitments />         
+          <Assets />
+          <Commitments />         
         </div>
       ); 
     }

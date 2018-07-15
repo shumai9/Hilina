@@ -35,7 +35,7 @@ class Login extends React.Component {
         self.props.changePage("delete");
         self.props.updateCurrentUser(response.email);
       } else {
-        alert('Sign in was not succesful', response.error);
+        alert('Sign in was not succesful', response.errors);
       }
     }).catch(function(error){
       
@@ -62,7 +62,9 @@ class Login extends React.Component {
             <button className="btn-login">Login</button>
         </form>
         <br/>
-        <button className="btn-new" onClick={() => this.props.changePage("signup")}>No account? Signup</button>
+          <button className="btn-new" onClick={
+            () => this.props.changePage("signup")
+            }> No account? Signup </button>
       </div>
     )
   }

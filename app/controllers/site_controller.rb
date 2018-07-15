@@ -3,6 +3,7 @@ class SiteController < ApplicationController
   def index
     render "site/site", {:formats=>[:html]}
   end
+  
   def check_user
     if user_signed_in?
       render :json => {"signed_in" => true, "user" => current_user}.to_json()

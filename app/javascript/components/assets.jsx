@@ -3,31 +3,22 @@ import React from 'react'
 
 class Assets extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      isLoaded: false,
-      error: null,
-      itemsName:[],
-      itemsVal: []
+      asset: []
     }
     this.list = this.list.bind(this);
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/asset")
+    fetch("http://localhost:3000/api/v1/total_assets")
       .then(res => res.json())
-      .then(
+      .then (
         (result) => {
-          this.setState({
-            isLoaded: true,
-            itemsName: (Object.keys(result[0])),
-            itemsVal: ( Object.values(result[0]))
-          });
-
+          this.setState({ asset: result })
         },
-
-        (error) => {this.setState({ isLoaded: true, error});} 
-      )
+      (error) => {this.props.setState({ isLoaded: true, errors: error.message });} 
+    )
   }
   
   list(data1, data2){    
@@ -41,21 +32,16 @@ class Assets extends React.Component {
   }
 
   render() {    
-    const { error, isLoaded, itemsName, itemsVal } = this.state;
-    console.log(this.state.itemsName);
-    console.log(this.state.itemsVal);  
-
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
+    if (this.props.error) {
+      return <div>Error: {this.props.errors}</div>;
+    } else if (!this.props.isLoaded) {
       return <div>Loading...</div>;
     } else {
       return (
           <div style={asetStyle}>
             <h2> Total Assets:</h2>
              {itemsName.map((data1)=> this.list(data1))}
-              { itemsVal.map((data2)=> this.list(data2)) }
-           
+              { itemsVal.map((data2)=> this.list(data2)) }   
           </div>
         );
       }
