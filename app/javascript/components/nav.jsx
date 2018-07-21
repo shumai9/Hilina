@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 
 class Nav extends React.Component {
   constructor(props) {
@@ -7,12 +8,19 @@ class Nav extends React.Component {
   render(){ 
     return( 
       <span className="baner">
-        <nav className="nav nav-bar"> 
-        <span>About</span>
-        <span>Home</span>
-        <span>SignUp</span>
-        <span>Login</span>
-        <span>About</span> 
+        <nav className="nav nav-bar">
+          <Link to={`/about`}>
+            <span>About</span>
+          </Link>
+          <Link to={`/home`}>
+            <span>Home</span>
+          </Link>
+          <Link to={`//users/sign_up`}>
+            <span>SignUp</span>
+          </Link>
+          <Link to={`/users/sign_in`}>
+            <span>Login</span>
+          </Link>
         </nav> 
       </span> 
     )

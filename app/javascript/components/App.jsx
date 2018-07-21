@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Header from '../components/header'
-import {BrowserRouter as Router} from 'react-router-dom'
+import Nav from '../components/nav'
 import './App.scss'
 
 
@@ -42,10 +42,10 @@ class App extends React.Component {
   render(){
     return (
       <div className="app">
-         <a href={this.page || '#'} onClick={() => this.changePage("home")}>Home</a>
+        <Nav />
         <Header updateCurrentUser={this.updateCurrentUser}/>
-        <div id="footer"></div>
-      </div>
+      <div id="footer"></div>
+    </div>
     )
   }
 }

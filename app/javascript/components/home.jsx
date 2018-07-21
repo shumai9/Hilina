@@ -19,13 +19,11 @@ class Home extends React.Component {
     return(
       <div className="home">
        <header>
-        <Nav>
         <h2>Welcome Home</h2>
           <a href='#' onClick={() => this.props.changePage("signup")}>
             New here Signup</a>
           <a href='#' onClick={() => this.props.changePage("login")}>
             Back to Login</a>
-        </Nav>
         </header>
       </div>
     )
