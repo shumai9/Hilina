@@ -9,18 +9,10 @@ class Nav extends React.Component {
     return( 
       <span className="baner">
         <nav className="nav nav-bar">
-          <Link to={`/about`}>
-            <span>About</span>
-          </Link>
-          <Link to={`/home`}>
-            <span>Home</span>
-          </Link>
-          <Link to={`//users/sign_up`}>
-            <span>SignUp</span>
-          </Link>
-          <Link to={`/users/sign_in`}>
-            <span>Login</span>
-          </Link>
+          <Link to={`/about`}><span>About</span></Link>
+          <Link to={`/home`}><span>Home</span></Link>
+          <Link to={`/contact_us`}><span>Contact</span></Link>
+          <Link to={`/address`}><span>Address</span></Link>
         </nav> 
       </span> 
     )

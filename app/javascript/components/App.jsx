@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import Header from '../components/header'
 import Nav from '../components/nav'
 import './App.scss'
@@ -12,7 +13,7 @@ class App extends React.Component {
     this.updateCurrentUser = this.updateCurrentUser.bind(this);
     this.changePage = this.changePage.bind(this);
   }
-
+ 
   componentDidMount(){
     fetch('/any_user', {
       method: "GET",
@@ -43,7 +44,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <Nav />
-        <Header updateCurrentUser={this.updateCurrentUser}/>
+        <Header updateCurrentUser = { this.updateCurrentUser } />
       <div id="footer"></div>
     </div>
     )

@@ -1,8 +1,9 @@
 
 html{
-  background: no-repeat url("../img/hlogo.png");
+  background: no-repeat url("../img/lavacrp.png");
+  background: no-repeat url("../img/street.jpeg");
   background-size: unset;
-  background-color: rgba(119, 95, 98, 0.7);
+  background-color: rgba(3, 16, 18, 1);
   width: auto;
   height: auto;
   }
@@ -87,6 +88,7 @@ form {
 }
 //nav style
 .nav span {
+  liststyle:none;
   padding: 5rem;
 }
 
