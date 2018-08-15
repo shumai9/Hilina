@@ -1,9 +1,16 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import Loadable from 'react-loadable';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
-import Header from '../components/header'
 import Nav from '../components/nav'
-import './App.scss'
+import Signup from '../components/signup'
+import Login from '../components/login'
+import Main from '../components/main'
+import About from '../components/about'
+import Home from '../components/home'
+import Contact from '../components/contact'
+import Address from '../components/address'
+
+require('../style/App.scss');
 
 
 class App extends React.Component {
@@ -13,7 +20,7 @@ class App extends React.Component {
     this.updateCurrentUser = this.updateCurrentUser.bind(this);
     this.changePage = this.changePage.bind(this);
   }
- 
+
   componentDidMount(){
     fetch('/any_user', {
       method: "GET",
@@ -28,7 +35,7 @@ class App extends React.Component {
     }).catch((error) =>{
       console.log(error);
     })
-  }
+  }  
 
   updateCurrentUser(email) {
     this.setState({
@@ -42,15 +49,25 @@ class App extends React.Component {
   
   render(){
     return (
-      <div className="app">
-        <Nav />
-        <Header updateCurrentUser = { this.updateCurrentUser } />
-      <div id="footer"></div>
-    </div>
+      <Router>
+        <div className="content" >
+          <Nav/>            
+          <Main updateCurrentUser = { this.updateCurrentUser } />
+            <div className="route">
+              <Route exact path="/home" component={Home}/>
+              <Route path="/about" component={About}/>
+              <Route path="/contact" component={Contact}/>
+              <Route path="/address" component={Address}/>
+              <Route path="/users/sign_up" component={Signup}/>
+            </div>              
+          <div id="footer"></div>
+        </div>
+      </Router>        
     )
   }
 }
 
 
 export default App;
+
 

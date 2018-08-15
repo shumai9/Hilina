@@ -1,6 +1,7 @@
 import React from 'react'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
+
 import Nav from '../components/nav'
-import './home.scss'
 
 
 class Home extends React.Component {
@@ -17,14 +18,9 @@ class Home extends React.Component {
 
   render() {
     return(
-      <div className="home">
-       <header>
-        <h2>Welcome Home</h2>
-          <a href='#' onClick={() => this.props.changePage("signup")}>
-            New here Signup</a>
-          <a href='#' onClick={() => this.props.changePage("login")}>
-            Back to Login</a>
-        </header>
+      <div className="home">  
+        <h2>Home</h2>
+          <p> Welcome this is hilina home page enjoy! </p>     
       </div>
     )
   }

@@ -2,10 +2,12 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",
+    "loadable": "^1.0.0",
     "prop-types": "^15.6.1",
-    "react": "^16.4.1",
+    "react": "^16.4.2",
     "react-devise": "^0.0.19",
     "react-dom": "^16.4.1",
+    "react-loadable": "^5.4.0",
     "react-router-dom": "^4.4.0-alpha.1"
   },
   "devDependencies": {

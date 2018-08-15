@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graphic xmlns="http://ns.adobe.com/fxg/2008" xmlns:fxg="http://ns.adobe.com/fxg/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:svg="http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-tiny.dtd" version="2.0" viewWidth="794" viewHeight="1123">
+  <mask>
+    <Group>
+      <Rect width="794" height="1123">
+        <fill>
+          <SolidColor color="#ffffff" alpha="1"/>
+        </fill>
+      </Rect>
+    </Group>
+  </mask>
+  <!--Unknown tag: defs-->
+  <!--Unknown tag: sodipodi:namedview-->
+  <!--Unknown tag: metadata-->
+  <Group id="layer1">
+    <Group>
+      <transform>
+        <Transform>
+          <matrix>
+            <Matrix a="0.10990884" b="0" c="0" d="0.09164148" tx="-42.05" ty="73.55"/>
+          </matrix>
+        </Transform>
+      </transform>
+      <RichText alignmentBaseline="ascent" fontSize="192" fontWeight="bold" fontFamily="URW Palladio L" fontStyle="normal" color="#000000" textAlpha="1" lineHeight="1" id="flowRoot11076" width="294" height="437" x="295" y="313">
+        <content/>
+      </RichText>
+    </Group>
+    <Group scaleX="1.0951416" scaleY="0.91312391">
+      <RichText alignmentBaseline="ascent" fontSize="19" fontWeight="normal" fontFamily="Tlwg Mono" fontStyle="oblique" color="#000000" textAlpha="1" lineHeight="0" x="11" y="156" id="text11090" whiteSpaceCollapse="preserve">
+        <content/>
+      </RichText>
+    </Group>
+    <Group>
+      <transform>
+        <Transform>
+          <matrix>
+            <Matrix a="0.41540351" b="0" c="0" d="0.34636148" tx="-42.05" ty="73.55"/>
+          </matrix>
+        </Transform>
+      </transform>
+      <RichText alignmentBaseline="ascent" fontSize="192" fontWeight="bold" fontFamily="Noto Serif" fontStyle="normal" color="#000000" textAlpha="1" lineHeight="1" id="flowRoot11092" width="454" height="551" x="135" y="199">
+        <content/>
+      </RichText>
+    </Group>
+    <Group scaleX="1.0951416" scaleY="0.91312391">
+      <RichText alignmentBaseline="ascent" fontSize="19" fontWeight="normal" fontFamily="Tlwg Mono" fontStyle="oblique" color="#000000" textAlpha="1" lineHeight="0" x="-1" y="120" id="text11102" whiteSpaceCollapse="preserve">
+        <content/>
+      </RichText>
+    </Group>
+  </Group>
+</Graphic>

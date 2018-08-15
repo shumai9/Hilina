@@ -1,5 +1,5 @@
 import React from 'react'
-import './signup.scss'
+
 
 
 class Signup extends React.Component{
@@ -64,7 +64,6 @@ class Signup extends React.Component{
   render() {
     return (
       <div className="form form-signup">
-        <a href="#" onClick={() => this.props.changePage("home")}>Home</a> 
         <h1>Sign-up</h1>
         <form onSubmit={this.handleSignup}>
           <div className="form-field ">
@@ -76,7 +75,7 @@ class Signup extends React.Component{
           <div className="form-field">   
             <label>Last name :
             <input className="border" value={this.state.last_name} onChange={this.handleChange}
-              type="text" id="last_name" name="last_name" placeholder="Lastname"/>
+              type="text" id="last_name" name="last_name" placeholder="Last name"/>
           </label>
           </div><br />
           <div className="form-field">     
@@ -104,11 +103,7 @@ class Signup extends React.Component{
           </label>
           </div><br />
             <button className="btn-signup" onChange={this.handleSignup}>Create Account</button>
-          <br/>
-           <a href="#" onClick={() => this.props.changePage("login")}>Already have an account?</a> 
-        </form>
-        <br/>
-         
+        </form>         
       </div>
     );
   };

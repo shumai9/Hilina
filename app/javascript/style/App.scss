@@ -1,0 +1,123 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html {
+  background: none;
+  background-size: cover;
+  height: 30rem;
+}
+body {
+  font-family: 'Poiret One', cursive;
+
+  background: no-repeat url('../img/mar.jpg');
+  background-size: cover;
+  .route {
+    padding: 0px 10px;
+    margin: 0px 25px;
+    width: auto;
+    height: 90vh;
+    background: rgba(200, 200, 200, 0.38);
+  }
+  
+}
+
+ #logo {
+  float: left;
+  background: no-repeat url('../img/svlogo.png');
+  background-size: contain;
+  height: 6rem ;
+  width: 6rem;
+  margin: 15px;
+  z-index: 100;
+}
+
+ app{
+ display: grid;
+ width: 100%;
+ grid-template-columns:20% auto;
+ grid-gap: 10px;
+
+ }
+
+.nav-bar{
+  position: relative;
+  background: #09283e;
+  height: 15vh;
+  width: 100%;
+  box-shadow: inset -1px 0px 18px 4px rgb(202, 222, 237);
+  li, a {
+    display: inline-block;
+    text-decoration: none;
+    list-style: none;
+    color: #fff;
+    padding: 5px;
+    margin: 5px;
+  }
+  .link {
+    text-align: center;
+    
+    a:hover{
+      background: rgba(193, 193, 193, 0.8);
+      margin: 5px;      
+      border-radius: 5rem;
+    }
+  }
+}
+.active {
+  background-color: #fdaa12;
+  border-radius: 5rem;
+}
+
+ul a {
+  position: relative;
+     
+}
+
+.form-login, .form-signup {
+  float: right;
+  input {
+    font-weight: bold;
+    font-family: 'Poiret One', cursive;
+    color: #000;
+    border: solid 1px #f06d06;
+    padding: 3px;
+    margin: 2px;
+    height: 1.5em; 
+    border-radius: 4px;
+    background-clip: content-box;
+    background-color: white;
+    line-height: 1.5;
+    font-size: 18px;
+    text-indent: 0.5rem;
+  }
+}
+
+button {
+  color: #000;
+  font-weight: bold;
+  font-family: 'Poiret One', cursive;
+  padding: 5px;
+  border-radius: 4px;
+  background: orange;
+  a {
+    text-decoration: none;
+  }
+}
+
+h1,h2,p, label, li, a {
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Poiret One', cursive;
+}
+
+#alert {
+  background: red;
+}
+
+
+
+footer{}

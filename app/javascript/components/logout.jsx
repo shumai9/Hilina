@@ -1,6 +1,5 @@
 import React from 'react'
 import Account from '../components/account'
-import './logout.scss'
 
 class Logout extends React.Component {
   

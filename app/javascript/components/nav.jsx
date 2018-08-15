@@ -1,5 +1,7 @@
 import React from 'react'
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom'
+import Login from '../components/login'
+
 
 class Nav extends React.Component {
   constructor(props) {
@@ -7,17 +9,19 @@ class Nav extends React.Component {
   }
   render(){ 
     return( 
-      <span className="baner">
-        <nav className="nav nav-bar">
-          <Link to={`/about`}><span>About</span></Link>
-          <Link to={`/home`}><span>Home</span></Link>
-          <Link to={`/contact_us`}><span>Contact</span></Link>
-          <Link to={`/address`}><span>Address</span></Link>
-        </nav> 
-      </span> 
+      <div className="nav nav-bar">
+        <NavLink exact to={"/"} id="logo"/>
+          <ul className="link" >
+            <li><NavLink exact to={"/home"}>Home</NavLink></li>
+            <li><NavLink to={"/about"}>About</NavLink></li>
+            <li><NavLink to={"/contact"}>Contact</NavLink></li>
+            <li><NavLink to={"/address"}>Address</NavLink></li>
+            <li><NavLink to={"/users/sign_up"}>Sign up</NavLink></li>
+          </ul>
+        <Login />
+      </div> 
     )
   }
 }
 
 export default Nav;
-

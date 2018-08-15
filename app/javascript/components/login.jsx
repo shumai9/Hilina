@@ -1,5 +1,4 @@
 import React from 'react'
-import './login.scss'
 
 
 
@@ -17,6 +16,7 @@ class Login extends React.Component {
   }
 
   handleLogin = (e) => {
+    e.preventDefault();
     let self = this
     let data = {
       user: {
@@ -24,7 +24,6 @@ class Login extends React.Component {
         password: document.getElementById('password').value
       }
     }
-    e.preventDefault();
     fetch('/users/sign_in', {
       method: "POST", 
       body: JSON.stringify(data),
@@ -35,36 +34,27 @@ class Login extends React.Component {
         self.props.changePage("delete");
         self.props.updateCurrentUser(response.email);
       } else {
-        alert('Sign in was not succesful', response.errors);
+        alert('Invalid email or password', response.errors);
       }
-    }).catch(function(error){
-      
-    })
+    }).catch(function(error){})
   }
 
   render(){
     return(
       <div className="form form-login">
-        <h2>Login</h2>
-        <form  onSubmit={this.handleLogin} >
-          <div className="form-field">
-            <label name="email">Email :</label>
-            <input value={this.state.email} onChange={this.handleChange}
-            type="text" id="email" name="email" placeholder="Email"/>
-          </div>
-          <br/>
-          <div className="form-field">           
-            <label name="email"> Password :</label>
-            <input value={this.state.password} onChange={this.handleChange}
-            type="password" id="password" name="password" placeholder=""/>
-          </div>
-          <br/>          
-            <button className="btn-login">Login</button>
+        <form onSubmit = { this.handleLogin }>
+          <span className = "form-field">
+              <input value = { this.state.email }
+                  onChange = { this.handleChange }
+                type="text" id="email" name="email" placeholder="Email"/>
+          </span>
+          <span className="form-field">
+              <input value = { this.state.password }
+                onChange = { this.handleChange } 
+              type="password" id="password" name="password" placeholder="password"/>
+          </span>
+            <button className="btn-login"> Login </button>
         </form>
-        <br/>
-          <button className="btn-new" onClick={
-            () => this.props.changePage("signup")
-            }> No account? Signup </button>
       </div>
     )
   }
