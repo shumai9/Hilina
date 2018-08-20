@@ -10,66 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_14_230800) do
+ActiveRecord::Schema.define(version: 2018_08_15_221235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accounts", force: :cascade do |t|
-    t.integer "total_assets"
-    t.integer "total_commitments"
-    t.integer "networth_state"
-    t.integer "user_id"
+  create_table "assets", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "asset_name", null: false
+    t.string "asset_type"
+    t.decimal "amount", precision: 12, scale: 2
+    t.datetime "acquired", null: false
+    t.datetime "ceased"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_assets_on_user_id"
   end
 
-  create_table "total_assets", force: :cascade do |t|
-    t.boolean "financial_assets", default: false
-    t.boolean "non_financial_assets", default: false
-    t.decimal "cash", precision: 12, scale: 2
-    t.decimal "current_account", precision: 12, scale: 2
-    t.decimal "savings_account", precision: 12, scale: 2
-    t.decimal "business_market_value", precision: 12, scale: 2
-    t.decimal "bullion_value", precision: 12, scale: 2
-    t.decimal "employer_pension", precision: 12, scale: 2
-    t.decimal "securities", precision: 12, scale: 2
-    t.decimal "retirement_funds", precision: 12, scale: 2
-    t.decimal "life_insurance", precision: 12, scale: 2
-    t.decimal "motor_vehicle", precision: 12, scale: 2
-    t.decimal "jewelery", precision: 12, scale: 2
-    t.decimal "furniture", precision: 12, scale: 2
-    t.decimal "real_estate", precision: 12, scale: 2
-    t.decimal "office_equipment", precision: 12, scale: 2
-    t.decimal "collectible", precision: 12, scale: 2
-    t.decimal "fine_art", precision: 12, scale: 2
-    t.decimal "clothing", precision: 12, scale: 2
-    t.decimal "appliance", precision: 12, scale: 2
-    t.datetime "date_acquired", null: false
-    t.datetime "date_ceased"
-    t.integer "account_id"
+  create_table "commitments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "commitment_name", null: false
+    t.string "commitment_type"
+    t.decimal "amount", precision: 12, scale: 2
+    t.datetime "acquired", null: false
+    t.datetime "ceased"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_commitments_on_user_id"
   end
 
-  create_table "total_commitments", force: :cascade do |t|
-    t.decimal "outstanding_bill", precision: 12, scale: 2
-    t.decimal "credit_card_charge", precision: 12, scale: 2
-    t.decimal "medical_bill", precision: 12, scale: 2
-    t.decimal "rent", precision: 12, scale: 2
-    t.decimal "repair_bill", precision: 12, scale: 2
-    t.decimal "auto_installment_loan", precision: 12, scale: 2
-    t.decimal "personal_loan", precision: 12, scale: 2
-    t.decimal "peer_to_peer_loan", precision: 12, scale: 2
-    t.decimal "home_mortgage", precision: 12, scale: 2
-    t.decimal "rental_property_loan", precision: 12, scale: 2
-    t.decimal "small_business_loan", precision: 12, scale: 2
-    t.decimal "college_loan", precision: 12, scale: 2
-    t.datetime "date_acquired", null: false
-    t.datetime "date_ceased"
-    t.integer "account_id"
+  create_table "networths", force: :cascade do |t|
+    t.bigint "user_id"
+    t.decimal "total_amount", precision: 12, scale: 2
+    t.decimal "total_current_value", precision: 12, scale: 2
+    t.decimal "current_networth", precision: 12, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_networths_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,4 +69,7 @@ ActiveRecord::Schema.define(version: 2018_06_14_230800) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "assets", "users"
+  add_foreign_key "commitments", "users"
+  add_foreign_key "networths", "users"
 end

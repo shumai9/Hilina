@@ -10,7 +10,7 @@ class Nav extends React.Component {
   render(){ 
     return( 
       <div className="nav nav-bar">
-        <NavLink exact to={"/"} id="logo"/>
+        <NavLink exact to={"/#"} id="logo"/>
           <ul className="link" >
             <li><NavLink exact to={"/home"}>Home</NavLink></li>
             <li><NavLink to={"/about"}>About</NavLink></li>
@@ -18,7 +18,7 @@ class Nav extends React.Component {
             <li><NavLink to={"/address"}>Address</NavLink></li>
             <li><NavLink to={"/users/sign_up"}>Sign up</NavLink></li>
           </ul>
-        <Login />
+        <Login updateCurrentUser = { this.props.updateCurrentUser } />
       </div> 
     )
   }

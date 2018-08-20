@@ -1,18 +1,20 @@
 import React from 'react'
-
+import {  BrowserRouter as Redirect} from "react-router-dom";
 
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: ''};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
+    this.state = {
+      value: '',
+      logedIn: false
+    };
   }
 
   handleChange = (e) => {
-    this.setState({value: e.target.value});
+    this.setState({
+      value: e.target.value
+    });
   }
 
   handleLogin = (e) => {
@@ -24,39 +26,48 @@ class Login extends React.Component {
         password: document.getElementById('password').value
       }
     }
+  
+    console.log( this.state.value, "checked");
+    
     fetch('/users/sign_in', {
       method: "POST", 
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json; charset=UTF-8', mode: 'cors' },
       credentials: 'include'
-    }).then(res => res.json()).then((response) => {        
-      if(response.email){
-        self.props.changePage("delete");
-        self.props.updateCurrentUser(response.email);
-      } else {
-        alert('Invalid email or password', response.errors);
-      }
-    }).catch(function(error){})
-  }
+      })
+      .then(res => res.json())
+      .then((response) => {        
+        if(response.email === this.state.value) {
+          this.setState({
+            logedIn: true 
+          });
+          self.props.updateCurrentUser(response.email);          
+          } else {
+          alert('Invalid email or password', response.errors);
+        }
+    }).catch(function(_error){});
+    console.log( this.state.logedIn, "checked");
 
+  } 
   render(){
+    if (this.state.logedIn){
+      return <Redirect  push to="/user/dashboard"/> 
+    }
     return(
-      <div className="form form-login">
-        <form onSubmit = { this.handleLogin }>
-          <span className = "form-field">
-              <input value = { this.state.email }
-                  onChange = { this.handleChange }
-                type="text" id="email" name="email" placeholder="Email"/>
-          </span>
-          <span className="form-field">
-              <input value = { this.state.password }
-                onChange = { this.handleChange } 
-              type="password" id="password" name="password" placeholder="password"/>
-          </span>
-            <button className="btn-login"> Login </button>
-        </form>
-      </div>
-    )
+    <div className="form form-login">
+      <form onSubmit = { this.handleLogin }>
+        <span className = "form-field">
+            <input value = { this.state.email }
+                onChange = { this.handleChange }
+              type="text" id="email" name="email" placeholder="Email"/>
+        
+            <input value = { this.state.password } 
+            type="password" id="password" name="password" placeholder="Password"/>
+        </span>
+          <button className="btn-login"> Login </button>
+      </form>
+    </div>
+  )
   }
 }
 
