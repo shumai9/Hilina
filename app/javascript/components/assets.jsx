@@ -11,13 +11,13 @@ class Assets extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/total_assets")
+    fetch("http://localhost:3000/api/v1/assets")
       .then(res => res.json())
       .then (
         (result) => {
           this.setState({ asset: result })
         },
-      (error) => {this.props.setState({ isLoaded: true, errors: error.message });} 
+      (error) => {this.props.setState({ isLoaded: true, errors: error.messages });} 
     )
   }
   
@@ -27,11 +27,10 @@ class Assets extends React.Component {
         <p id="a-name">{data1} </p>
         <p id="v-name">{data2} </p>
       </span>     
-      )
-      console.log(data);
+    )
   }
-
-  render() {    
+ 
+  render() {   
     if (this.props.error) {
       return <div>Error: {this.props.errors}</div>;
     } else if (!this.props.isLoaded) {

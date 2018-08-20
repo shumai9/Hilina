@@ -1,5 +1,4 @@
 import React from 'react'
-import Account from '../components/account'
 
 class Logout extends React.Component {
   

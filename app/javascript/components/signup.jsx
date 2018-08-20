@@ -41,6 +41,7 @@ class Signup extends React.Component{
     } else { 
 
     console.log(this.state.value);
+      const newLocal = 'ok';
       fetch('/users', {
         method: "POST", 
         body: JSON.stringify(data),
@@ -49,7 +50,7 @@ class Signup extends React.Component{
       })
       .then((res)=> res.json())
       .then((result) =>{ 
-        if (result.status == 'ok') {
+        if (result.status == '200') {
           self.props.updateCurrentUser(email);
           self.props.changePage("delete");
         }else{ console.log(result.errors)}
