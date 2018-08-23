@@ -1,0 +1,2 @@
+class NetworthController < ApplicationController
+end
