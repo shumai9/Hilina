@@ -1,4 +1,12 @@
 {
+  "name": "hilina",
+  "version": "1.0.0",
+  "description": "rails api and react",
+  "main": "application.js",
+  "repository": "git@github.com:shumai9/Hilina.git",
+  "author": "shumai",
+  "license": "MIT",
+
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",
@@ -12,5 +20,5 @@
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
-  }
+  }  
 }
