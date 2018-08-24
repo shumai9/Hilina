@@ -125,5 +125,4 @@ RSpec.describe NetworthController, type: :controller do
       }.to change(Account, :count).by(-1)
     end
   end
-
 end
