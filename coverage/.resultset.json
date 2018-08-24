@@ -1,7 +1,294 @@
 {
   "RSpec": {
     "coverage": {
+      "/home/shumai/Documents/Final-project/try-3/hilina/Rakefile": [
+        null,
+        null,
+        null,
+        1,
+        null,
+        1
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/lib/tasks/start.rake": [
+        1,
+        0,
+        null,
+        null
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/controllers/application_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/lib/application_responder.rb": [
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/models/user.rb": [
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/models/application_record.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/jobs/application_job.rb": [
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/models/networth.rb": [
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/models/asset.rb": [
+        0,
+        null,
+        0,
+        null,
+        null,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/models/commitment.rb": [
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/controllers/site_controller.rb": [
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/controllers/api/v1/registrations.rb": [
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        null,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/channels/application_cable/channel.rb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/channels/application_cable/connection.rb": [
+        0,
+        0,
+        0,
+        0
+      ]
     },
-    "timestamp": 1535101645
+    "timestamp": 1535112471
+  },
+  "Unknown Test Framework": {
+    "coverage": {
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/jobs/application_job.rb": [
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/models/networth.rb": [
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/models/asset.rb": [
+        0,
+        null,
+        0,
+        null,
+        null,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/models/commitment.rb": [
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/models/user.rb": [
+        0,
+        0,
+        null,
+        null,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/models/application_record.rb": [
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/controllers/site_controller.rb": [
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/controllers/api/v1/registrations.rb": [
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        null,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/controllers/application_controller.rb": [
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/channels/application_cable/channel.rb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/app/channels/application_cable/connection.rb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/shumai/Documents/Final-project/try-3/hilina/lib/application_responder.rb": [
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        0
+      ]
+    },
+    "timestamp": 1535112472
   }
 }

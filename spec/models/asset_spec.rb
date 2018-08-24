@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Asset, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it {should validate_presence_of(:asset_name)}
+  it {should validate_presence_of(:user_id)}
+  it {should validate_presence_of(:acquired)}
+  it {should validate_presence_of(:ceased)}
 end
