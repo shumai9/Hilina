@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get "/any_user" => 'site#check_user'
   
   scope :api, :v1, defaults: {format: 'json'} do
-    resources :total_commitments
-    resources :total_assets
-    resources :accounts
+    resources :commitment
+    resources :asset
+    resources :networth
   end
 end
