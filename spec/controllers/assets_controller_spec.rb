@@ -23,10 +23,10 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe TotalCommitmentsController, type: :controller do
+RSpec.describe AssetsController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # TotalCommitment. As you add validations to TotalCommitment, be sure to
+  # Asset. As you add validations to Asset, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -38,12 +38,12 @@ RSpec.describe TotalCommitmentsController, type: :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # TotalCommitmentsController. Be sure to keep this updated too.
+  # AssetsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
     it "returns a success response" do
-      total_commitment = TotalCommitment.create! valid_attributes
+      asset = Asset.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_success
     end
@@ -51,33 +51,33 @@ RSpec.describe TotalCommitmentsController, type: :controller do
 
   describe "GET #show" do
     it "returns a success response" do
-      total_commitment = TotalCommitment.create! valid_attributes
-      get :show, params: {id: total_commitment.to_param}, session: valid_session
+      asset = Asset.create! valid_attributes
+      get :show, params: {id: asset.to_param}, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new TotalCommitment" do
+      it "creates a new Asset" do
         expect {
-          post :create, params: {total_commitment: valid_attributes}, session: valid_session
-        }.to change(TotalCommitment, :count).by(1)
+          post :create, params: {asset: valid_attributes}, session: valid_session
+        }.to change(Asset, :count).by(1)
       end
 
-      it "renders a JSON response with the new total_commitment" do
+      it "renders a JSON response with the new asset" do
 
-        post :create, params: {total_commitment: valid_attributes}, session: valid_session
+        post :create, params: {asset: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
-        expect(response.location).to eq(total_commitment_url(TotalCommitment.last))
+        expect(response.location).to eq(_asset_url(Asset.last))
       end
     end
 
     context "with invalid params" do
-      it "renders a JSON response with errors for the new total_commitment" do
+      it "renders a JSON response with errors for the new _asset" do
 
-        post :create, params: {total_commitment: invalid_attributes}, session: valid_session
+        post :create, params: {asset: invalid_attributes}, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -90,27 +90,27 @@ RSpec.describe TotalCommitmentsController, type: :controller do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested total_commitment" do
-        total_commitment = TotalCommitment.create! valid_attributes
-        put :update, params: {id: total_commitment.to_param, total_commitment: new_attributes}, session: valid_session
-        total_commitment.reload
+      it "updates the requested asset" do
+        asset = Asset.create! valid_attributes
+        put :update, params: {id: asset.to_param, asset: new_attributes}, session: valid_session
+        asset.reload
         skip("Add assertions for updated state")
       end
 
-      it "renders a JSON response with the total_commitment" do
-        total_commitment = TotalCommitment.create! valid_attributes
+      it "renders a JSON response with the asset" do
+        asset = Asset.create! valid_attributes
 
-        put :update, params: {id: total_commitment.to_param, total_commitment: valid_attributes}, session: valid_session
+        put :update, params: {id: asset.to_param, asset: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
       end
     end
 
     context "with invalid params" do
-      it "renders a JSON response with errors for the total_commitment" do
-        total_commitment = TotalCommitment.create! valid_attributes
+      it "renders a JSON response with errors for the asset" do
+        asset = Asset.create! valid_attributes
 
-        put :update, params: {id: total_commitment.to_param, total_commitment: invalid_attributes}, session: valid_session
+        put :update, params: {id: asset.to_param, asset: invalid_attributes}, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -118,11 +118,11 @@ RSpec.describe TotalCommitmentsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested total_commitment" do
-      total_commitment = TotalCommitment.create! valid_attributes
+    it "destroys the requested asset" do
+      asset = Asset.create! valid_attributes
       expect {
-        delete :destroy, params: {id: total_commitment.to_param}, session: valid_session
-      }.to change(TotalCommitment, :count).by(-1)
+        delete :destroy, params: {id: asset.to_param}, session: valid_session
+      }.to change(Asset, :count).by(-1)
     end
   end
 
