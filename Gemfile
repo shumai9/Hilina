@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.4.1'
+ruby '>= 2.4.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Shumai selcted jems
+# Shumai selcted gems
 gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'foreman'
 gem 'devise_token_auth'
@@ -39,14 +39,14 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
   gem 'rspec-rails', '~> 3.7'
+  gem 'factory_bot_rails', '~> 4.10'
   gem 'faker'
 end
 
 group :test do
-  gem 'factory_bot_rails', '~> 4.10'
   gem 'capybara', '~> 3.2'
-  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
   gem 'database_cleaner', '~> 1.7'
   gem 'cucumber', '~> 3.1'
   gem 'selenium-webdriver'

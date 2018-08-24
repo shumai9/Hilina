@@ -23,10 +23,10 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe AccountsController, type: :controller do
+RSpec.describe CommitmentsController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # Account. As you add validations to Account, be sure to
+  # Commitment. As you add validations to Commitment, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -38,12 +38,12 @@ RSpec.describe AccountsController, type: :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # AccountsController. Be sure to keep this updated too.
+  # CommitmentsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
     it "returns a success response" do
-      account = Account.create! valid_attributes
+      commitment = Commitment.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_success
     end
@@ -51,33 +51,33 @@ RSpec.describe AccountsController, type: :controller do
 
   describe "GET #show" do
     it "returns a success response" do
-      account = Account.create! valid_attributes
-      get :show, params: {id: account.to_param}, session: valid_session
+      commitment = Commitment.create! valid_attributes
+      get :show, params: {id: commitment.to_param}, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new Account" do
+      it "creates a new Commitment" do
         expect {
-          post :create, params: {account: valid_attributes}, session: valid_session
-        }.to change(Account, :count).by(1)
+          post :create, params: {commitment: valid_attributes}, session: valid_session
+        }.to change(Commitment, :count).by(1)
       end
 
-      it "renders a JSON response with the new account" do
+      it "renders a JSON response with the new commitment" do
 
-        post :create, params: {account: valid_attributes}, session: valid_session
+        post :create, params: {commitment: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
-        expect(response.location).to eq(account_url(Account.last))
+        expect(response.location).to eq(commitment_url(Commitment.last))
       end
     end
 
     context "with invalid params" do
-      it "renders a JSON response with errors for the new account" do
+      it "renders a JSON response with errors for the new commitment" do
 
-        post :create, params: {account: invalid_attributes}, session: valid_session
+        post :create, params: {commitment: invalid_attributes}, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -90,27 +90,27 @@ RSpec.describe AccountsController, type: :controller do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested account" do
-        account = Account.create! valid_attributes
-        put :update, params: {id: account.to_param, account: new_attributes}, session: valid_session
-        account.reload
+      it "updates the requested commitment" do
+        commitment = Commitment.create! valid_attributes
+        put :update, params: {id: commitment.to_param, commitment: new_attributes}, session: valid_session
+        commitment.reload
         skip("Add assertions for updated state")
       end
 
-      it "renders a JSON response with the account" do
-        account = Account.create! valid_attributes
+      it "renders a JSON response with the commitment" do
+        commitment = Commitment.create! valid_attributes
 
-        put :update, params: {id: account.to_param, account: valid_attributes}, session: valid_session
+        put :update, params: {id: commitment.to_param, commitment: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
       end
     end
 
     context "with invalid params" do
-      it "renders a JSON response with errors for the account" do
-        account = Account.create! valid_attributes
+      it "renders a JSON response with errors for the commitment" do
+        commitment = Commitment.create! valid_attributes
 
-        put :update, params: {id: account.to_param, account: invalid_attributes}, session: valid_session
+        put :update, params: {id: commitment.to_param, commitment: invalid_attributes}, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -118,11 +118,11 @@ RSpec.describe AccountsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested account" do
-      account = Account.create! valid_attributes
+    it "destroys the requested commitment" do
+      commitment = Commitment.create! valid_attributes
       expect {
-        delete :destroy, params: {id: account.to_param}, session: valid_session
-      }.to change(Account, :count).by(-1)
+        delete :destroy, params: {id: commitment.to_param}, session: valid_session
+      }.to change(Commitment, :count).by(-1)
     end
   end
 

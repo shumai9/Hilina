@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "TotalCommitments", type: :request do
-  describe "GET /total_commitments" do
+RSpec.describe "Assets", type: :request do
+  describe "GET /assets" do
     it "works! (now write some real specs)" do
-      get total_commitments_path
+      get assets_path
       expect(response).to have_http_status(200)
     end
   end
