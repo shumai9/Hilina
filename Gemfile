@@ -39,14 +39,14 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
   gem 'rspec-rails', '~> 3.7'
+  gem 'factory_bot_rails', '~> 4.10'
   gem 'faker'
 end
 
 group :test do
-  gem 'factory_bot_rails', '~> 4.10'
   gem 'capybara', '~> 3.2'
-  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
   gem 'database_cleaner', '~> 1.7'
   gem 'cucumber', '~> 3.1'
   gem 'selenium-webdriver'
