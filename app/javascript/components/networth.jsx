@@ -1,3 +1,6 @@
+
+
+
 import React from 'react'
 
 class Networth extends React.Component {
@@ -5,8 +8,7 @@ class Networth extends React.Component {
       super(props);
       this.state = ({
         isLoaded: false,
-        bucks: [],
-        errors: []
+        
       })
       
     }
@@ -31,15 +33,14 @@ class Networth extends React.Component {
   
     render() {    
       
-      if (!this.state.errors) {
+      if (this.state.errors) {
         return <div> Error: {this.state.errors}</div>;
       } else if (!this.state.isLoaded) {
         return <div> Loading...</div>;
       } else {
         return (
           <div className='appStyle'>
-            <Assets />
-            <Commitments />         
+            <p>Net</p>       
           </div>
         ); 
       }

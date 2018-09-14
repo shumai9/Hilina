@@ -5,10 +5,11 @@ class About extends React.Component {
     return(
       <div>
         <h1>About Hilina</h1>
-        <p>Hilina is a project to help individuals look after their financial wellbeing and current state</p>
-        <p>Hilina Remmeber to fetch data saved from server for dynamic content
-          if you can see your shadow you know where the sun is.
-        </p>
+        <p>Hilina is a project created to help individuals look after their 
+          financial wellbeing and current state by tracking realtime individual assets
+          and commitments.
+          </p>
+        <p>Dynamic content here </p>
       </div>
     );
   }

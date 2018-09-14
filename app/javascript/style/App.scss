@@ -32,15 +32,6 @@ body {
   width: 5rem;
   z-index: 100;
 }
-
- app{
- display: grid;
- width: 100%;
- grid-template-columns:20% auto;
- grid-gap: 10px;
-
- }
-
 div.nav, .nav-bar{
   position: relative;
   background:  #02243d;
@@ -71,10 +62,12 @@ div.nav, .nav-bar{
 }
 
 ul a {
+  display: inline;
   position: relative;
      
 }
 .form{
+  display: inline;
   text-align: right;
   margin-right: 0px; 
   input {
@@ -93,7 +86,11 @@ ul a {
     text-indent: 0.5rem;
   }
 }
+.form-signup {
+  width: 50vw;
+  
 
+}
 button {
   color: #000;
   font-weight: bold;
@@ -120,4 +117,6 @@ h1,h2,p, label, li, a {
 
 
 
-footer{}
+footer{
+  background: #000;
+}

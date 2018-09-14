@@ -1,10 +1,11 @@
+
+
 class Networth < ApplicationRecord
   belongs_to :user
-  def initialize
-    @assets = total_assets
-
-
+  @assets = Asset.all
+  @commitments = Commitment.all
+  
   def calc_networth
-    return assets - commitments
+    return @assets.amount - @commitments.amount
   end
 end
