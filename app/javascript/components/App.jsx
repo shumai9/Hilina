@@ -7,7 +7,6 @@ import Main from '../components/main'
 import About from '../components/about'
 import Home from '../components/home'
 import Contact from '../components/contact'
-import Address from '../components/address'
 import DashBoard from '../components/dash_board'
 
 require('../style/App.scss');
@@ -68,7 +67,6 @@ class App extends React.Component {
               <Route exact path="/home" component={Home}/>
               <Route path="/about" component={About}/>
               <Route path="/contact" component={Contact}/>
-              <Route path="/address" component={Address}/>
               <Route path="/users/sign_up" component={Signup}/>
             </div>    
           <div id="footer"></div>

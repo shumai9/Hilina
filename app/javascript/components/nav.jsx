@@ -15,7 +15,6 @@ class Nav extends React.Component {
             <li><NavLink exact to={"/home"}>Home</NavLink></li>
             <li><NavLink to={"/about"}>About</NavLink></li>
             <li><NavLink to={"/contact"}>Contact</NavLink></li>
-            <li><NavLink to={"/address"}>Address</NavLink></li>
             <li><NavLink to={"/users/sign_up"}>Sign up</NavLink></li>
           </ul>
         <Login updateCurrentUser = { this.props.updateCurrentUser } />

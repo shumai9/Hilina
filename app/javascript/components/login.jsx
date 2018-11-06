@@ -45,16 +45,15 @@ class Login extends React.Component {
           } else {
           alert('Invalid email or password', response.errors);
         }
-    }).catch(function(_error){});
-    console.log( this.state.logedIn, "checked");
-
+    }).catch(function(_error){})
   } 
+
   render(){
     if (this.state.logedIn){
       return <Redirect  push to="/user/dashboard"/> 
     }
     return(
-    <div className="form form-login">
+    <span className="form form-login">
       <form onSubmit = { this.handleLogin }>
         <span className = "form-field">
             <input value = { this.state.email }
@@ -66,13 +65,10 @@ class Login extends React.Component {
         </span>
           <button className="btn-login"> Login </button>
       </form>
-    </div>
+    </span>
   )
   }
 }
-
-
-
 
 export default Login;
 

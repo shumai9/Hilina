@@ -28,7 +28,7 @@ class DashBoard extends React.Component {
   }
 
   render() {    
-    if (this.state.isLoaded) {
+    if (!this.state.isLoaded) {
       return <Networth>This is data {this.state.display}</Networth>;
     } else {
       return (
