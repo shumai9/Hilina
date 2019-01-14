@@ -1,8 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 
-import Nav from '../components/nav'
-
 
 class Home extends React.Component {
   constructor(props) {

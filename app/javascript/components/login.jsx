@@ -7,7 +7,7 @@ class Login extends React.Component {
     super(props);
     this.state = {
       value: '',
-      logedIn: false
+      access: false
     };
   }
 
@@ -19,7 +19,6 @@ class Login extends React.Component {
 
   handleLogin = (e) => {
     e.preventDefault();
-    let self = this
     let data = {
       user: {
         email: document.getElementById('email').value,
@@ -35,38 +34,38 @@ class Login extends React.Component {
       headers: { 'Content-Type': 'application/json; charset=UTF-8', mode: 'cors' },
       credentials: 'include'
       })
-      .then(res => res.json())
-      .then((response) => {        
+      .then(res => res.json()).then((response) => {        
         if(response.email === this.state.value) {
-          this.setState({
-            logedIn: true 
-          });
-          self.props.updateCurrentUser(response.email);          
+          this.setState({access: true})
+          this.props.toggleLogin()
+          this.props.updateCurrentUser(response.email);
+          
+          console.log('this is login', response.email)          
           } else {
           alert('Invalid email or password', response.errors);
         }
-    }).catch(function(_error){})
+    }).catch( e => { console.log('Login error',e)})
   } 
 
   render(){
-    if (this.state.logedIn){
-      return <Redirect  push to="/user/dashboard"/> 
+    if (this.state.access){
+      return <Redirect push exact to="/user/dash_board" />
     }
     return(
-    <span className="form form-login">
-      <form onSubmit = { this.handleLogin }>
-        <span className = "form-field">
-            <input value = { this.state.email }
-                onChange = { this.handleChange }
-              type="text" id="email" name="email" placeholder="Email"/>
-        
-            <input value = { this.state.password } 
-            type="password" id="password" name="password" placeholder="Password"/>
-        </span>
-          <button className="btn-login"> Login </button>
-      </form>
-    </span>
-  )
+      <span className="form form-login">
+        <form onSubmit = { this.handleLogin }>
+          <span className = "form-field">
+              <input value = { this.state.email }
+                  onChange = { this.handleChange }
+                type="text" id="email" name="email" placeholder="Email"/>
+          
+              <input value = { this.state.password } 
+              type="password" id="password" name="password" placeholder="Password"/>
+          </span>
+            <button className="btn-login"> Login </button>
+        </form>
+      </span>
+    )
   }
 }
 

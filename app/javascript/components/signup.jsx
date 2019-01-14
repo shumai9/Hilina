@@ -18,9 +18,6 @@ class Signup extends React.Component{
 
   errorHander = (e) =>{
     e.preventDefault();
-
-
-
   }
 
   handleSignup =(e) => {
@@ -52,7 +49,6 @@ class Signup extends React.Component{
       .then((result) =>{ 
         if (result.status == '200') {
           self.props.updateCurrentUser(email);
-          self.props.changePage("delete");
         }else{ console.log(result.errors)}
         })
       .catch(function(error){

@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import Loadable from 'react-loadable';
-import { BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
-import Nav from '../components/nav'
-import Signup from '../components/signup'
-import Main from '../components/main'
-import About from '../components/about'
-import Home from '../components/home'
-import Contact from '../components/contact'
-import DashBoard from '../components/dash_board'
+import { BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import DashBoard from '../components/private/dash_board';
+import Login from '../components/login';
+import Signup from '../components/signup';
+import Home from '../components/shared/home';
+import About from '../components/shared/about';
+import Contact from '../components/shared/contact';
+import Nav from '../components/shared/nav';
 
 require('../style/App.scss');
 
@@ -15,9 +15,12 @@ require('../style/App.scss');
 class App extends React.Component {
   constructor(){
     super();
-    this.state = { current_user: null }
+    this.state = { 
+      current_user: null,
+      logedIn: false
+    }
     this.updateCurrentUser = this.updateCurrentUser.bind(this);
-    this.changePage = this.changePage.bind(this);
+    this.toggleLogin = this.toggleLogin.bind(this);
   }
 
   componentDidMount(){
@@ -25,7 +28,9 @@ class App extends React.Component {
       method: "GET",
       headers: {'Content-Type': 'application/json',mode: 'cors'}
       }
-    ).then((res) => res.json()).then((response) => {        
+    )
+    .then((res) => res.json())
+    .then((response) => {        
       if(response.email){
         this.setState({ current_user: response.email })
       } else {
@@ -42,32 +47,40 @@ class App extends React.Component {
     })
   }
 
-  changePage(newPage) {
-    this.setState({ page: newPage })
+  toggleLogin() {
+    this.setState({ logedIn: !this.state.logedIn })
   }
   
   render(){
-    if (this.state.current_user){
+    if (this.state.logedIn){
       return(
         <Router>
           <Switch>
-          <Route exact to="/user/dash_board" component={DashBoard} />
+            <Route exact to="/user/dash_board" component={DashBoard} />
           </Switch>
-        </Router>
+        </Router>     
       )
-    } 
-    return (
-      
+    }   
+    return (      
       <Router>
         <div className="content" >
-          <Nav updateCurrentUser = { this.updateCurrentUser }/>            
-          <Main updateCurrentUser = { this.updateCurrentUser } />         
+          <Nav />                           
             <div className="route">
-              <Route exact path="/#" component={Home}/>
-              <Route exact path="/home" component={Home}/>
-              <Route path="/about" component={About}/>
-              <Route path="/contact" component={Contact}/>
-              <Route path="/users/sign_up" component={Signup}/>
+              <Route exact path="/" render= { (props)=> <Home { ...props}/>}/>
+              <Route exact path="/home" render={ (props)=> <Home { ...props}/>}/>
+              <Route path="/about" render={ (props)=><About { ...props}/>}/>
+              <Route path="/contact" render={ (props)=><Contact { ...props}/>}/>
+              <Route path="/users/sign_up" render={ (props)=> <Signup { ...props} toggleLogin={this.toggleLogin}  />}/>
+              <Route 
+                path="/users/login" 
+                  render={
+                    (props)=> <Login 
+                      { ...props} 
+                      updateCurrentUser = { this.updateCurrentUser } 
+                      toggleLogin={this.toggleLogin} 
+                      />
+                } 
+              />
             </div>    
           <div id="footer"></div>
         </div>

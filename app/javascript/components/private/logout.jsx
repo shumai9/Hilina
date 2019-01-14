@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {BrowserRouter as Redirect} from "react-router-dom";
 
 class Logout extends React.Component {
   
@@ -17,8 +18,9 @@ class Logout extends React.Component {
       header: 'Content-Type: application/json',
       body: JSON.stringify(email)
     })
+    .then((j))
     .then((res) => {
-      self.props.changePage("login")
+      self.props.setState({ logedIn: false})
     })
     .catch(function(error){
       console.log(error)
@@ -29,7 +31,6 @@ class Logout extends React.Component {
     return (
       <div id="exit">
       <button className="btn-out" onClick={this.handleLogout}>Sign Out</button>
-      <Account />
       </div>
     );
   };
