@@ -1,7 +1,7 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 import { BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
-import DashBoard from '../components/private/dash_board';
+import Dashboard from '../components/private/dash_board';
 import Login from '../components/login';
 import Signup from '../components/signup';
 import Home from '../components/shared/home';
@@ -56,21 +56,29 @@ class App extends React.Component {
       return(
         <Router>
           <Switch>
-            <Route exact to="/user/dash_board" component={DashBoard} />
+            <Route exact to="/user/dash_board" component={Dashboard}/>
           </Switch>
         </Router>     
       )
     }   
     return (      
       <Router>
-        <div className="content" >
+        <div className="content" > 
           <Nav />                           
             <div className="route">
               <Route exact path="/" render= { (props)=> <Home { ...props}/>}/>
-              <Route exact path="/home" render={ (props)=> <Home { ...props}/>}/>
-              <Route path="/about" render={ (props)=><About { ...props}/>}/>
-              <Route path="/contact" render={ (props)=><Contact { ...props}/>}/>
-              <Route path="/users/sign_up" render={ (props)=> <Signup { ...props} toggleLogin={this.toggleLogin}  />}/>
+              <Route path="/about_us" render={ (props)=><About { ...props}/>}/>
+              <Route path="/contact_us" render={ (props)=><Contact { ...props}/>}/>
+              <Route 
+                path="/users/registration" 
+                  render={
+                    (props)=> <Signup 
+                      { ...props} 
+                      toggleLogin={this.toggleLogin}
+                      updateCurrentUser={this.updateCurrentUser}
+                    />
+                  }
+                />
               <Route 
                 path="/users/login" 
                   render={

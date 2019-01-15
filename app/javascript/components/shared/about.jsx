@@ -11,7 +11,7 @@ class About extends React.Component {
   componentDidMount() {
     fetch("http://localhost:3000/about")
     .then(res => res.json())
-    .then ((result) => {this.setState({text: result.all, isLoaded: true})})
+    .then ((result) => {this.setState({text: result, isLoaded: true})})
     .catch(
       e =>{ console.log('text errors',e);}
     );
@@ -23,7 +23,6 @@ class About extends React.Component {
       <div className="about">
         <h1>{data.title}</h1>
         <p>{data.body}</p>
-        <p> turned dinamic</p>
       </div>
     );
   }

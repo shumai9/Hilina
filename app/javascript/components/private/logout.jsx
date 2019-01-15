@@ -1,8 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Redirect} from "react-router-dom";
 
-class Logout extends React.Component {
-  
+class Logout extends React.Component {  
   constructor(props){
     super(props);
     this.handleLogout = this.handleLogout.bind(this);
@@ -10,20 +9,21 @@ class Logout extends React.Component {
   
   handleLogout(e) {
     e.preventDefault();
-    let self = this
     let email = this.props.current_user
+    console.log('from log out', email);
 
     fetch('/users/sign_out', {
       method: 'delete',
       header: 'Content-Type: application/json',
       body: JSON.stringify(email)
     })
-    .then((j))
-    .then((res) => {
-      self.props.setState({ logedIn: false})
+    .then(res => res.json())
+    .then((result) => {
+      this.props.toggleLogin();
+      this.updateCurrentUser(result);
     })
-    .catch(function(error){
-      console.log(error)
+    .catch( e =>{
+      console.log('logout error',e);
     })
   }
 

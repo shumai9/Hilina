@@ -3,41 +3,34 @@
   padding: 0px;
   box-sizing: border-box;
 }
-
-html {
-  background: none;
-  background-size: cover;
-  height: 30rem;
-}
 body {
   font-family: 'Poiret One', cursive;
-
   background: no-repeat url('../img/mar.jpg');
   background-size: cover;
   .route {
-    padding: 0px 10px;
-    margin: 0px 25px;
+    padding: 10% 10%;
+    margin: 15px;
     width: auto;
-    height: 90vh;
     background: rgba(49, 49, 49, 0.38);
   }
-  
 }
 
  #logo {
-  float: left;
+  position: fixed;
+  left: 15px;
+  top: 15px;
   background: no-repeat url('../img/svlogo.png');
   background-size: contain;
-  height: 5rem ;
-  width: 5rem;
+  height: 3rem ;
+  width: 3rem;
   z-index: 100;
 }
 div.nav, .nav-bar{
   position: relative;
   background:  #02243d;
-  height: auto;
+  height: 6rem;
   width: 100%;
-  box-shadow: inset -1px 0px 18px 4px rgb(152, 168, 180);
+  box-shadow: 13px 1px 1rem 8px #011d0a;
   li, a {
     display: inline-block;
     text-decoration: none;
@@ -47,6 +40,8 @@ div.nav, .nav-bar{
     margin: 5px;
   }
   .link {
+    position: relative;
+    top: 1rem;
     text-align: center;
     
     a:hover{
@@ -58,7 +53,7 @@ div.nav, .nav-bar{
 }
 .active {
   background-color: #fdaa12;
-  border-radius: 5rem;
+  border-radius: 5%;
 }
 
 ul a {
@@ -67,17 +62,20 @@ ul a {
      
 }
 .form{
-  display: inline;
-  text-align: right;
-  margin-right: 0px; 
+  position: relative;
+  top: 0rem;
+  left: 43%;
+  width: 300px;
+  height: auto; 
   input {
-    font-weight: bold;
+    font-weight: 1000;
     font-family: 'Poiret One', cursive;
     color: #000;
     border: solid 1px #f06d06;
     padding: 3px;
     margin: 2px;
-    height: 1.5em; 
+    height: 2rem;
+    width: 100%; 
     border-radius: 5rem;
     background-clip: content-box;
     background-color: white;
@@ -86,11 +84,6 @@ ul a {
     text-indent: 0.5rem;
   }
 }
-.form-signup {
-  width: 50vw;
-  
-
-}
 button {
   color: #000;
   font-weight: bold;
@@ -98,7 +91,7 @@ button {
   padding: 5px;
   border-radius: 5rem;
   background: orange;
-  width:100px; 
+  width:100%; 
   a {
     text-decoration: none;
   }

@@ -1,24 +1,30 @@
 import React from 'react'
-import { BrowserRouter as Router, Link } from 'react-router-dom'
-
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    
-    this.handleChange = this.handleChange.bind(this);
-    
+    this.state ={
+      isLoaded: false,
+      text: {}
+    }       
   }
-
-   handleChange = (e) => {
-    this.setState({value: e.target.value});
+  componentDidMount() {
+    fetch("http://localhost:3000/home")
+    .then(res => res.json())
+    .then((result)=>{
+      this.setState({
+        isLoaded: true,
+        text: result
+      })
+    })
+    .catch( e => {console.log('home',e)})
   }
-
   render() {
+    const data = this.state.text;
     return(
       <div className="home">  
-        <h2>Home</h2>
-          <p> Welcome this is hilina home page enjoy! </p>     
+        <h1>{data.title}</h1>
+          <p>{data.body}</p>     
       </div>
     )
   }

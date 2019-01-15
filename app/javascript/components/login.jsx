@@ -1,5 +1,6 @@
 import React from 'react'
-import {  BrowserRouter as Redirect} from "react-router-dom";
+import { BrowserRouter as Redirect} from 'react-router-dom';
+
 
 
 class Login extends React.Component {
@@ -17,7 +18,7 @@ class Login extends React.Component {
     });
   }
 
-  handleLogin = (e) => {
+  handleLogin = (e) => {  
     e.preventDefault();
     let data = {
       user: {
@@ -49,7 +50,8 @@ class Login extends React.Component {
 
   render(){
     if (this.state.access){
-      return <Redirect push exact to="/user/dash_board" />
+      //I needed to make the to an object this wasted me 5hour of debug
+      return <Redirect to="/" push={true} />
     }
     return(
       <span className="form form-login">
