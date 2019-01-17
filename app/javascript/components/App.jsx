@@ -1,13 +1,18 @@
-import React from 'react'
+import React from 'react';
 import Loadable from 'react-loadable';
-import { BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
-import Nav from '../components/nav'
-import Signup from '../components/signup'
-import Main from '../components/main'
-import About from '../components/about'
-import Home from '../components/home'
-import Contact from '../components/contact'
-import DashBoard from '../components/dash_board'
+import { 
+  BrowserRouter,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
+import Dashboard from '../components/private/dash_board';
+import Login from '../components/login';
+import Signup from '../components/signup';
+import Home from '../components/shared/home';
+import About from '../components/shared/about';
+import Contact from '../components/shared/contact';
+import Nav from '../components/shared/nav';
 
 require('../style/App.scss');
 
@@ -15,9 +20,12 @@ require('../style/App.scss');
 class App extends React.Component {
   constructor(){
     super();
-    this.state = { current_user: null }
+    this.state = { 
+      current_user: null,
+      logedIn: false
+    }
     this.updateCurrentUser = this.updateCurrentUser.bind(this);
-    this.changePage = this.changePage.bind(this);
+    this.toggleLogin = this.toggleLogin.bind(this);
   }
 
   componentDidMount(){
@@ -25,7 +33,9 @@ class App extends React.Component {
       method: "GET",
       headers: {'Content-Type': 'application/json',mode: 'cors'}
       }
-    ).then((res) => res.json()).then((response) => {        
+    )
+    .then((res) => res.json())
+    .then((response) => {        
       if(response.email){
         this.setState({ current_user: response.email })
       } else {
@@ -36,42 +46,69 @@ class App extends React.Component {
     })
   }  
 
-  updateCurrentUser(email) {
+  updateCurrentUser (email) {
     this.setState({
       current_user: email
     })
   }
 
-  changePage(newPage) {
-    this.setState({ page: newPage })
+  toggleLogin() {
+    this.setState({ logedIn: !this.state.logedIn })
   }
   
   render(){
-    if (this.state.current_user){
-      return(
-        <Router>
-          <Switch>
-          <Route exact to="/user/dash_board" component={DashBoard} />
-          </Switch>
-        </Router>
-      )
-    } 
-    return (
-      
-      <Router>
-        <div className="content" >
-          <Nav updateCurrentUser = { this.updateCurrentUser }/>            
-          <Main updateCurrentUser = { this.updateCurrentUser } />         
+    const currentUser = this.state.current_user
+    const signedIn = this.state.logedIn
+    const updateCurrentUser= this.updateCurrentUser
+    const toggleLogin= this.toggleLogin
+    
+    return (      
+      <BrowserRouter>
+        <div className="content" > 
+          <Nav />                           
             <div className="route">
-              <Route exact path="/#" component={Home}/>
-              <Route exact path="/home" component={Home}/>
-              <Route path="/about" component={About}/>
-              <Route path="/contact" component={Contact}/>
-              <Route path="/users/sign_up" component={Signup}/>
+            <Switch>
+              <Route exact path="/" render= { (props)=> <Home { ...props}/>}/>
+              <Route exact path="/about_us" render={ (props)=><About { ...props}/>}/>
+              <Route exact path="/contact_us" render={ (props)=><Contact { ...props}/>}/>
+              <Route exact path="/users/registration" 
+                render={
+                  (props)=> <Signup 
+                    { ...props} 
+                    toggleLogin={toggleLogin}
+                    updateCurrentUser={updateCurrentUser}
+                  />
+                }
+              />
+              <Route exact path="/users/login" 
+                render={
+                  (props)=> <Login { ...props} 
+                    updateCurrentUser = { updateCurrentUser } 
+                    toggleLogin={toggleLogin}
+                    currentUser={currentUser} 
+                  />
+                } 
+              />
+              {
+              currentUser ? (
+                <Route exact to="/user/dash_board" render={
+                  (props)=> <Dashboard { ...props} 
+                    updateCurrentUser = { updateCurrentUser } 
+                    toggleLogin={toggleLogin}
+                    currentUser={currentUser}
+                    signedIn = {signedIn}
+                  />
+                } 
+              />
+              ) : (
+                <Redirect exact  to="/users/login"/>  
+              )
+             }
+            </Switch>
             </div>    
           <div id="footer"></div>
-        </div>
-      </Router>        
+        </div>        
+      </BrowserRouter>        
     )
   }
 }

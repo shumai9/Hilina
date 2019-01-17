@@ -11,14 +11,10 @@ console.log('Hello World from Webpacker');
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../components/App'
-
-
-
+import { BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-      <App />,
-    document.querySelector('#app')
+  ReactDOM.render(<App />,document.querySelector('#app')
   )
 })
 
