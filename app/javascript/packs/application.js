@@ -14,7 +14,7 @@ import App from '../components/App'
 import { BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<Router><App /></Router>,document.querySelector('#app')
+  ReactDOM.render(<App />,document.querySelector('#app')
   )
 })
 

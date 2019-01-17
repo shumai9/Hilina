@@ -9,28 +9,30 @@ class Logout extends React.Component {
   
   handleLogout(e) {
     e.preventDefault();
-    let email = this.props.current_user
-    console.log('from log out', email);
+    const data= { email: `${this.props.curentUser}`}  
+    console.log('check data in logout ',data.email);
 
     fetch('/users/sign_out', {
-      method: 'delete',
+      method: 'DELETE',
       header: 'Content-Type: application/json',
-      body: JSON.stringify(email)
+      body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .then((result) => {
-      this.props.toggleLogin();
-      this.updateCurrentUser(result);
+    .then((result) => {     
+      this.props.updateCurrentUser();
+      console.log('returned api data',result.status);
     })
     .catch( e =>{
-      console.log('logout error',e);
+      console.log('error form logout ',e);
     })
   }
 
   render() {
+    const curentUser = this.props.curentUser;
+    const signedIn = this.props.signedIn
+    console.warn('now user is ', curentUser);
     return (
-      <div id="exit">
-      <button className="btn-out" onClick={this.handleLogout}>Sign Out</button>
+      <div className="exit form">
+        <button className="btn-out" onClick={this.handleLogout}>Sign Out</button>
       </div>
     );
   };

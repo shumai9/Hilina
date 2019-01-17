@@ -16,6 +16,7 @@ class Nav extends React.Component {
             <li><NavLink to={"/contact_us"}>Contact</NavLink></li>
             <li><NavLink to={"/users/registration"}>Sign up</NavLink></li>
             <li><NavLink to={"/users/login"}>Login</NavLink></li>
+            <li><NavLink exact to={"/user/dash_board"}>Dash Board</NavLink></li>
           </ul>
       </div> 
     )

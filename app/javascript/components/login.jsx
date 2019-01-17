@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Redirect} from 'react-router-dom';
+import { BrowserRoute as Route, Redirect} from 'react-router-dom';
 
 
 
@@ -37,24 +37,28 @@ class Login extends React.Component {
       })
       .then(res => res.json()).then((response) => {        
         if(response.email === this.state.value) {
-          this.setState({access: true})
+          this.setState({
+            access: true
+          })
           this.props.toggleLogin()
           this.props.updateCurrentUser(response.email);
           
           console.log('this is login', response.email)          
           } else {
-          alert('Invalid email or password', response.errors);
+          console.warn('Invalid email or password', response.errors);
         }
     }).catch( e => { console.log('Login error',e)})
   } 
 
   render(){
-    if (this.state.access){
-      //I needed to make the to an object this wasted me 5hour of debug
-      return <Redirect to="/" push={true} />
-    }
+    const access = this.props.access;
+    const currentUser = this.props.currentUser;
+    
     return(
-      <span className="form form-login">
+      currentUser ? (
+        <Redirect push={true} to="/dashboard"/>
+      ) : (
+        <div className="form form-login">
         <form onSubmit = { this.handleLogin }>
           <span className = "form-field">
               <input value = { this.state.email }
@@ -66,7 +70,8 @@ class Login extends React.Component {
           </span>
             <button className="btn-login"> Login </button>
         </form>
-      </span>
+      </div> 
+      )      
     )
   }
 }
