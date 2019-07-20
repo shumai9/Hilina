@@ -37,9 +37,7 @@ class Login extends React.Component {
       })
       .then(res => res.json()).then((response) => {        
         if(response.email === this.state.value) {
-          this.setState({
-            access: true
-          })
+          
           this.props.toggleLogin()
           this.props.updateCurrentUser(response.email);
           

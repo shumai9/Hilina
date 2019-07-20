@@ -6,9 +6,12 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 #-- require database cleaner at the top level
 require 'database_cleaner'
+require 'simplecov'
+SimpleCov.start
 
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -23,13 +26,15 @@ require 'database_cleaner'
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
-#
- Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
-ActiveRecord::Migration.maintain_test_schema!
-
+begin
+  ActiveRecord::Migration.maintain_test_schema!
+rescue ActiveRecord::PendingMigrationError => e
+  puts e.to_s.strip
+  exit 1
+end
 #--configure shoulda matchers to use rspec as the test framework and full matcher libraries for rails
 
 Shoulda::Matchers.configure do |config|
@@ -50,6 +55,9 @@ RSpec.configure do |config|
 
   #-- add `FactoryBot` methods
   config.include FactoryBot::Syntax::Methods
+  #line to allow helper to be loaded
+  config.include RequestSpecHelper
+  config.include ControllerSpecHelper
 
 
   # RSpec Rails can automatically mix in different behaviours to your tests

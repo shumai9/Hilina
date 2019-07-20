@@ -25,7 +25,8 @@ class Assets extends React.Component {
     } else {
       return (
         <div className="assets">
-          <h2> Total Assets:{this.state.asset}</h2>               
+          <h2> Total Assets:</h2>
+          {this.state.asset.map((k,v)=>{ return <li>`${k} : ${v}`</li>})}               
         </div>
       );
     }

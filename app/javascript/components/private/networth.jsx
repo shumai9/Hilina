@@ -28,7 +28,7 @@ class Networth extends React.Component {
       } else {
         return (
           <div className='networth'>
-            <h1>{this.state.bucks}</h1>
+            <h1>{networth}</h1>
             {/* {this.state.bucks.map((key, value) => {return <div></div>})} */}
                    
           </div>
