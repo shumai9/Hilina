@@ -34,7 +34,7 @@ gem 'react-rails'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
- gem 'rack-cors', require: 'rack/cors'
+gem 'rack-cors', require: 'rack/cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -42,7 +42,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails', '~> 4.10'
-  gem 'faker'
+  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 end
 
 group :test do

@@ -8,22 +8,11 @@ class Home extends React.Component {
       text: {}
     }       
   }
-  componentDidMount() {
-    fetch("http://localhost:3000/home")
-    .then(res => res.json())
-    .then((result)=>{
-      this.setState({
-        isLoaded: true,
-        text: result
-      })
-    })
-    .catch( e => {console.log('home',e)})
-  }
   render() {
     const data = this.state.text;
     return(
       <div className="home">  
-        <h1>{data.title}</h1>
+        <h1>Home sweet Home</h1>
           <p>{data.body}</p>     
       </div>
     )

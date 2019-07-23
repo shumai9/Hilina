@@ -4,30 +4,18 @@ import {BrowserRouter as Redirect} from "react-router-dom";
 class Logout extends React.Component {  
   constructor(props){
     super(props);
-    this.handleLogout = this.handleLogout.bind(this);
   }
   
-  handleLogout(e) {
-    e.preventDefault();
-    const data= { email: `${this.props.curentUser}`}  
+  handleLogout = (e) => {
+    const data= { email: `${this.props.user}`}  
     console.log('check data in logout ',data.email);
-
-    fetch('/users/sign_out', {
-      method: 'DELETE',
-      header: 'Content-Type: application/json',
-      body: JSON.stringify(data)
-    })
-    .then((result) => {     
-      this.props.updateCurrentUser();
-      console.log('returned api data',result.status);
-    })
-    .catch( e =>{
-      console.log('error form logout ',e);
-    })
+    this.props.updateCurrentUser();      
+    this.props.toggleLogin();
+    //sessionStorage.clear();
   }
 
   render() {
-    const curentUser = this.props.curentUser;
+    const curentUser = this.props.user;
     const signedIn = this.props.signedIn
     console.warn('now user is ', curentUser);
     return (

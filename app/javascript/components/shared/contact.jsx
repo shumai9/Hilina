@@ -8,6 +8,7 @@ class Contact extends React.Component {
       isLoaded: true
     }
   }
+  /*
   componentDidMount() {
     fetch("http://localhost:3000/contact")
     .then(res => res.json())
@@ -16,6 +17,7 @@ class Contact extends React.Component {
       e =>{ console.log('text errors',e);}
     );
   }
+  */
   render() {
     const data = this.state.text;
     return(

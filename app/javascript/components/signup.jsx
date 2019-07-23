@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 class Signup extends React.Component{
   constructor(props){
     super(props);
@@ -23,46 +21,52 @@ class Signup extends React.Component{
   handleSignup =(e) => {
     let self = this
     e.preventDefault();
-    let data = { user:{ 
-      first_name: document.getElementById('first_name').value,
-      last_name: document.getElementById('last_name').value,
-      birth_date: document.getElementById('birth_date').value,
-      email: document.getElementById('email').value,
-      password: document.getElementById('password').value
+    let data = {
+      user:{ 
+        user_name: document.getElementById('user_name').value,
+        first_name: document.getElementById('first_name').value,
+        last_name: document.getElementById('last_name').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
       }
     };
+    let pswd = document.getElementById('password_confirmation').value
 
     if(this.state.value === '' ){
       alert("Please type in details to register");
-
-    } else { 
-
-    console.log(this.state.value);
-      const newLocal = 'ok';
-      fetch('/users', {
-        method: "POST", 
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json; charset=UTF-8', mode: 'cors' },
-        credentials: 'include'    
-      })
-      .then((res)=> res.json())
-      .then((result) =>{ 
-        if (result.status == '200') {
-          self.props.updateCurrentUser(email);
-        }else{ console.log(result.errors)}
+    } else {
+      console.log(this.state.value);
+      if(pswd === data.user.password ){
+        fetch('/signup', {
+          method: "POST", 
+          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json; charset=UTF-8', mode: 'cors' },
+          credentials: 'include'    
         })
-      .catch(function(error){
-        console.log(data)
-      })
+        .then((res)=> res.json())
+        .then((result) =>{ 
+          if (result.status == '200') {
+            self.props.updateCurrentUser(email);
+          }else{ console.log(result.errors)}
+          })
+        .catch(function(error){
+          console.log(data)
+        })    
+      }
     }
   }
-
   
   render() {
     return (
       <div className="form form-signup">
         <h1>Sign-up</h1>
         <form onSubmit={this.handleSignup}>
+          <div className="form-field">     
+            <label >User Name 
+            <input className="border" value={this.state.user_name} onChange={this.handleChange}
+              type="text" id="user_name" name="user_name" placeholder="User name"/>
+          </label>
+          </div><br />
           <div className="form-field ">
             <label>First name 
               <input value={this.state.first_name} onChange={this.handleChange}
@@ -73,12 +77,6 @@ class Signup extends React.Component{
             <label>Last name
               <input className="border" value={this.state.last_name} onChange={this.handleChange}
               type="text" id="last_name" name="last_name" placeholder="Last name"/>
-          </label>
-          </div><br />
-          <div className="form-field">     
-            <label >Birth date 
-            <input className="border" value={this.state.birth_date} onChange={this.handleChange}
-              type="date" id="birth_date" name="birth_date" placeholder="Birth date"/>
           </label>
           </div><br />
           <div className="form-field">     
@@ -96,7 +94,7 @@ class Signup extends React.Component{
           <div className="form-field">     
             <label >Confirm password 
             <input className="border" value={this.state.password_confirmation} onChange={this.handleChange}
-            type="password" id="password_confirmation" name="password_confirmation" placeholder="Retype paswword"/>
+            type="password" id="password_confirmation" name="password_confirmation" placeholder="Retype password"/>
           </label>
           </div><br />
             <button className="btn-signup" onChange={this.handleSignup}>Create Account</button>

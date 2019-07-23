@@ -1,9 +1,9 @@
-module Api 
-  module V1
+module Api::V1 
+  #module V1
     class AssetsController < ApplicationController
       def index
-        @assets = Asset.all.where(user_id: params.id) 
-        render json: {all: @assets}.to_json
+        assets = Asset.all
+        json_response(asset: assets)
       end
 
       def create
@@ -23,5 +23,5 @@ module Api
       end
 
     end
-  end
+  #end
 end

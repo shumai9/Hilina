@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   post 'auth/login', to: 'authentication#authenticate'
   post 'signup', to: 'users#create'
+  #catch all urls
+  get '*path' => 'landing#index'
 end
 
 #only: [:show, :edit, :update, :destroy] 

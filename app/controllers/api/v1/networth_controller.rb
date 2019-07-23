@@ -1,10 +1,10 @@
 module Api
-    module V1
-        class NetworthController < ApplicationController
-            def index
-                @networths = Networth.all
-                render json: { current: "your net worth is #@netwoths"}
-            end
-        end
+  module V1
+    class NetworthController < ApplicationController
+      def index
+        net = Networth.all
+        json_response(net: net)
+      end
     end
+  end
 end
