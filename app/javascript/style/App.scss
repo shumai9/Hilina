@@ -5,12 +5,13 @@
 }
 body {
   font-family: 'Poiret One', cursive;
-  background: no-repeat url('../img/mar.jpg');
+  background: url('../img/mar.jpg');
   background-size: cover;
   .route {
-    padding: 10% 10%;
+    padding: 5% 15%;
     margin: 15px;
     width: auto;
+    height: 100vh;
     background: rgba(49, 49, 49, 0.38);
   }
 }

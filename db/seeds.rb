@@ -8,61 +8,35 @@
 
 
 @usr = User.create( 
-    :first_name => Faker::Name.first_name,
-    :last_name => Faker::Name.last_name,
-    :user_name => Faker::Movies::StarWars.character
-    #:birth_date => Faker::Date.birthday(18, 60),
-    :email => Faker::Internet.email,
-    :password => "password"
-  )
-
-@acc = Account.create( total_assets: 0, total_commitments: 0, networth_state: 0, user_id: @usr.id)
-
-
-
-@asst = TotalAsset.create(
-    :financial_assets => Faker::Boolean.boolean(0.5), 
-    :non_financial_assets => Faker::Boolean.boolean(0.5),
-    :cash => Faker::Number.decimal(8, 2),
-    :current_account => Faker::Number.decimal(8, 2),
-    :savings_account => Faker::Number.decimal(8, 2),
-    :business_market_value => Faker::Number.decimal(8, 2),
-    :bullion_value => Faker::Number.decimal(8, 2),
-    :employer_pension => Faker::Number.decimal(8, 2),
-    :securities => Faker::Number.decimal(8, 2),
-    :retirement_funds => Faker::Number.decimal(8, 2),
-    :life_insurance => Faker::Number.decimal(8, 2),
-    :motor_vehicle => Faker::Number.decimal(8, 2),
-    :jewelery => Faker::Number.decimal(8, 2),
-    :furniture => Faker::Number.decimal(8, 2),
-    :real_estate => Faker::Number.decimal(8, 2),
-    :office_equipment => Faker::Number.decimal(8, 2),
-    :collectible => Faker::Number.decimal(8, 2),
-    :fine_art => Faker::Number.decimal(8, 2),
-    :clothing => Faker::Number.decimal(8, 2),
-    :appliance => Faker::Number.decimal(8, 2),
-    :date_acquired => Faker::Date.between(2.year.ago, Date.today),
-    :account_id => @acc.id
+  :first_name => Faker::Name.first_name,
+  :last_name => Faker::Name.last_name,
+  :user_name => Faker::Movies::StarWars.character
+  :email => Faker::Internet.email,
+  :password => "password"
+)
+@asset = Asset.create(
+  :user_id => @usr.id
+  :asset_name => Faker::Name.first_name
+  :asset_type => Faker::Name.first_name
+  :amount => Faker::Name.first_name
+  :acquired =>Faker::Name.first_name 
+  :ceased =>Faker::Name.first_name 
+)
+@commits = Commitment.create(
+  :user_id => @usr.id
+  :commitment_name =>Faker::Name.first_name 
+  :commitment_type =>Faker::Name.first_name 
+  :amount => Faker::Name.first_name
+  :acquired => Faker::Name.first_name
+  :ceased => Faker::Name.first_name
 )
 
-@comit = TotalCommitment.create(
-    outstanding_bill: (Faker::Number.decimal(8, 2)),
-    credit_card_charge: (Faker::Number.decimal(8, 2)),
-    medical_bill: (Faker::Number.decimal(8, 2)),
-    rent: (Faker::Number.decimal(8, 2)),
-    repair_bill: (Faker::Number.decimal(8, 2)),
-    auto_installment_loan: (Faker::Number.decimal(8, 2)),
-    personal_loan: (Faker::Number.decimal(8, 2)),
-    peer_to_peer_loan: (Faker::Number.decimal(8, 2)),
-    home_mortgage: (Faker::Number.decimal(8, 2)),
-    rental_property_loan: (Faker::Number.decimal(8, 2)),
-    small_business_loan: (Faker::Number.decimal(8, 2)),
-    college_loan: (Faker::Number.decimal(8, 2)),
-    date_acquired: (Faker::Date.between(2.year.ago, Date.today)),
-    :account_id => @acc.id        
+@netwoth = Networth.create(
+  :user_id => @usr.id
+  :total_amount => 0
+  :total_current_value => 0
+  :current_networth => 0
 )
 
-
-# user = Account(Asset + Commitment)
 
 
