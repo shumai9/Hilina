@@ -9,9 +9,9 @@ class Logout extends React.Component {
   handleLogout = (e) => {
     const data= { email: `${this.props.user}`}  
     console.log('check data in logout ',data.email);
+    sessionStorage.clear();
     this.props.updateCurrentUser();      
     this.props.toggleLogin();
-    //sessionStorage.clear();
   }
 
   render() {

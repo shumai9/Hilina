@@ -8,11 +8,31 @@ body {
   background: url('../img/mar.jpg');
   background-size: cover;
   .route {
-    padding: 5% 15%;
+    padding: 5% 5%;
     margin: 15px;
     width: auto;
     height: 100vh;
     background: rgba(49, 49, 49, 0.38);
+  }
+  .dashboard{
+    display: flex;
+    ul{
+      border-right: 1px solid #000;
+      width: 40%;
+      li{
+        text-align: right;
+        padding: 1rem;
+        margin: 1rem;
+        list-style: none;
+        button { background: black;}
+        button.active { background: orange;}
+        a {text-decoration: none;}
+      }
+    }
+    div{
+      padding: 5px;
+      margin: 5px;
+    }
   }
 }
 
@@ -63,11 +83,8 @@ ul a {
      
 }
 div.form{
-  position: relative;
-  top: 0rem;
-  left: 43%;
-  width: 300px;
-  height: auto; 
+  background: #02243d;
+  border-radius: 1rem;
   input {
     font-weight: 1000;
     font-family: 'Poiret One', cursive;
@@ -84,9 +101,6 @@ div.form{
     font-size: 18px;
     text-indent: 0.5rem;
   }
-}
-.form-login {
-  float: left;
 }
 button {
   color: #000;

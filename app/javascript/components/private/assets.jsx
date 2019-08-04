@@ -4,35 +4,19 @@ import React from 'react'
 class Assets extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isLoaded: false,
-      asset: {}
-    }
   }
+
   listAssets =(res)=>{
     const data = {asset: res};
     console.log('Asset', data.asset)
     this.setState({isLoaded: true})
   }
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/assets", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "charset": "UTF-8",
-        "Authorization": this.props.token(), 
-        "mode": "cors"
-      }
-    })
-    .then(res => res.json())
-    .then ((result) => {
-      this.listAssets(result);
-    }).catch(
-      e =>{ console.log('Asset errors',e);}
-    );
+    console.log('asset mounted')
   }
 
   render() {
+    console.log("ASSEt",this.props.token());
     if (this.props.isLoaded) {
       return <div>Loading...</div>
     } else {

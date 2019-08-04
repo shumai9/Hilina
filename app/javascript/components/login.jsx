@@ -21,14 +21,14 @@ class Login extends React.Component {
       headers: { 'Content-Type': 'application/json; charset=UTF-8', mode: 'cors' },
       credentials: 'include'
     })
-    .then(res => res.json())
-    .then((response) => {        
-      if(response.auth_token) {        
+    .then(response => response.json())
+    .then((result) => {        
+      if(result.auth_token) {        
         this.props.toggleLogin()
-        this.props.updateCurrentUser(data.user.email, response.auth_token);        
-        console.log('this is login', response.auth_token)          
-        } else {
-        console.warn('Invalid email or password', response.errors);
+        this.props.updateCurrentUser(data.user.email, result.auth_token);        
+        console.log('this is login', result.auth_token)          
+      } else {
+        console.warn('Invalid email or password', result.errors.message);
       }
     }).catch( e => { console.log('Login error',e)})
   } 

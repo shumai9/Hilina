@@ -24,15 +24,17 @@ class App extends React.Component {
   }
 
   updateCurrentUser = (email, token) => {
-    this.setState({ current_user: email });
+    this.setState({ current_user: email, token: token });
     if (token){
-      sessionStorage.setItem('email',email);
       sessionStorage.setItem('token',token); 
+      sessionStorage.setItem('email',email);
     }
   }
+
   toggleLogin = () => {
     this.setState({ logedIn: !this.state.logedIn })
   }
+
   componentDidMount(){
     const email = sessionStorage.getItem('email');         
     if(email){
@@ -40,12 +42,15 @@ class App extends React.Component {
     } else {
       this.setState({ current_user: null })
     }
+  }
+  tokenHandler=()=>{
+    return this.state.token
   } 
   render(){
-    const currentUser = this.state.current_user
-    const signedIn = this.state.logedIn
-    const updateCurrentUser= this.updateCurrentUser
-    const toggleLogin= this.toggleLogin
+    const currentUser       = this.state.current_user
+    const signedIn          = this.state.logedIn
+    const updateCurrentUser = this.updateCurrentUser
+    const toggleLogin       = this.toggleLogin
     
     return (      
       <BrowserRouter>
@@ -61,7 +66,9 @@ class App extends React.Component {
                   updateCurrentUser = { updateCurrentUser } 
                   toggleLogin={toggleLogin}
                   currentUser={currentUser}
-                  signedIn = {signedIn} />
+                  signedIn = {signedIn}
+                  tokenHandler= {this.tokenHandler}
+                  />
                 } 
               />
             </Switch>
