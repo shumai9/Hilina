@@ -125,8 +125,16 @@ h1,h2,p, label, li, a {
 #alert {
   background: red;
 }
-
-
+div.exit.form {
+  position: absolute;
+  left: 82%;
+  top: 7rem;
+}
+.user_links a { 
+  background: red;
+  padding: 1rem;
+  margin: 1rem;
+}
 
 footer{
   background: #000;

@@ -6,26 +6,37 @@ class Assets extends React.Component {
     super(props);
   }
 
-  listAssets =(res)=>{
-    const data = {asset: res};
-    console.log('Asset', data.asset)
-    this.setState({isLoaded: true})
+  listAssets =()=>{
+    console.log('asset got here')   
   }
   componentDidMount() {
     console.log('asset mounted')
+    this.props.fetchUserData("assets", "GET"); 
   }
 
   render() {
-    console.log("ASSEt",this.props.token());
-    if (this.props.isLoaded) {
-      return <div>Loading...</div>
-    } else {
+    const data = this.props.data;
+    console.log("ASSEt");
+    if (this.props.data) {
       return (
         <div className="assets">
           <h2> Total Assets:</h2>
-          {/*this.state.asset.map((k,v)=>{ return <li>`${k} : ${v}`</li>})*/}               
+            {
+              [...data].map((k,v)=>{ 
+                return (
+                  <div key={v}>
+                    <h5 > `${k.asset_type}` : `${k.asset_name}` </h5>
+                    <ul>
+                      <li> Total amount: {k.amount}</li>
+                    </ul>
+                  </div>              
+                );
+              })
+            }
         </div>
       );
+    } else {
+      return <div>Loading...</div>
     }
   }
 }  

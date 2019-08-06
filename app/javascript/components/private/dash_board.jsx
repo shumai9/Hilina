@@ -19,8 +19,7 @@ class DashBoard extends React.Component {
 
   fetchUserData = (endPoint, method) => {
     const baseUrl = 'http://localhost:3000/api/v1';
-    var param = { method: method,
-      headers: {
+    var param = { method: method, headers: {
         "Content-Type": "application/json",
         "charset": "UTF-8",
         "Authorization": "", 
@@ -28,11 +27,11 @@ class DashBoard extends React.Component {
       }
     }
     if (this.props.currentUser) {
-      param.headers["Authorization"] = this.props.tokenHandler()
+      param.headers["Authorization"] = sessionStorage.getItem("token");
       fetch( baseUrl +"/"+ endPoint, param)
       .then(res => res.json())
       .then ((result) => {
-        this.setState(result);
+        this.setState(result)
       }).catch(
         e =>{ console.log('Asset errors',e);}
       );
@@ -54,23 +53,20 @@ class DashBoard extends React.Component {
     e.currentTarget.style["background"] = "transparent"
   }
   componentDidUpdate(prevProps) {
-    if (this.props.currentUser !== prevProps.currentUser) {
+    /*if (this.props.currentUser !== prevProps.currentUser) {
       ["assets","commitments","networth"].forEach(
         item => this.fetchUserData(item, "GET")
       )
-    }
-    console.log(this.props.currentUser)    
-  }
-  componentWillUnmount() {
-    this.dashBoardCleaner();
-    console.log("Dash umounted", this.state)
+    }*/
+    console.log(this.props.currentUser, prevProps.currentUser )    
   }
   render() {
     const token = this.getUserToken;
     const currentUser= this.props.currentUser;
     const toggleLogin = this.props.toggleLogin;
     const updateCurrentUser = this.props.updateCurrentUser;
-    const signedIn = this.props.signedIn
+    const signedIn = this.props.signedIn;
+    const fetchUserData = this.fetchUserData;
     console.warn(this.props.currentUser, this.getUserToken());
     return (
       <div className='dashboard'>
@@ -107,15 +103,42 @@ class DashBoard extends React.Component {
               updateCurrentUser = { updateCurrentUser }
               user={currentUser}
             />
-            <Networth 
-              token = {this.getUserToken} 
-              currentUser={currentUser} />
-            <Assets 
-              token = {this.getUserToken}
-              currentUser={currentUser} />
-            <Commitments 
-              token = {this.getUserToken}
-              currentUser={currentUser} />        
+            <div className="user_links">              
+              <Link to={"/assets"}>Assets</Link>              
+              <Link to={"/commits"}>Commitments</Link>              
+              <Link to={"/networth"}>Net Worth</Link>              
+            </div>            
+            <div>
+              <Route exact path="/assets" 
+                render={
+                  (props)=> <Assets { ...props }
+                  data = { this.state.asset }
+                  token = { this.getUserToken }
+                  currentUser = { currentUser }
+                  fetchUserData = { fetchUserData } />
+                }
+              />
+              <Route  path="/commits" 
+                render={
+                  (props)=> <Commitments { ...props}
+                    data={this.state.commits}
+                    token = {this.getUserToken}
+                    currentUser={currentUser}
+                    fetchUserData = { fetchUserData }
+                  />
+                } 
+              />
+              <Route  path="/networth" 
+                render={
+                  (props)=> <Networth { ...props}
+                    data={this.state.networth}
+                    token = {this.getUserToken}
+                    currentUser={currentUser}
+                    fetchUserData = { fetchUserData }
+                  />
+                } 
+              /> 
+            </div>         
           </div>           
           ) : (
           <div>
