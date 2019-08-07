@@ -16,7 +16,7 @@ body {
   }
   .dashboard{
     display: flex;
-    ul{
+    ul, .login_signup {
       border-right: 1px solid #000;
       width: 40%;
       li{
@@ -32,6 +32,12 @@ body {
     div{
       padding: 5px;
       margin: 5px;
+    }
+    .user_board{
+      width: 100%;
+      .assets{background: rgb(9, 255, 0);}
+      .commitments{background: rgb(236, 102, 102);}
+      .networth div {background: blanchedalmond;}
     }
   }
 }

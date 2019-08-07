@@ -20,19 +20,17 @@ class Assets extends React.Component {
     if (this.props.data) {
       return (
         <div className="assets">
-          <h2> Total Assets:</h2>
+          <h2>Financial Assets: :Total amount </h2>
+          <ul >
             {
               [...data].map((k,v)=>{ 
                 return (
-                  <div key={v}>
-                    <h5 > `${k.asset_type}` : `${k.asset_name}` </h5>
-                    <ul>
-                      <li> Total amount: {k.amount}</li>
-                    </ul>
-                  </div>              
+                  <li key={"asset-" + v}>  {k.asset_name} : {k.amount}</li>
                 );
               })
             }
+          </ul>
+          <h1>Total:</h1>
         </div>
       );
     } else {

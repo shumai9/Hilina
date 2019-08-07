@@ -10,17 +10,31 @@ class Networth extends React.Component {
   }
   
   componentDidMount() {
-    console.log("Got ch yaaaa")
+    this.props.fetchUserData("networth", "GET");
   } 
   
   render() { 
-    return (
-      <div className='networth'>
-          <h1>Total Networth</h1>
-          {/* {this.state.bucks.map((key, value) => {return <div></div>})} */}  
+    const data = this.props.data;
+    if (data) {
+      return (
+        <div className="networth">
+          <h2> Total Net worth:</h2>
+          {
+            [...data].map((k,v)=>{ 
+              return (
+                <div key={v}>
+                  <h3> Net Worth Now: {k.current_networth}</h3>
+                  <h3> Total amount: {k.total_amount}</h3>
+                  <h3> Total Net Worth value : {k.total_current_value}</h3>
+                </div>              
+              );
+            })
+          }
         </div>
-      ); 
-    
+      );
+    } else {
+      return <div>Loading...</div>
+    }
   }
 }
   

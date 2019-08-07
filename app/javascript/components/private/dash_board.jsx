@@ -5,7 +5,7 @@ import Networth from './networth'
 import Logout from './logout'
 import Login from '../login';
 import Signup from '../signup';
-import {  BrowserRouter as Router,  Route,  Link,  Redirect,  withRouter} from "react-router-dom";
+import {  Route,  Link, Switch} from "react-router-dom";
 
 class DashBoard extends React.Component {
   constructor(props) {
@@ -72,7 +72,7 @@ class DashBoard extends React.Component {
       <div className='dashboard'>
         {
           !currentUser ? (
-          <ul>
+          <ul className="login_signup btn">
             <li>
               <button id="signup"
                 onClick={e => this.handleBtnStyle(e)}
@@ -96,7 +96,7 @@ class DashBoard extends React.Component {
         }
         {
           currentUser ? (
-          <div>
+          <div className="user_board">
             <Logout
               signedIn = {signedIn}
               toggleLogin={toggleLogin}
@@ -108,7 +108,7 @@ class DashBoard extends React.Component {
               <Link to={"/commits"}>Commitments</Link>              
               <Link to={"/networth"}>Net Worth</Link>              
             </div>            
-            <div>
+            <Switch>
               <Route exact path="/assets" 
                 render={
                   (props)=> <Assets { ...props }
@@ -131,14 +131,14 @@ class DashBoard extends React.Component {
               <Route  path="/networth" 
                 render={
                   (props)=> <Networth { ...props}
-                    data={this.state.networth}
+                    data={this.state.net}
                     token = {this.getUserToken}
                     currentUser={currentUser}
                     fetchUserData = { fetchUserData }
                   />
                 } 
               /> 
-            </div>         
+            </Switch>         
           </div>           
           ) : (
           <div>

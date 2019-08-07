@@ -1,10 +1,5 @@
 import React from 'react';
-import { 
-  BrowserRouter,
-  Route,
-  Switch,
-  Redirect
-} from 'react-router-dom';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import Dashboard from '../components/private/dash_board';
 import Home from '../components/shared/home';
 import About from '../components/shared/about';

@@ -6,18 +6,30 @@ class Commitments extends React.Component {
   }
   
   componentDidMount() {
-    console.log('COMit mounted');
+    console.log('COMit mounted');    
+    this.props.fetchUserData("commitments", "GET");
   }
   
-  render() {   
-    if (this.props.isLoaded) {
-      return <div>Loading...</div>
-    } else {
+  render() {
+    const data = this.props.data;   
+    if (data) {
       return (
-        <div className="commitmentss">
-          <h2> Total Commitments:</h2>               
+        <div className="commitments">
+          <h2>Financial commitment : Total amount</h2>
+          <ul>
+            {
+              [...data].map((k,v)=>{ 
+                return (
+                  <li key={"commit" + v}> {k.commitment_name}: - {k.amount}</li>             
+                );
+              })
+            }
+          </ul>
+          <h1>Total:</h1>
         </div>
       );
+    } else {
+      return <div>Loading...</div>
     }
   }
 }     
