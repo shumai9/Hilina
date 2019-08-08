@@ -12,7 +12,11 @@ class DashBoard extends React.Component {
     super(props);
     this.state = {}    
   }
-
+  sumData = (value) =>{
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const total  = value.reduce(reducer);
+    return total 
+  }
   getUserToken =() =>{
     return sessionStorage.getItem('token');
   }
@@ -115,7 +119,8 @@ class DashBoard extends React.Component {
                   data = { this.state.asset }
                   token = { this.getUserToken }
                   currentUser = { currentUser }
-                  fetchUserData = { fetchUserData } />
+                  fetchUserData = { fetchUserData }
+                  sumData = {this.sumData} />
                 }
               />
               <Route  path="/commits" 
@@ -125,6 +130,7 @@ class DashBoard extends React.Component {
                     token = {this.getUserToken}
                     currentUser={currentUser}
                     fetchUserData = { fetchUserData }
+                    sumData = {this.sumData}
                   />
                 } 
               />

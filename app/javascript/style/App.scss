@@ -35,9 +35,9 @@ body {
     }
     .user_board{
       width: 100%;
-      .assets{background: rgb(9, 255, 0);}
+      .assets{background: #13702d}
       .commitments{background: rgb(236, 102, 102);}
-      .networth div {background: blanchedalmond;}
+      .networth div {background: rgb(255, 217, 160);}
     }
   }
 }
@@ -136,10 +136,14 @@ div.exit.form {
   left: 82%;
   top: 7rem;
 }
-.user_links a { 
-  background: red;
+.user_links {
+  a:hover {
+    background: #f06d06;
+  }
+  a { 
   padding: 1rem;
   margin: 1rem;
+  }
 }
 
 footer{

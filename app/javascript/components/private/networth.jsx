@@ -4,7 +4,7 @@ class Networth extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      networth: {},
+      networth: null,
       isLoaded: false
     }  
   }
