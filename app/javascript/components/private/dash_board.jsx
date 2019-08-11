@@ -13,9 +13,23 @@ class DashBoard extends React.Component {
     this.state = {}    
   }
   sumData = (value) =>{
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const reducer = (accumulator, currentValue) =>
+     accumulator + currentValue;
     const total  = value.reduce(reducer);
     return total 
+  }
+  networthCalc = () =>{
+    const net = { assetTotal: [], commitTotal: []}
+    if (this.state.asset && this.state.commits){
+      this.state.asset.map((k, v) =>{
+        net.assetTotal.push(parseInt(k.amount))
+      });
+      this.state.commits.map((k, v) =>{
+        net.commitTotal.push(parseInt(k.amount))
+      });
+      return this.sumData( net.assetTotal) - this.sumData( net.commitTotal)
+    }
+    return false
   }
   getUserToken =() =>{
     return sessionStorage.getItem('token');
@@ -71,7 +85,9 @@ class DashBoard extends React.Component {
     const updateCurrentUser = this.props.updateCurrentUser;
     const signedIn = this.props.signedIn;
     const fetchUserData = this.fetchUserData;
-    console.warn(this.props.currentUser, this.getUserToken());
+    const getNetworth = this.networthCalc;
+    console.warn(this.props.currentUser, this.getUserToken(), this.networthCalc());
+    
     return (
       <div className='dashboard'>
         {
@@ -141,6 +157,7 @@ class DashBoard extends React.Component {
                     token = {this.getUserToken}
                     currentUser={currentUser}
                     fetchUserData = { fetchUserData }
+                    getNetworth = {getNetworth}
                   />
                 } 
               /> 

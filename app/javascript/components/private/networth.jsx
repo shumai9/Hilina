@@ -15,10 +15,11 @@ class Networth extends React.Component {
   
   render() { 
     const data = this.props.data;
+    const net = this.props.getNetworth;
     if (data) {
       return (
         <div className="networth">
-          <h2> Total Net worth:</h2>
+          <h1> Total Net worth</h1>
           {
             [...data].map((k,v)=>{ 
               return (
@@ -30,6 +31,7 @@ class Networth extends React.Component {
               );
             })
           }
+          <h1>Net : {net()}</h1>
         </div>
       );
     } else {
