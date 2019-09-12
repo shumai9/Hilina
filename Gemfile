@@ -24,7 +24,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 # Shumai selcted gems
-gem 'devise', '~> 4.6'
+gem 'devise', '~> 4.7'
 gem 'foreman'
 gem 'jwt'
 gem 'react-rails'
