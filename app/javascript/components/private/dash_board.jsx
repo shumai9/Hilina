@@ -27,6 +27,7 @@ class DashBoard extends React.Component {
       this.state.commits.map((k, v) =>{
         net.commitTotal.push(parseInt(k.amount))
       });
+      console.log(net.assetTotal,net.commitTotal)
       return this.sumData( net.assetTotal) - this.sumData( net.commitTotal)
     }
     return false
@@ -61,14 +62,16 @@ class DashBoard extends React.Component {
     this.setState({});
     console.log("CLEANER", this.state)
   }
-  handleBtnStyle =(e)=>{
-    e.preventDefault();
-    console.log("btn clicked", e.target)
-    e.currentTarget.style["background"] = "orange"
-  }
   handleChange = (e)=>{
-    e.preventDefault();
-    e.currentTarget.style["background"] = "transparent"
+    const sign = document.getElementById("signup");
+    const login = document.getElementById("login");
+    e.target.id == "signup" ? ( 
+      (sign.style["border-bottom"] = "solid 8px #ffa500") & 
+      (login.style["border-bottom"] = "hidden")
+    ) : (
+      (sign.style["border-bottom"] = "hidden") & 
+      (login.style["border-bottom"] = "solid 8px #ffa500")
+    )
   }
   componentDidUpdate(prevProps) {
     /*if (this.props.currentUser !== prevProps.currentUser) {
@@ -90,30 +93,6 @@ class DashBoard extends React.Component {
     
     return (
       <div className='dashboard'>
-        {
-          !currentUser ? (
-          <ul className="login_signup btn">
-            <li>
-              <button id="signup"
-                onClick={e => this.handleBtnStyle(e)}
-                onMouseOut={e => this.handleChange(e)}
-              >
-                <Link to={"/signup"}>Sign up</Link>
-              </button>
-            </li>
-            <li>
-              <button id="login"
-                onClick={e => this.handleBtnStyle(e)}
-                onMouseOut={e => this.handleChange(e)}
-                >
-                <Link to={"/auth/login"}>Login</Link>
-              </button>
-            </li>
-          </ul>
-          ):(
-            null
-          )
-        }
         {
           currentUser ? (
           <div className="user_board">
@@ -164,7 +143,17 @@ class DashBoard extends React.Component {
             </Switch>         
           </div>           
           ) : (
-          <div>
+          <div className="login_signup">
+            <div className="links">
+              <Link 
+                onMouseDown={this.handleChange}
+                id="signup"
+                to={"/signup"}> Sign up </Link>
+              <Link 
+                onMouseDown={this.handleChange}
+                id="login"
+                to={"/auth/login"}> Login </Link>
+            </div>               
             <Route exact path="/signup" 
               render={
                 (props)=> <Signup 

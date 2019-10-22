@@ -59,47 +59,63 @@ class Signup extends React.Component{
   render() {
     return (
       <div className="form form-signup">
-        <h1>Sign-up</h1>
-        <form onSubmit={this.handleSignup}>
-          <div className="form-field">     
-            <label >User Name 
-            <input className="border" value={this.state.user_name} onChange={this.handleChange}
-              type="text" id="user_name" name="user_name" placeholder="User name"/>
+        <form className="form-field " 
+          onSubmit={this.handleSignup} >     
+          <label>User Name 
+            <input value={this.state.user_name} 
+              onChange={this.handleChange}
+              type="text" id="user_name" 
+              name="user_name" 
+              placeholder="User name"
+            />
           </label>
-          </div><br />
-          <div className="form-field ">
             <label>First name 
-              <input value={this.state.first_name} onChange={this.handleChange}
-              type="text" id="first_name" name="first_name" placeholder="First name"/>
-            </label>
-          </div><br />
-          <div className="form-field">   
-            <label>Last name
-              <input className="border" value={this.state.last_name} onChange={this.handleChange}
-              type="text" id="last_name" name="last_name" placeholder="Last name"/>
+              <input value={this.state.first_name} 
+              onChange={this.handleChange}
+              type="text" id="first_name" 
+              name="first_name" 
+              placeholder="First name"
+            />
+            </label>   
+            <label>Last name</label>     
+              <input value={this.state.last_name} 
+                onChange={this.handleChange}
+                type="text" id="last_name" 
+                name="last_name" 
+                placeholder="Last name"
+              />
+          <label>Email 
+            <input className="border"
+              value={this.state.email} 
+              onChange={this.handleChange}
+              type="text" id="email" name="email" 
+              placeholder="Email"
+            />
+          </label>  
+          <label >Password 
+            <input value={this.state.password} 
+              onChange={this.handleChange}
+              type="password"
+              id="password" 
+              name="password"
+              placeholder="Password"
+            />
+          </label>               
+          <label >Confirm password 
+            <input value={ this.state.password_confirmation }
+              onChange={ this.handleChange }
+              type="password"
+              id="password_confirmation"
+              name="password_confirmation"
+              placeholder="Retype password"
+            />
           </label>
-          </div><br />
-          <div className="form-field">     
-            <label>Email 
-              <input className="border" value={this.state.email} onChange={this.handleChange}
-              type="text" id="email" name="email" placeholder="Email"/>
-          </label>
-          </div><br />
-          <div className="form-field">  
-            <label >Password 
-            <input className="border" value={this.state.password} onChange={this.handleChange}
-              type="password" id="password" name="password" placeholder="Password"/>
-          </label>
-          </div><br />          
-          <div className="form-field">     
-            <label >Confirm password 
-            <input className="border" value={this.state.password_confirmation} onChange={this.handleChange}
-            type="password" id="password_confirmation" name="password_confirmation" placeholder="Retype password"/>
-          </label>
-          </div><br />
-            <button className="btn-signup" onChange={this.handleSignup}>Create Account</button>
-        </form>         
-      </div>
+            <button className="btn-signup"
+              onChange={this.handleSignup}>
+               Create Account
+            </button>
+        </form> 
+      </div>        
     );
   };
 };
