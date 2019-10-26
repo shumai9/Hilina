@@ -7,7 +7,7 @@ module Api::V1
 
     def create
       @asset = Asset.create!(user_params)
-      response = {mesage: "The Asset #{@asset.asset_name} created succesfully"}
+      response = {message: "The Asset #{@asset.asset_name} created succesfully"}
       json_response(response, :created)
     end
 

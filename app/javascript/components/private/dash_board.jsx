@@ -18,6 +18,10 @@ class DashBoard extends React.Component {
     const total  = value.reduce(reducer);
     return total 
   }
+  showMessage =(result)=>{
+    console.log(result.message)
+    this.setState({message: result.message})
+  }
   dataParser =(data)=>{
     Object.values(data)[0].map((k, v) =>{
       k.amount = parseInt(k.amount)
@@ -44,7 +48,7 @@ class DashBoard extends React.Component {
 
   fetchUserData = (endPoint, method, data) => {
     const baseUrl = 'http://localhost:3000/api/v1';
-    var param = { 
+    const param = { 
       method: method, headers: {
         "Content-Type": "application/json",
         "charset": "UTF-8",
@@ -52,13 +56,13 @@ class DashBoard extends React.Component {
         "mode": "cors"
       }
     }
-    method == "POST" ? param.body = JSON.stringify(data) : ""
+    method == "POST"|"EDIT"|"DELETE" ? param.body = JSON.stringify(data) : ""
     if (this.props.currentUser) {
       param.headers["Authorization"] = sessionStorage.getItem("token");
       fetch( baseUrl +"/"+ endPoint, param)
       .then(res => res.json())
       .then ((result) => {
-        this.dataParser(result)
+        param.body ? this.showMessage(result) : this.dataParser(result)
       }).catch(
         e =>{ console.log('Asset errors',e);}
       );
