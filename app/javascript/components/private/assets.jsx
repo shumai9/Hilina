@@ -4,18 +4,27 @@ import React from 'react'
 class Assets extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: []
-    }
+    this.state = {}
   }
   valueHandler = () =>{
     const ary = [];
-    this.props.data.map(
-      (k,v) => {
-      ary.push(parseInt(k.amount))
+    this.props.data.map( (k,v) => {
+      ary.push(k.amount)
     });
     //this.setState({ value: ary })
     return this.props.sumData(ary)
+  }
+  inputHandler = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+  submitHandler = (e) =>{
+    const asset = this.state;
+    asset['user_id'] = this.props.data[0].user_id;  
+    this.props.fetchUserData("assets","POST",asset);
+    console.log("Create", asset)
+    //e.preventDefault();
   }
   componentDidMount() {
     console.log('asset mounted')
@@ -54,7 +63,7 @@ class Assets extends React.Component {
             </tbody>
           </table>
           <ul >
-            {//This needs sorting out ??
+            {
               [...data].map((k,v)=>{
                 return (
                   <li key={"asset-" + v}>  {k.asset_name} : £  {k.amount}</li>
@@ -63,6 +72,44 @@ class Assets extends React.Component {
             }
           </ul>
           <h1>Total:  <strong> £{this.valueHandler()}</strong></h1>
+          <form onSubmit ={this.submitHandler} className="form">
+            <input
+              value={this.state.value}
+              onChange ={this.inputHandler}
+              type="text"
+              id="asset_name" 
+              name="asset_name"
+              placeholder="Asset name"/>
+            <input
+              value={this.state.value}
+              onChange ={this.inputHandler}
+              type="number"
+              id="amount" 
+              name="amount"
+              placeholder="Asset value"/>
+            <input
+              value={this.state.value}
+              onChange ={this.inputHandler}
+              type="text"
+              id="asset_type" 
+              name="asset_type"
+              placeholder="Asset type"/>
+            <input
+              value={this.state.value}
+              onChange ={this.inputHandler}
+              type="date"
+              id="acquired" 
+              name="acquired"
+              placeholder="Date acquired"/>
+            <input
+              value={this.state.value}
+              onChange ={this.inputHandler}
+              type="date"
+              id="ceased" 
+              name="ceased"
+              placeholder="Date ceased"/>
+            <button type="submit">Submit</button>
+          </form>
         </div>
       );
     } else {

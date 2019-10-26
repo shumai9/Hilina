@@ -18,14 +18,20 @@ class DashBoard extends React.Component {
     const total  = value.reduce(reducer);
     return total 
   }
+  dataParser =(data)=>{
+    Object.values(data)[0].map((k, v) =>{
+      k.amount = parseInt(k.amount)
+    });
+    this.setState(data);
+  }
   networthCalc = () =>{
     const net = { assetTotal: [], commitTotal: []}
     if (this.state.asset && this.state.commits){
       this.state.asset.map((k, v) =>{
-        net.assetTotal.push(parseInt(k.amount))
+        net.assetTotal.push(k.amount)
       });
       this.state.commits.map((k, v) =>{
-        net.commitTotal.push(parseInt(k.amount))
+        net.commitTotal.push(k.amount)
       });
       console.log(net.assetTotal,net.commitTotal)
       return this.sumData( net.assetTotal) - this.sumData( net.commitTotal)
@@ -36,21 +42,23 @@ class DashBoard extends React.Component {
     return sessionStorage.getItem('token');
   }
 
-  fetchUserData = (endPoint, method) => {
+  fetchUserData = (endPoint, method, data) => {
     const baseUrl = 'http://localhost:3000/api/v1';
-    var param = { method: method, headers: {
+    var param = { 
+      method: method, headers: {
         "Content-Type": "application/json",
         "charset": "UTF-8",
-        "Authorization": "", 
+        "Authorization": "",
         "mode": "cors"
       }
     }
+    method == "POST" ? param.body = JSON.stringify(data) : ""
     if (this.props.currentUser) {
       param.headers["Authorization"] = sessionStorage.getItem("token");
       fetch( baseUrl +"/"+ endPoint, param)
       .then(res => res.json())
       .then ((result) => {
-        this.setState(result)
+        this.dataParser(result)
       }).catch(
         e =>{ console.log('Asset errors',e);}
       );
@@ -73,13 +81,11 @@ class DashBoard extends React.Component {
       (login.style["border-bottom"] = "solid 8px #ffa500")
     )
   }
-  componentDidUpdate(prevProps) {
-    /*if (this.props.currentUser !== prevProps.currentUser) {
-      ["assets","commitments","networth"].forEach(
-        item => this.fetchUserData(item, "GET")
-      )
-    }*/
-    console.log(this.props.currentUser, prevProps.currentUser )    
+  componentDidMount() {   
+    /*["assets","commitments","networth"].forEach(
+      item => this.fetchUserData(item, "GET")
+    )*/
+    console.log(this.props.currentUser )    
   }
   render() {
     const token = this.getUserToken;

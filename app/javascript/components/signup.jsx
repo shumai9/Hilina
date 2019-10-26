@@ -19,7 +19,6 @@ class Signup extends React.Component{
   }
 
   handleSignup =(e) => {
-    let self = this
     e.preventDefault();
     let data = {
       user:{ 
