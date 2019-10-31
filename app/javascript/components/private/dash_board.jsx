@@ -7,16 +7,14 @@ import Login from '../login';
 import Signup from '../signup';
 import {  Route,  Link, Switch} from "react-router-dom";
 
+import Form from './form'
+
 class DashBoard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}    
-  }
-  sumData = (value) =>{
-    const reducer = (accumulator, currentValue) =>
-     accumulator + currentValue;
-    const total  = value.reduce(reducer);
-    return total 
+    this.state = {
+      formOpen: false
+    }    
   }
   showMessage =(result)=>{
     console.log(result.message)
@@ -26,8 +24,40 @@ class DashBoard extends React.Component {
     Object.values(data)[0].map((k, v) =>{
       k.amount = parseInt(k.amount)
     });
-    this.setState(data);
+    this.setState(data)
   }
+  fetchUserData = (endPoint, method, data) => {
+    const baseUrl = 'http://localhost:3000/api/v1';
+    const param = { 
+      method: method, headers: {
+        "Content-Type": "application/json",
+        "charset": "UTF-8",
+        "Authorization": "",
+        "mode": "cors"
+      }
+    }
+    method == "POST"|"EDIT"|"DELETE" ? param.body = JSON.stringify(data) : ""
+    const token = sessionStorage.getItem("token");
+    if (this.props.currentUser) {
+      param.headers["Authorization"] = token;
+      fetch( baseUrl +"/"+ endPoint, param)
+      .then(res => res.json())
+      .then ((result) => {
+        param.body ? this.showMessage(result) : this.dataParser(result)
+      }).catch(
+        e =>{ console.log('Asset errors',e);}
+      );
+    } else {
+      console.log("No Token so far")
+    }     
+  }
+  sumData = (value) =>{
+    const reducer = (accumulator, currentValue) =>
+     accumulator + currentValue;
+    const total  = value.reduce(reducer);
+    return total 
+  }
+
   networthCalc = () =>{
     const net = { assetTotal: [], commitTotal: []}
     if (this.state.asset && this.state.commits){
@@ -45,31 +75,6 @@ class DashBoard extends React.Component {
   getUserToken =() =>{
     return sessionStorage.getItem('token');
   }
-
-  fetchUserData = (endPoint, method, data) => {
-    const baseUrl = 'http://localhost:3000/api/v1';
-    const param = { 
-      method: method, headers: {
-        "Content-Type": "application/json",
-        "charset": "UTF-8",
-        "Authorization": "",
-        "mode": "cors"
-      }
-    }
-    method == "POST"|"EDIT"|"DELETE" ? param.body = JSON.stringify(data) : ""
-    if (this.props.currentUser) {
-      param.headers["Authorization"] = sessionStorage.getItem("token");
-      fetch( baseUrl +"/"+ endPoint, param)
-      .then(res => res.json())
-      .then ((result) => {
-        param.body ? this.showMessage(result) : this.dataParser(result)
-      }).catch(
-        e =>{ console.log('Asset errors',e);}
-      );
-    } else {
-      console.log("No Token so far", this.props.tokenHandler())
-    }     
-  }
   dashBoardCleaner=()=>{
     this.setState({});
     console.log("CLEANER", this.state)
@@ -85,20 +90,38 @@ class DashBoard extends React.Component {
       (login.style["border-bottom"] = "solid 8px #ffa500")
     )
   }
-  componentDidMount() {   
-    /*["assets","commitments","networth"].forEach(
-      item => this.fetchUserData(item, "GET")
-    )*/
-    console.log(this.props.currentUser )    
+  submitHandler = (data) =>{
+    data['user_id'] = this.props.data[0].user_id;  
+    this.fetchUserData("assets","POST", data);
+    this.renderForm()
+    console.log("Create", data)
+  }
+  renderForm = () => {
+    this.setState({formOpen: !this.state.formOpen});
+  }
+  componentDidMount(){
+    this.props.currentUser ? this.getUserData() : console.log("skiped")
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.currentUser !== prevProps.currentUser) {
+      this.getUserData();
+    }
+  }
+  getUserData() {
+    ["assets","commitments","networth"].forEach(
+      (item) => { this.fetchUserData(item, "GET")})
   }
   render() {
+    const fetchUserData = this.fetchUserData;
+    const submitHandler = this.submitHandler;
+    const data = this.state;
     const token = this.getUserToken;
     const currentUser= this.props.currentUser;
     const toggleLogin = this.props.toggleLogin;
     const updateCurrentUser = this.props.updateCurrentUser;
     const signedIn = this.props.signedIn;
-    const fetchUserData = this.fetchUserData;
     const getNetworth = this.networthCalc;
+    const getUserData = this.props.getUserData;
     console.warn(this.props.currentUser, this.getUserToken(), this.networthCalc());
     
     return (
@@ -121,20 +144,18 @@ class DashBoard extends React.Component {
               <Route exact path="/assets" 
                 render={
                   (props)=> <Assets { ...props }
-                  data = { this.state.asset }
+                  data = { data.asset }
                   token = { this.getUserToken }
                   currentUser = { currentUser }
-                  fetchUserData = { fetchUserData }
                   sumData = {this.sumData} />
                 }
               />
               <Route  path="/commits" 
                 render={
                   (props)=> <Commitments { ...props}
-                    data={this.state.commits}
+                    data = { data.commits }
                     token = {this.getUserToken}
                     currentUser={currentUser}
-                    fetchUserData = { fetchUserData }
                     sumData = {this.sumData}
                   />
                 } 
@@ -142,15 +163,14 @@ class DashBoard extends React.Component {
               <Route  path="/networth" 
                 render={
                   (props)=> <Networth { ...props}
-                    data={this.state.net}
+                    data = { data.net }
                     token = {this.getUserToken}
                     currentUser={currentUser}
-                    fetchUserData = { fetchUserData }
                     getNetworth = {getNetworth}
                   />
                 } 
-              /> 
-            </Switch>         
+              />
+            </Switch>
           </div>           
           ) : (
           <div className="login_signup">
@@ -178,7 +198,8 @@ class DashBoard extends React.Component {
                 (props)=> <Login { ...props} 
                   updateCurrentUser = { updateCurrentUser } 
                   toggleLogin={toggleLogin}
-                  currentUser={currentUser} 
+                  currentUser={currentUser}
+                  getUserData={getUserData} 
                 />
               } 
             /> 

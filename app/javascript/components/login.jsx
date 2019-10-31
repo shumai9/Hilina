@@ -24,7 +24,7 @@ class Login extends React.Component {
     .then(response => response.json())
     .then((result) => {        
       if(result.auth_token) {        
-        this.props.updateCurrentUser(data.user.email, result.auth_token);        
+        this.props.updateCurrentUser(data.user.email, result.auth_token);       
         this.props.toggleLogin()
         console.log('this is login', result.auth_token)          
       } else {

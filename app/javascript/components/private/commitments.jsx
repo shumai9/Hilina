@@ -10,7 +10,7 @@ class Commitments extends React.Component {
   
   componentDidMount() {
     console.log('COMit mounted');    
-    this.props.fetchUserData("commitments", "GET");
+    //this.props.fetchUserData("commitments", "GET");
   }
   
   render() {

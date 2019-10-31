@@ -25,7 +25,6 @@ module Api::V1
       assets = Asset.where(user_id: @current_user.id)
     end
     def user_params
-      #
       params.require(:asset).permit(:user_id, :asset_name,
         :amount, :asset_type, :acquired, :ceased )
     end

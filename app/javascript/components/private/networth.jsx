@@ -10,7 +10,7 @@ class Networth extends React.Component {
   }
   
   componentDidMount() {
-    this.props.fetchUserData("networth", "GET");
+    //this.props.fetchUserData("networth", "GET");
   } 
   
   render() { 

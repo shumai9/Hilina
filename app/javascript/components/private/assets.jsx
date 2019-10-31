@@ -29,7 +29,7 @@ class Assets extends React.Component {
   
   componentDidMount() {
     console.log('asset mounted')
-    this.props.fetchUserData("assets", "GET");
+    //this.props.fetchUserData("assets", "GET");
   }
   render(props) {
     const data = this.props.data;
