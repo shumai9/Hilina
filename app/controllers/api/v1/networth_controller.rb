@@ -6,7 +6,6 @@ module Api::V1
     end
     private 
     def user_data
-      #Asset.where("user_id = ?", params[:user_id])
       @networth = Networth.where(user_id: @current_user.id)
     end
   end
