@@ -1,5 +1,6 @@
 import React from 'react';
-import Form from './form'
+import Form from './form';
+import Section from './section';
 
 
 class Assets extends React.Component {
@@ -26,7 +27,18 @@ class Assets extends React.Component {
     this.renderForm()
     console.log("Create", data)
   } 
-  
+  getAssetId = (e) => {
+    const assetId = e.target.id;
+    assetId ? (
+      this.props.data.forEach(
+        (item) => { 
+          if (item.id == assetId){
+            this.setState({singleAsset: item})
+          } else{
+            //this.props.fetchUserData(`assets/${id}`, "GET");
+          }
+      })) : console.log("Error")
+  }
   componentDidMount() {
     console.log('asset mounted')
     //this.props.fetchUserData("assets", "GET");
@@ -38,6 +50,7 @@ class Assets extends React.Component {
     if (this.props.data) {
       return (
         <div className="assets">
+          <Section data={this.state.singleAsset}/>
           <h2>Financial Assets: :Total amount </h2>
           <table>
             <tbody>
@@ -63,11 +76,11 @@ class Assets extends React.Component {
             </tr>
             </tbody>
           </table>
-          <ul >
+          <ul onClick={this.getAssetId}>
             {
               [...data].map((k,v)=>{
                 return (
-                  <li key={"asset-" + v}>  {k.asset_name} : £  {k.amount}</li>
+                  <li id={k.id} key={`${k.id}`}>  {k.asset_name} : £  {k.amount}</li>
                 );
               })
             }

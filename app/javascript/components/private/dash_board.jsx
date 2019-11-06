@@ -1,12 +1,12 @@
 import React from 'react'
+import { Route, Link, Switch } from "react-router-dom";
 import Assets from './assets'
 import Commitments from './commitments'
 import Networth from './networth'
 import Logout from './logout'
 import Login from '../login';
 import Signup from '../signup';
-import {  Route,  Link, Switch} from "react-router-dom";
-
+import Section from './section';
 import Form from './form'
 
 class DashBoard extends React.Component {
@@ -21,10 +21,17 @@ class DashBoard extends React.Component {
     this.setState({message: result.message})
   }
   dataParser =(data)=>{
-    Object.values(data)[0].map((k, v) =>{
-      k.amount = parseInt(k.amount)
-    });
-    this.setState(data)
+    const subj = Object.keys(data)[0];
+    const detail = data[subj];
+    if(Array.isArray(detail)){
+      Object.values(data)[0].map((k, v) =>{
+        k.amount = parseInt(k.amount)
+      });
+      this.setState(data)
+    } else {
+      data[subj].amount = parseInt(data[subj].amount)
+      this.setState(data)
+    }
   }
   fetchUserData = (endPoint, method, data) => {
     const baseUrl = 'http://localhost:3000/api/v1';
@@ -122,7 +129,6 @@ class DashBoard extends React.Component {
     const signedIn = this.props.signedIn;
     const getNetworth = this.networthCalc;
     const getUserData = this.props.getUserData;
-    console.warn(this.props.currentUser, this.getUserToken(), this.networthCalc());
     
     return (
       <div className='dashboard'>
@@ -137,7 +143,7 @@ class DashBoard extends React.Component {
             />
             <div className="user_links">              
               <Link to={"/assets"}>Assets</Link>              
-              <Link to={"/commits"}>Commitments</Link>              
+              <Link to={"/commits"}>Commitments</Link>
               <Link to={"/networth"}>Net Worth</Link>              
             </div>            
             <Switch>
@@ -145,6 +151,7 @@ class DashBoard extends React.Component {
                 render={
                   (props)=> <Assets { ...props }
                   data = { data.asset }
+                  fetchUserData= { fetchUserData }
                   token = { this.getUserToken }
                   currentUser = { currentUser }
                   sumData = {this.sumData} />
@@ -154,6 +161,7 @@ class DashBoard extends React.Component {
                 render={
                   (props)=> <Commitments { ...props}
                     data = { data.commits }
+                    fetchUserData= { fetchUserData }
                     token = {this.getUserToken}
                     currentUser={currentUser}
                     sumData = {this.sumData}
@@ -164,6 +172,7 @@ class DashBoard extends React.Component {
                 render={
                   (props)=> <Networth { ...props}
                     data = { data.net }
+                    fetchUserData= { fetchUserData }
                     token = {this.getUserToken}
                     currentUser={currentUser}
                     getNetworth = {getNetworth}

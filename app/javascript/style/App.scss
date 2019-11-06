@@ -48,6 +48,13 @@ body {
       .commitments{background: rgb(236, 102, 102);}
       .networth div {background: rgb(255, 217, 160);}
     }
+    .section{
+      background: inherit;
+      position: absolute;
+      top: 45%;
+      right: 8%;
+      border: 1px solid white;
+    }
   }
 }
 
