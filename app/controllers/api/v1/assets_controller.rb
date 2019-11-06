@@ -16,23 +16,19 @@ module Api::V1
     def show
       single_asset = user_data.find_by("id = ?", params[:id])
       json_response( single_asset ? 
-        { single_asset: single_asset }
-         : 
-        { message: "Record not found"}
+        { single_asset: single_asset }: { message: "Record not found"}
       )    
     end
 
     def update
-      #Dear my future self I assure u I didn't copy this I worked it out 
-      asset_to_update = user_data.find_by("id = ?", params[:id]) and
-      asset_to_update.update_attributes!(user_params) if
-       @current_user.id == user_params[:user_id]
-      json_response( 
-        asset_to_update ? 
-          { message: asset_to_update}
-           : 
-          { message: "User id mis match"}
-      )
+      if @current_user.id == user_params[:user_id]
+        asset_to_update = user_data.find_by("id = ?", params[:id])
+        if asset_to_update.update_attributes!(user_params) 
+          json_response({ message: asset_to_update})
+        end
+      else 
+        json_response({ message: "Error id mis match"})
+      end
     end
 
     def destroy
