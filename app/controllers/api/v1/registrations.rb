@@ -14,8 +14,6 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def user_params
-    # data = JSON.parse(user_params)
-
     params.require(:user).permit(:first_name, :email, :last_name, :password, :birth_date)
   end
 end

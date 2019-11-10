@@ -27,13 +27,13 @@ class Assets extends React.Component {
     this.renderForm()
     console.log("Create", data)
   } 
-  getAssetId = (e) => {
-    const assetId = e.target.id;
-    assetId ? (
+  getSingleData = (e) => {
+    const dataId = e.target.id;
+    dataId ? (
       this.props.data.forEach(
         (item) => { 
-          if (item.id == assetId){
-            this.setState({singleAsset: item})
+          if (item.id == dataId){
+            this.setState({singleData: item})
           } else{
             //this.props.fetchUserData(`assets/${id}`, "GET");
           }
@@ -41,6 +41,7 @@ class Assets extends React.Component {
   }
   componentDidMount() {
     console.log('asset mounted')
+    this.props.updateCompo("asset")
     //this.props.fetchUserData("assets", "GET");
   }
   render(props) {
@@ -50,7 +51,10 @@ class Assets extends React.Component {
     if (this.props.data) {
       return (
         <div className="assets">
-          <Section data={this.state.singleAsset}/>
+          <Section 
+            component={ this.props.component }
+            data={this.state.singleData}
+          />
           <h2>Financial Assets: :Total amount </h2>
           <table>
             <tbody>
@@ -76,7 +80,7 @@ class Assets extends React.Component {
             </tr>
             </tbody>
           </table>
-          <ul onClick={this.getAssetId}>
+          <ul onClick={this.getSingleData}>
             {
               [...data].map((k,v)=>{
                 return (
@@ -87,7 +91,14 @@ class Assets extends React.Component {
           </ul>
           <h1>Total:  <strong> £{this.valueHandler()}</strong></h1>
           <button onClick={this.renderForm} className="btn-create">+</button>
-          {this.state.formOpen ? <Form submitHandler={this.submitHandler}/> : null}
+          { 
+            this.state.formOpen ?
+              <Form 
+                submitHandler={ this.submitHandler }
+                component={ this.props.component }
+              />
+            : null
+          }
         </div>
       );
     } else {

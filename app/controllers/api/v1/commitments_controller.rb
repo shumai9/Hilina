@@ -42,7 +42,9 @@ module Api::V1
     end
 
     def user_params
-      params.require(:commits).permit(:user_id, :commitment_name,
+      # Noted that params uses the models name to assigne params data
+      # commitment: {data}
+      params.require(:commitment).permit(:user_id, :commitment_name,
         :amount, :commitment_type, :acquired, :ceased )
     end
   end

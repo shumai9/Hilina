@@ -5,7 +5,7 @@
 }
 body {
   font-family: 'Poiret One', cursive;
-  background: url('../img/mar.jpg');
+  background: url('../img/bro.jpg');
   background-size: cover;
   .route {
     padding: 5% 5%;
@@ -109,7 +109,8 @@ ul a {
   background: linear-gradient(transparent,#02243d);
   padding: 1rem;
   border-radius: 1rem;
-  input {
+  input, select, select option {
+    outline: none;
     font-weight: 1000;
     font-family: 'Poiret One', cursive;
     color: #000;

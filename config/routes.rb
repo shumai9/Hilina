@@ -15,5 +15,3 @@ Rails.application.routes.draw do
   #catch all urls
   get '*path' => 'landing#index'
 end
-
-#only: [:show, :edit, :update, :destroy] 

@@ -12,9 +12,14 @@ import Form from './form'
 class DashBoard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      formOpen: false
+    this.state={
+      compo: null
     }    
+  }
+  updateCompo = (stuff) =>{
+    this.setState({
+      compo: stuff
+    })
   }
   showMessage =(result)=>{
     console.log(result.message)
@@ -36,14 +41,15 @@ class DashBoard extends React.Component {
   fetchUserData = (endPoint, method, data) => {
     const baseUrl = 'http://localhost:3000/api/v1';
     const param = { 
-      method: method, headers: {
+      method: method,
+      headers: {
         "Content-Type": "application/json",
         "charset": "UTF-8",
         "Authorization": "",
         "mode": "cors"
       }
     }
-    method == "POST"|"EDIT"|"DELETE" ? param.body = JSON.stringify(data) : ""
+    method == "POST"|"EDIT"|"DELETE" ? param["body"] = JSON.stringify(data) : ""
     const token = sessionStorage.getItem("token");
     if (this.props.currentUser) {
       param.headers["Authorization"] = token;
@@ -136,46 +142,51 @@ class DashBoard extends React.Component {
           currentUser ? (
           <div className="user_board">
             <Logout
-              signedIn = {signedIn}
-              toggleLogin={toggleLogin}
+              signedIn = { signedIn }
+              toggleLogin={ toggleLogin }
               updateCurrentUser = { updateCurrentUser }
-              user={currentUser}
+              user={ currentUser }
             />
             <div className="user_links">              
-              <Link to={"/assets"}>Assets</Link>              
-              <Link to={"/commits"}>Commitments</Link>
-              <Link to={"/networth"}>Net Worth</Link>              
+              <Link to={ "/assets" }>Assets</Link>              
+              <Link to={ "/commits" }>Commitments</Link>
+              <Link to={ "/networth" }>Net Worth</Link>              
             </div>            
             <Switch>
               <Route exact path="/assets" 
                 render={
                   (props)=> <Assets { ...props }
-                  data = { data.asset }
-                  fetchUserData= { fetchUserData }
-                  token = { this.getUserToken }
-                  currentUser = { currentUser }
-                  sumData = {this.sumData} />
+                    data={ data.asset }
+                    fetchUserData={ fetchUserData }
+                    token={ this.getUserToken }
+                    currentUser={ currentUser }
+                    sumData={ this.sumData }
+                    updateCompo={ this.updateCompo }
+                    component={ this.state.compo }
+                  />
                 }
               />
               <Route  path="/commits" 
                 render={
                   (props)=> <Commitments { ...props}
-                    data = { data.commits }
-                    fetchUserData= { fetchUserData }
-                    token = {this.getUserToken}
+                    data={ data.commits }
+                    fetchUserData={ fetchUserData }
+                    token={this.getUserToken}
                     currentUser={currentUser}
-                    sumData = {this.sumData}
+                    sumData={this.sumData}
+                    updateCompo={ this.updateCompo }
+                    component={ this.state.compo }
                   />
                 } 
               />
               <Route  path="/networth" 
                 render={
                   (props)=> <Networth { ...props}
-                    data = { data.net }
-                    fetchUserData= { fetchUserData }
-                    token = {this.getUserToken}
+                    data={ data.net }
+                    fetchUserData={ fetchUserData }
+                    token={this.getUserToken}
                     currentUser={currentUser}
-                    getNetworth = {getNetworth}
+                    getNetworth={getNetworth}
                   />
                 } 
               />
@@ -193,22 +204,22 @@ class DashBoard extends React.Component {
                 id="login"
                 to={"/auth/login"}> Login </Link>
             </div>               
-            <Route exact path="/signup" 
+            <Route exact path="/signup"
               render={
                 (props)=> <Signup 
-                  { ...props} 
-                  toggleLogin={toggleLogin}
-                  updateCurrentUser={updateCurrentUser}
+                  { ...props } 
+                  toggleLogin={ toggleLogin }
+                  updateCurrentUser={ updateCurrentUser }
                 />
               }
             />
             <Route  path="/auth/login" 
               render={
                 (props)=> <Login { ...props} 
-                  updateCurrentUser = { updateCurrentUser } 
-                  toggleLogin={toggleLogin}
-                  currentUser={currentUser}
-                  getUserData={getUserData} 
+                  updateCurrentUser={ updateCurrentUser } 
+                  toggleLogin={ toggleLogin }
+                  currentUser={ currentUser }
+                  getUserData={ getUserData } 
                 />
               } 
             /> 

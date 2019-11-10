@@ -24,7 +24,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 # Shumai selcted gems
-gem 'foreman'
+#gem 'foreman' # shoun't be bundled to project 
 gem 'jwt'
 gem 'react-rails'
 #gem 'multi_json', '~> 1.13', '>= 1.13.1'
