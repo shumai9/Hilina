@@ -6,15 +6,20 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from '../components/App';
+
+document.addEventListener(
+  'DOMContentLoaded',
+  () => {
+    ReactDOM.render( 
+      <App/>,
+      document.querySelector('#app')
+    )
+  }
+)
+
 console.log('Hello World from Webpacker');
-
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from '../components/App'
-import { BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
-
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<App />,document.querySelector('#app')
-  )
-})
-
