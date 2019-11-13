@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/stympy/faker.git
-  revision: 65a252f36eb445de79bae16a550762d32ffe0d30
+  revision: fdf95cf9732bcd7000476b0cee15e8cbc5d91db4
   branch: master
   specs:
     faker (2.7.0)
@@ -112,7 +112,7 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
-    ffi (1.11.1)
+    ffi (1.11.2)
     gherkin (5.1.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -145,7 +145,6 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
-    orm_adapter (0.5.0)
     pg (1.1.4)
     public_suffix (4.0.1)
     rack (2.0.7)
@@ -189,9 +188,6 @@ GEM
       railties (>= 3.2)
       tilt
     regexp_parser (1.6.0)
-    responders (3.0.0)
-      actionpack (>= 5.0)
-      railties (>= 5.0)
     rspec-core (3.9.0)
       rspec-support (~> 3.9.0)
     rspec-expectations (3.9.0)
@@ -233,8 +229,6 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    warden (1.2.8)
-      rack (>= 2.0.6)
     webpacker (4.0.7)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
