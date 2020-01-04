@@ -39,10 +39,10 @@ class Login extends React.Component {
         <Redirect push={true} to="/user/dashboard"/>
       ) : (
         <div className="form form-login">
-        <form onSubmit = { this.handleLogin }>
+        <form onSubmit = { this.handleLogin } >
           <span className = "form-field">
-            <input type="text" id="email" name="email" placeholder="Email"/>          
-            <input type="password" id="password" placeholder="Password"/>
+            <input autoComplete="on" type="text" id="email" name="email" placeholder="Email"/>          
+            <input autoComplete="on" type="password" id="password" placeholder="Password"/>
           </span>
             <button className="btn-login"> Login </button>
         </form>

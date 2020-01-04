@@ -27,9 +27,13 @@ module Api::V1
     end
     def destroy
       single_asset = Asset.find_by("id = ?", params[:id])
-      json_response(single_asset && single_asset.destroy ? 
-        { message: "Asset name #{single_asset.asset_name} deleted" } : 
-        { message: "Record not found"}, 404)
+      json_response(
+        single_asset && single_asset.destroy ? (
+          { message: "Asset name #{single_asset.asset_name} deleted" }
+        ) : (
+          { message: "Record not found"}
+        )
+      )
     end
     private
     def user_data
