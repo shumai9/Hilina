@@ -30,10 +30,12 @@ module Api::V1
     end
 
     def destroy
-      single_commit = Asset.find_by("id = ?", params[:id])
-      json_response(single_commit && single_commit.destroy ? 
-        { message: "Asset name #{single_commit.asset_name} deleted" } : 
-        { message: "Record not found"}, 404)
+      single_commit = user_data.find_by("id = ?", params[:id])
+      json_response( single_commit && single_commit.destroy ? 
+        { message: "Commitment name #{single_commit.commitment_name} deleted" }
+         : 
+        { message: "Record not found"}
+      )
     end
 
     private 

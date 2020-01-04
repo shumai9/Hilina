@@ -8,7 +8,7 @@ body {
   background: url('../img/bro.jpg');
   background-size: cover;
   .route {
-    padding: 5% 5%;
+    padding: 1% 5%;
     margin: 15px;
     width: auto;
     height: 100vh;
@@ -16,12 +16,9 @@ body {
   }
   .dashboard{
     div.login_signup{
-      display:inline;
       width: 350px;
-      position: absolute;
+      position: relative;
       left: 30%;
-      top: 30%;
-      right: 30%;
       div.links {
         background: #000;
         padding: 1rem;
@@ -44,16 +41,47 @@ body {
       }
       .assets{
         background: #13702d;
+        padding: 4rem;
+        ul li {
+          list-style: none;
+        }        
       }
-      .commitments{background: rgb(236, 102, 102);}
-      .networth div {background: rgb(255, 217, 160);}
-    }
-    .section{
-      background: inherit;
-      position: absolute;
-      top: 45%;
-      right: 8%;
-      border: 1px solid white;
+      .commitments{
+        background: rgb(236, 102, 102);
+        padding: 4rem;
+        ul li {
+          list-style: none;
+        }
+      }
+      .networth div {
+        background: rgb(255, 217, 160);
+        padding: 4rem;
+        ul li {
+          list-style: none;
+        }
+      }
+      .section{
+        position: absolute;
+        top: 15%;
+        right: 0%;
+        background: #000a11;
+        box-shadow: 0px 10px 2rem 1px #011d0a;
+        padding: 1rem;
+        height: 100%;
+        width: 450px;
+        ul li {
+          list-style: none;
+        }
+        span{
+          position: absolute;
+          right: 0;
+          button {
+            width: 60px;
+            padding: 4px;
+            margin: 4px;
+          }
+        }
+      }
     }
   }
 }
@@ -155,8 +183,8 @@ h1,h2,p, label, li, a {
 }
 div.exit.form {
   position: absolute;
-  left: 82%;
-  top: 7rem;
+  right: 2%;
+  top: 3rem;
 }
 .user_links {
   a:hover {

@@ -14,7 +14,6 @@ class Login extends React.Component {
       }
     }
     console.log( data.user, "checked");
-
     fetch('/auth/login', {
       method: "POST", 
       body: JSON.stringify(data),
@@ -26,7 +25,7 @@ class Login extends React.Component {
       if(result.auth_token) {        
         this.props.updateCurrentUser(data.user.email, result.auth_token);       
         this.props.toggleLogin()
-        console.log('this is login', result.auth_token)          
+        console.log('this is login', result)          
       } else {
         console.warn('Invalid email or password', result.errors.message);
       }
@@ -37,23 +36,13 @@ class Login extends React.Component {
     const currentUser = this.props.currentUser;    
     return(
       currentUser ? (
-        <Redirect push={true} to="/user/dashboard"
-          render={
-            (props)=> 
-            <Dashboard { ...props} 
-              updateCurrentUser = { updateCurrentUser } 
-              toggleLogin={toggleLogin}
-              currentUser={currentUser}
-              signedIn = {signedIn}
-            />
-          } 
-        />
+        <Redirect push={true} to="/user/dashboard"/>
       ) : (
         <div className="form form-login">
-        <form onSubmit = { this.handleLogin }>
+        <form onSubmit = { this.handleLogin } >
           <span className = "form-field">
-            <input type="text" id="email" name="email" placeholder="Email"/>          
-            <input type="password" id="password" placeholder="Password"/>
+            <input autoComplete="on" type="text" id="email" name="email" placeholder="Email"/>          
+            <input autoComplete="on" type="password" id="password" placeholder="Password"/>
           </span>
             <button className="btn-login"> Login </button>
         </form>

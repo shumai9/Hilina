@@ -1,89 +1,87 @@
-import React from 'react'
+import React from 'react';
 import { Route, Link, Switch } from "react-router-dom";
-import Assets from './assets'
-import Commitments from './commitments'
-import Networth from './networth'
-import Logout from './logout'
+import Assets from './assets';
+import Commitments from './commitments';
+import Networth from './networth';
+import Logout from './logout';
 import Login from '../login';
 import Signup from '../signup';
+import Form from './form';
 import Section from './section';
-import Form from './form'
+import EditForm from './edit_section';
 
 class DashBoard extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      compo: null
+      form_open: false,
+      edit: false,
+      component: null,
+      section_on: false
     }    
   }
-  updateCompo = (stuff) =>{
+  loadedComponent = (name) =>{
     this.setState({
-      compo: stuff
+      component: name,
+      singleData: null,
+      section_on: false
     })
   }
-  showMessage =(result)=>{
-    console.log(result.message)
-    this.setState({message: result.message})
+  closeSection=()=>{
+    this.setState({
+      section_on: false
+    })
   }
-  dataParser =(data)=>{
-    const subj = Object.keys(data)[0];
-    const detail = data[subj];
-    if(Array.isArray(detail)){
-      Object.values(data)[0].map((k, v) =>{
-        k.amount = parseInt(k.amount)
-      });
-      this.setState(data)
-    } else {
-      data[subj].amount = parseInt(data[subj].amount)
-      this.setState(data)
-    }
+  renderForm = () => {
+    this.setState({formOpen: !this.state.formOpen});
   }
-  fetchUserData = (endPoint, method, data) => {
-    const baseUrl = 'http://localhost:3000/api/v1';
-    const param = { 
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-        "charset": "UTF-8",
-        "Authorization": "",
-        "mode": "cors"
-      }
+  renderEditor=()=>{
+    this.setState({edit: !this.state.edit});
+  }
+  selectedItem =(data, id)=>{
+    return data.filter(item => item.id == id)[0]
+  }
+  getSingleData = (e) => {
+    const itemId = parseInt(e.target.id);
+    const data = this.props.data;
+    if (this.state.component === "asset"){
+      this.setState({
+        singleData: [...data.asset].filter(item => item.id == itemId)[0],
+        section_on: true
+      })
     }
-    method == "POST"|"EDIT"|"DELETE" ? param["body"] = JSON.stringify(data) : ""
-    const token = sessionStorage.getItem("token");
-    if (this.props.currentUser) {
-      param.headers["Authorization"] = token;
-      fetch( baseUrl +"/"+ endPoint, param)
-      .then(res => res.json())
-      .then ((result) => {
-        param.body ? this.showMessage(result) : this.dataParser(result)
-      }).catch(
-        e =>{ console.log('Asset errors',e);}
-      );
-    } else {
-      console.log("No Token so far")
-    }     
+    if (this.state.component == "commitment"){
+      this.setState({
+        singleData: [ ...data.commit].filter(item => item.id == itemId)[0],
+        section_on: true
+      })
+    }
+    //this.props.fetchUserData(`assets/${id}`, "GET");         
+  }
+  submitHandler = (data) =>{
+    data['user_id'] = this.props.data[0].user_id;  
+    this.props.createUserData("assets", data);
+    this.renderForm()
+    console.log("Create", data)
+  }
+  updateHandler =(data)=>{
+    const endPoint = this.state.component + 's';
+    this.props.updateUserData(endPoint, data.id, data);
+    this.renderEditor();
+  }
+  removeHandler=()=>{
+    const itemId = this.state.singleData.id;
+    const item = document.getElementById(itemId);
+    const endPoint = this.props.component + 's';
+    item.remove()
+    this.setState({singleData: null})
+    this.props.removeUserData(endPoint, itemId)
   }
   sumData = (value) =>{
     const reducer = (accumulator, currentValue) =>
      accumulator + currentValue;
     const total  = value.reduce(reducer);
     return total 
-  }
-
-  networthCalc = () =>{
-    const net = { assetTotal: [], commitTotal: []}
-    if (this.state.asset && this.state.commits){
-      this.state.asset.map((k, v) =>{
-        net.assetTotal.push(k.amount)
-      });
-      this.state.commits.map((k, v) =>{
-        net.commitTotal.push(k.amount)
-      });
-      console.log(net.assetTotal,net.commitTotal)
-      return this.sumData( net.assetTotal) - this.sumData( net.commitTotal)
-    }
-    return false
   }
   getUserToken =() =>{
     return sessionStorage.getItem('token');
@@ -92,7 +90,7 @@ class DashBoard extends React.Component {
     this.setState({});
     console.log("CLEANER", this.state)
   }
-  handleChange = (e)=>{
+  handleStyleChange = (e)=>{
     const sign = document.getElementById("signup");
     const login = document.getElementById("login");
     e.target.id == "signup" ? ( 
@@ -103,39 +101,24 @@ class DashBoard extends React.Component {
       (login.style["border-bottom"] = "solid 8px #ffa500")
     )
   }
-  submitHandler = (data) =>{
-    data['user_id'] = this.props.data[0].user_id;  
-    this.fetchUserData("assets","POST", data);
-    this.renderForm()
-    console.log("Create", data)
-  }
-  renderForm = () => {
-    this.setState({formOpen: !this.state.formOpen});
-  }
   componentDidMount(){
-    this.props.currentUser ? this.getUserData() : console.log("skiped")
-  }
-  componentDidUpdate(prevProps) {
-    if (this.props.currentUser !== prevProps.currentUser) {
-      this.getUserData();
-    }
-  }
-  getUserData() {
-    ["assets","commitments","networth"].forEach(
-      (item) => { this.fetchUserData(item, "GET")})
+    //this.props.currentUser ? this.props.getUserData() : console.log("skiped")
   }
   render() {
-    const fetchUserData = this.fetchUserData;
-    const submitHandler = this.submitHandler;
-    const data = this.state;
-    const token = this.getUserToken;
-    const currentUser= this.props.currentUser;
-    const toggleLogin = this.props.toggleLogin;
+    const fetchUserData     = this.props.fetchUserData;
+    const submitHandler     = this.submitHandler;
+    const data              = this.props.data;
+    const currentUser       = this.props.currentUser;
+    const toggleLogin       = this.props.toggleLogin;
     const updateCurrentUser = this.props.updateCurrentUser;
-    const signedIn = this.props.signedIn;
-    const getNetworth = this.networthCalc;
-    const getUserData = this.props.getUserData;
-    
+    const signedIn          = this.props.signedIn;
+    const getNetworth       = this.props.networthCalc;
+    const getUserData       = this.props.getUserData;
+    const removeData        = this.removeData;
+    const createUserData    = this.props.createUserData;
+    const updateUserData    = this.props.updateUserData;
+    const removeUserData    = this.props.removeUserData;
+    const closeSection    = this.closeSection;    
     return (
       <div className='dashboard'>
         {
@@ -147,35 +130,75 @@ class DashBoard extends React.Component {
               updateCurrentUser = { updateCurrentUser }
               user={ currentUser }
             />
-            <div className="user_links">              
-              <Link to={ "/assets" }>Assets</Link>              
-              <Link to={ "/commits" }>Commitments</Link>
-              <Link to={ "/networth" }>Net Worth</Link>              
-            </div>            
+            <button onClick={this.renderForm} className="btn-create">
+              Add {this.state.component}
+            </button>
+            {
+                this.state.section_on ?
+                <Section 
+                  component={ this.state.component }
+                  data={this.state.singleData}
+                  removeHandler={ this.removeHandler }
+                  renderEditor={ this.renderEditor }
+                  updateHandler = {this.updateHandler}
+                  closeSection= { this.closeSection }
+                />
+                : null
+              }
+              {
+                this.state.edit ?
+                  <EditForm 
+                    data= {this.state.singleData}
+                    updateHandler={ this.updateHandler }
+                    component={ this.state.component }
+                    edit = { this.state.edit }
+                    renderEditor={ this.renderEditor }
+                  />
+                : null
+              }
+              { 
+                this.state.formOpen ?
+                  <Form 
+                    submitHandler={ this.submitHandler }
+                    component={ this.state.component }
+                  />
+                : null
+              }          
             <Switch>
               <Route exact path="/assets" 
                 render={
                   (props)=> <Assets { ...props }
                     data={ data.asset }
-                    fetchUserData={ fetchUserData }
                     token={ this.getUserToken }
                     currentUser={ currentUser }
                     sumData={ this.sumData }
-                    updateCompo={ this.updateCompo }
+                    loadedComponent={ this.loadedComponent }
                     component={ this.state.compo }
+                    removeData={ removeData }
+                    fetchUserData={ fetchUserData }
+                    createUserData={ createUserData }
+                    updateUserData={ updateUserData }
+                    removeUserData={ removeUserData }
+                    closeSection= { this.closeSection }
+                    getSingleData={ this.getSingleData }
                   />
                 }
               />
               <Route  path="/commits" 
                 render={
                   (props)=> <Commitments { ...props}
-                    data={ data.commits }
-                    fetchUserData={ fetchUserData }
+                    data={ data.commit }
                     token={this.getUserToken}
                     currentUser={currentUser}
                     sumData={this.sumData}
-                    updateCompo={ this.updateCompo }
-                    component={ this.state.compo }
+                    loadedComponent={ this.loadedComponent }
+                    component={ this.state.component }
+                    fetchUserData={ fetchUserData }
+                    createUserData={ createUserData }
+                    updateUserData={ updateUserData }
+                    removeUserData={ removeUserData }
+                    closeSection= { this.closeSection }
+                    getSingleData={ this.getSingleData }
                   />
                 } 
               />
@@ -187,6 +210,7 @@ class DashBoard extends React.Component {
                     token={this.getUserToken}
                     currentUser={currentUser}
                     getNetworth={getNetworth}
+                    loadedComponent={ this.loadedComponent }
                   />
                 } 
               />
@@ -196,11 +220,11 @@ class DashBoard extends React.Component {
           <div className="login_signup">
             <div className="links">
               <Link 
-                onMouseDown={this.handleChange}
+                onMouseDown={this.handleStyleChange}
                 id="signup"
                 to={"/signup"}> Sign up </Link>
               <Link 
-                onMouseDown={this.handleChange}
+                onMouseDown={this.handleStyleChange}
                 id="login"
                 to={"/auth/login"}> Login </Link>
             </div>               

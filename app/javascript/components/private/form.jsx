@@ -15,8 +15,13 @@ class Form extends React.Component {
     const data = this.state;
     this.props.submitHandler(data);
   }
+  componentDidMount() {
+    this.props.data ?  this.setState(this.props.data) : null
+    
+  }
   render(props){
     const compo = this.props.component;
+    console.log( this.state[compo + "_name"] )
     return(
       <form { ...props } onSubmit={ this.submitForm } className="form">
         <label>
@@ -24,6 +29,7 @@ class Form extends React.Component {
             value={ this.state.value }
             onChange={ this.inputHandler }
             type="text"
+            edit="true"
             name={ compo + "_name" }
             placeholder="Name"
           />
@@ -32,13 +38,13 @@ class Form extends React.Component {
           onChange ={ this.inputHandler }
           value={ this.state.value }
           name={ compo + "_type" } form="form">
-          <option placeholder="Select"></option>
+          <option disabled value >--sellect type--</option>
           <option>Financial</option>
           <option>Non-Financial</option>
         </select>
         <label>
           <input
-            value={ this.state.value}
+            value={ this.state.value }
             onChange ={ this.inputHandler }
             type="number"
             step="0.01"
@@ -47,14 +53,14 @@ class Form extends React.Component {
         </label>
         <label>
           <input
-            value={this.state.value}
+            value={ this.state.value  }
             onChange ={this.inputHandler}
             type="date" 
             name="acquired"/>
         </label>
         <label>
           <input
-            value={this.state.value}
+            value={ this.state.value | this.state.ceased }
             onChange ={this.inputHandler}
             type="date" 
             name="ceased"/>

@@ -66,6 +66,7 @@ class Signup extends React.Component{
               type="text" id="user_name" 
               name="user_name" 
               placeholder="User name"
+              autoComplete="on"
             />
           </label>
             <label>First name 
@@ -74,6 +75,7 @@ class Signup extends React.Component{
               type="text" id="first_name" 
               name="first_name" 
               placeholder="First name"
+              autoComplete="on"
             />
             </label>   
             <label>Last name</label>     
@@ -82,6 +84,7 @@ class Signup extends React.Component{
                 type="text" id="last_name" 
                 name="last_name" 
                 placeholder="Last name"
+                autoComplete="on"
               />
           <label>Email 
             <input className="border"
@@ -89,6 +92,7 @@ class Signup extends React.Component{
               onChange={this.handleChange}
               type="text" id="email" name="email" 
               placeholder="Email"
+              autoComplete="on"
             />
           </label>  
           <label >Password 
@@ -98,6 +102,7 @@ class Signup extends React.Component{
               id="password" 
               name="password"
               placeholder="Password"
+              autoComplete="off"
             />
           </label>               
           <label >Confirm password 
@@ -107,6 +112,7 @@ class Signup extends React.Component{
               id="password_confirmation"
               name="password_confirmation"
               placeholder="Retype password"
+              autoComplete="off"
             />
           </label>
             <button className="btn-signup"

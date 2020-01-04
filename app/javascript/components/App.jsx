@@ -5,11 +5,11 @@ import Home from '../components/shared/home';
 import About from '../components/shared/about';
 import Contact from '../components/shared/contact';
 import Nav from '../components/shared/nav';
+import DashNav from '../components/private/dash_nav';
 import Login from './login';
 import Signup from './signup';
 
 require('../style/App.scss');
-
 
 class App extends React.Component {
   constructor(){
@@ -17,6 +17,16 @@ class App extends React.Component {
     this.state = { 
       current_user: null,
       logedIn: false
+    }
+    this.baseUrl = 'http://localhost:3000/api/v1';
+    this.param = { 
+      method: "",
+      headers: {
+        "Content-Type": "application/json",
+        "charset": "UTF-8",
+        "Authorization": "",
+        "mode": "cors"
+      }
     }
   }
   updateCurrentUser = (email, token) => {
@@ -27,7 +37,7 @@ class App extends React.Component {
     this.setState({ current_user: email, token: token });
   }
   toggleLogin = () => {
-    this.setState({ logedIn: !this.state.logedIn })
+    this.setState({ logedIn: !this.state.logedIn });
   }
   componentDidMount(){
     const email = sessionStorage.getItem('email');
@@ -36,22 +46,146 @@ class App extends React.Component {
     } else {
       this.setState({ current_user: null })
     }
+    this.state.current_user ? this.getUserData() : console.log("skiped")
   }
   tokenHandler=()=>{
     return this.state.token
-  } 
+  }
+  showMessage =(result)=>{
+    console.log(result.message)
+    this.setState({message: result.message})
+  }
+  dataParser =(data)=>{
+    const subj = Object.keys(data)[0];
+    const detail = data[subj];
+    if(Array.isArray(detail)){
+      Object.values(data)[0].map((k, v) =>{
+        k.amount = parseInt(k.amount)
+      });
+      this.setState(data)
+    } else {
+      data[subj].amount = parseInt(data[subj].amount)
+      this.setState(data)
+    }
+  }
+  removeUserData=(endPoint, id)=>{
+    const token = sessionStorage.getItem("token")
+    if (this.state.current_user) {
+      this.param.headers["Authorization"] = token;
+      this.param.method = "DELETE"
+      fetch( this.baseUrl +"/" + `${endPoint}/${id}`, this.param)
+      .then(res => res.json())
+      .then((result) => {
+        this.showMessage(result)
+        //this.setState( prevState => ({ asset: [...prevState.asset, data]}))
+      }).catch(
+        e =>{ console.log('Asset errors',e)}
+      );
+      } else {
+      console.log("No Token or User so far")
+    }
+  }
+  updateUserData=(endPoint,id, data)=>{
+    this.param["body"] = JSON.stringify(data)
+    const token = sessionStorage.getItem("token")
+    if (this.state.current_user) {
+      this.param.headers["Authorization"] = token;
+      this.param.method = "PUT"
+      fetch( this.baseUrl +"/"+ `${endPoint}/${id}`, this.param)
+      .then(res => res.json())
+      .then((result) => {
+        this.showMessage(result)
+        //this.setState( prevState => ({ asset: [...prevState.asset, data]}))
+      }).catch(
+        e =>{ console.log('Asset errors',e)}
+      );
+      } else {
+      console.log("No Token or User so far")
+    }
+  }
+  createUserData=(endPoint, data)=>{
+    this.param["body"] = JSON.stringify(data)
+    const token = sessionStorage.getItem("token")
+    if (this.state.current_user) {
+      this.param.headers["Authorization"] = token;
+      this.param.method = "POST"
+      fetch( this.baseUrl +"/"+ endPoint, this.param)
+      .then(res => res.json())
+      .then((result) => {
+        this.showMessage(result)
+      }).catch(
+        e =>{ console.log('Asset errors',e)}
+      );
+      } else {
+      console.log("No Token or User so far")
+    }
+  }
+  fetchUserData = (endPoint) => {    
+    const token = sessionStorage.getItem("token")
+    if (this.state.current_user) {
+      this.param.headers["Authorization"] = token;
+      this.param.method = "GET"
+      fetch( this.baseUrl +"/"+ endPoint, this.param)
+      .then(res => res.json())
+      .then((result) => {
+        this.dataParser(result)
+      }).catch(
+        e =>{ console.log('Asset errors',e)}
+      );
+      } else {
+      console.log("No Token so far")
+    }    
+  }
+  getUserData() {
+    ["assets","commitments","networth"].forEach(
+      (item) => { this.fetchUserData(item, "GET")})
+  }
+  componentDidUpdate(prevState, prevProps){
+    if (this.state.current_user !== prevProps.current_user) {
+      this.getUserData();
+    }
+    console.log(this.state.current_user,prevProps.current_user)
+  }
+  sumData = (value) =>{
+    const reducer = (accumulator, currentValue) =>
+     accumulator + currentValue;
+    const total  = value.reduce(reducer);
+    return total 
+  }
+  networthCalc = () =>{
+    const net = { assetTotal: [], commitTotal: []}
+    if (this.state.asset && this.state.commits){
+      this.state.asset.map((k, v) =>{
+        net.assetTotal.push(k.amount)
+      });
+      this.state.commits.map((k, v) =>{
+        net.commitTotal.push(k.amount)
+      });
+      console.log(net.assetTotal,net.commitTotal)
+      return this.sumData( net.assetTotal) - this.sumData( net.commitTotal)
+    }
+    return false
+  }
   render(){
     const currentUser       = this.state.current_user;
     const signedIn          = this.state.logedIn;
     const updateCurrentUser = this.updateCurrentUser;
     const toggleLogin       = this.toggleLogin;
     const fetchUserData     = this.fetchUserData;
-    const data              = this.state;
+    const createUserData    = this.createUserData;
+    const updateUserData    = this.updateUserData;
+    const removeUserData    = this.removeUserData;
     const getUserData       = this.getUserData;
+    const networthCalc      = this.networthCalc;
+    const data = {
+      asset: this.state.asset,
+      commit: this.state.commits,
+      net:  this.state.net
+    };
     return (      
       <BrowserRouter>
         <div className="content" > 
-          <Nav />                           
+          {currentUser ? <DashNav/> : <Nav />}                           
             <div className="route">
               <Switch>
                 <Route exact path="/" render= { (props)=> <Home { ...props}/>}/>
@@ -67,8 +201,12 @@ class App extends React.Component {
                     fetchUserData = { fetchUserData }
                     getUserData = { getUserData }
                     data = { data }
+                    createUserData = { createUserData }
+                    updateUserData = { updateUserData }
+                    removeUserData = { removeUserData }
+                    networthCalc = { networthCalc }
                     />
-                  } 
+                  }
                 />
               </Switch>
             </div>    
@@ -79,4 +217,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App; 
