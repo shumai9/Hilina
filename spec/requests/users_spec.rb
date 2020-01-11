@@ -8,13 +8,16 @@ RSpec.describe 'Users signup', type: :request do
   let(:valid_attributes) do
     attributes_for(:user, password_confirmation: user.password)
   end
+  let(:empty_attributes) do
+    {user: {user_name: '', first_name: '',last_name: '', email: '', password: ''}}
+  end
   # User signup test suite
   describe 'POST /signup' do
     context 'when valid request' do
       before do
         post '/signup',
-             params: valid_attributes.to_json,
-             headers: headers
+        params: { user: valid_attributes }.to_json,
+        headers: headers
       end
 
       it 'creates a new user' do
@@ -30,8 +33,8 @@ RSpec.describe 'Users signup', type: :request do
       end
     end
 
-    context 'when invalid request' do
-      before { post '/signup', params: {}, headers: headers }
+    context 'when valid request but empty data field' do
+      before { post '/signup', params: empty_attributes.to_json, headers: headers }
 
       it 'does not create a new user' do
         expect(response).to have_http_status(422)

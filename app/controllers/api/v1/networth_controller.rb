@@ -6,7 +6,8 @@ module Api::V1
     end
     private 
     def user_data
-      @networth = Networth.where(user_id: @current_user.id)
+      #where returns a collection 
+      @networth = Networth.where(user_id: @current_user.id).first
     end
   end
 end
