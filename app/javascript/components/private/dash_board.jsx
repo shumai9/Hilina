@@ -72,9 +72,10 @@ class DashBoard extends React.Component {
   removeHandler=()=>{
     const itemId = this.state.singleData.id;
     const item = document.getElementById(itemId);
-    const endPoint = this.props.component + 's';
+    const endPoint = this.state.component + 's';
     item.remove()
     this.setState({singleData: null})
+    console.log(endPoint)
     this.props.removeUserData(endPoint, itemId)
   }
   sumData = (value) =>{

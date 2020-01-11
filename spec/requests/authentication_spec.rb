@@ -11,21 +11,23 @@ RSpec.describe 'Authentication', type: :request do
     let(:headers) { valid_headers.except('Authorization') }
     # set test valid and invalid credentials
     let(:valid_credentials) do
-      {
-        email: user.email,
-        password: user.password
+      { 
+        user: {
+          email: user.email,
+          password: user.password 
+        }
       }.to_json
     end
     let(:invalid_credentials) do
       {
-        email: Faker::Internet.email,
-        password: Faker::Internet.password
+        user: {
+          email: Faker::Internet.email,
+          password: Faker::Internet.password
+        }
       }.to_json
     end
-
     # set request.headers to our custom headers
     # before { allow(request).to receive(:headers).and_return(headers) }
-
     # returns auth token when request is valid
     context 'When request is valid' do
       before { post '/auth/login', params: valid_credentials, headers: headers }
