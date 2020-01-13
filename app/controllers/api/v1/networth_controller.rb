@@ -5,8 +5,7 @@ module Api::V1
       json_response(net: @user_networth)
     end
     private 
-    def user_data
-      #where returns a collection 
+    def user_data 
       @networth = Networth.where(user_id: @current_user.id).first
     end
   end
