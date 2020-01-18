@@ -5,7 +5,6 @@ ruby '>= 2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
-# Use sqlite3 as the database for Active Record
 # Use Puma as the app server
 gem 'pg', '>= 0.18', '< 2.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -24,12 +23,9 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 # Shumai selcted gems
-#gem 'foreman' # shoun't be bundled to project
-gem 'devise', '~> 4.6'
+#gem 'foreman' # should't be bundled to project, install locally.
 gem 'jwt'
 gem 'react-rails'
-#gem 'multi_json', '~> 1.13', '>= 1.13.1'
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -50,15 +46,12 @@ group :test do
   gem 'database_cleaner', '~> 1.7'
   gem 'cucumber', '~> 3.1'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
   gem 'simplecov', require: false
 end
-
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
-
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

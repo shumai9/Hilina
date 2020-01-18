@@ -38,7 +38,7 @@ class Form extends React.Component {
           onChange ={ this.inputHandler }
           value={ this.state.value }
           name={ compo + "_type" } form="form">
-          <option disabled value >--sellect type--</option>
+          <option disabled value>--sellect type--</option>
           <option>Financial</option>
           <option>Non-Financial</option>
         </select>
@@ -53,14 +53,14 @@ class Form extends React.Component {
         </label>
         <label>
           <input
-            value={ this.state.value  }
+            value={ this.state.value }
             onChange ={this.inputHandler}
             type="date" 
             name="acquired"/>
         </label>
         <label>
           <input
-            value={ this.state.value | this.state.ceased }
+            value={ this.state.value }
             onChange ={this.inputHandler}
             type="date" 
             name="ceased"/>

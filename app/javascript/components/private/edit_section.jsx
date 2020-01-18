@@ -29,7 +29,10 @@ class EditForm extends React.Component {
     const compo = this.props.component;
     return(
       <div className="section">
-        <button onClick={ this.props.renderEditor } type="button">Close</button>
+        <button 
+          className="btn-cancel" 
+          onClick={ this.props.renderEditor }
+        >Cancel</button>
         <form onSubmit={ this.onSaveForm } className="form">
           <label>
             <input
@@ -72,7 +75,7 @@ class EditForm extends React.Component {
               type="date" 
               name="ceased"/>
           </label>
-          <button type="submit">Save</button>
+          <button className="btn-save" type="submit">Save</button>
         </form>
       </div>
     )

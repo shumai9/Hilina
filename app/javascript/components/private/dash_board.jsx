@@ -58,11 +58,12 @@ class DashBoard extends React.Component {
     }
     //this.props.fetchUserData(`assets/${id}`, "GET");         
   }
-  submitHandler = (data) =>{
-    data['user_id'] = this.props.data[0].user_id;  
-    this.props.createUserData("assets", data);
+  submitHandler = (form_data) =>{
+    const endPoint = this.state.component + 's';
+    form_data["user_id"] = this.props.data.asset[0].user_id;   
+    this.props.createUserData(endPoint, form_data);
     this.renderForm()
-    console.log("Create", data)
+    console.log("Create", form_data)
   }
   updateHandler =(data)=>{
     const endPoint = this.state.component + 's';
@@ -131,9 +132,6 @@ class DashBoard extends React.Component {
               updateCurrentUser = { updateCurrentUser }
               user={ currentUser }
             />
-            <button onClick={this.renderForm} className="btn-create">
-              Add {this.state.component}
-            </button>
             {
                 this.state.section_on ?
                 <Section 
@@ -182,6 +180,7 @@ class DashBoard extends React.Component {
                     removeUserData={ removeUserData }
                     closeSection= { this.closeSection }
                     getSingleData={ this.getSingleData }
+                    renderForm={ this.renderForm}
                   />
                 }
               />
@@ -200,13 +199,14 @@ class DashBoard extends React.Component {
                     removeUserData={ removeUserData }
                     closeSection= { this.closeSection }
                     getSingleData={ this.getSingleData }
+                    renderForm={ this.renderForm}
                   />
                 } 
               />
               <Route  path="/networth" 
                 render={
                   (props)=> <Networth { ...props}
-                    data={ data.net }
+                    data={ data }
                     fetchUserData={ fetchUserData }
                     token={this.getUserToken}
                     currentUser={currentUser}
