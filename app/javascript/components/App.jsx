@@ -6,9 +6,6 @@ import About from '../components/shared/about';
 import Contact from '../components/shared/contact';
 import Nav from '../components/shared/nav';
 import DashNav from '../components/private/dash_nav';
-import Login from './login';
-import Signup from './signup';
-
 require('../style/App.scss');
 
 class App extends React.Component {
@@ -19,9 +16,7 @@ class App extends React.Component {
       logedIn: false
     }
     this.baseUrl = 'http://localhost:3000/api/v1';
-    this.param = { 
-      method: "",
-      headers: {
+    this.param = { method: "", headers: {
         "Content-Type": "application/json",
         "charset": "UTF-8",
         "Authorization": "",
@@ -48,9 +43,6 @@ class App extends React.Component {
     }
     this.state.current_user ? this.getUserData() : console.log("skiped")
   }
-  tokenHandler=()=>{
-    return this.state.token
-  }
   showMessage =(result)=>{
     console.log(result.message)
     this.setState({message: result.message})
@@ -59,8 +51,8 @@ class App extends React.Component {
     const subj = Object.keys(data)[0];
     const detail = data[subj];
     if(Array.isArray(detail)){
-      Object.values(data)[0].map((k, v) =>{
-        k.amount = parseInt(k.amount)
+      Object.values(data)[0].map((item) =>{
+        item.amount = parseInt(item.amount)
       });
       this.setState(data)
     } else {
@@ -127,12 +119,9 @@ class App extends React.Component {
       this.param.method = "GET"
       fetch( this.baseUrl +"/"+ endPoint, this.param)
       .then(res => res.json())
-      .then((result) => {
-        this.dataParser(result)
-      }).catch(
-        e =>{ console.log('Asset errors',e)}
-      );
-      } else {
+      .then((result) => { this.dataParser(result) })
+      .catch( e =>{ console.log('Asset errors',e) });
+    } else {
       console.log("No Token so far")
     }    
   }
@@ -147,22 +136,21 @@ class App extends React.Component {
     console.log(this.state.current_user,prevProps.current_user)
   }
   sumData = (value) =>{
-    const reducer = (accumulator, currentValue) =>
-     accumulator + currentValue;
+    const reducer = (sum, num) => sum + num;
     const total  = value.reduce(reducer);
     return total 
   }
   networthCalc = () =>{
-    const net = { assetTotal: [], commitTotal: []}
+    const net = { assetTotal: [], commitTotal: []};
+    const collectAmounts = (data, netItem) => {
+      data.map((item) =>{ net[netItem].push(item.amount);})
+    }
     if (this.state.asset && this.state.commits){
-      this.state.asset.map((k, v) =>{
-        net.assetTotal.push(k.amount)
-      });
-      this.state.commits.map((k, v) =>{
-        net.commitTotal.push(k.amount)
-      });
-      console.log(net.assetTotal,net.commitTotal)
-      return this.sumData( net.assetTotal) - this.sumData( net.commitTotal)
+      collectAmounts(this.state.asset, "assetTotal")
+      collectAmounts(this.state.commits, "commitTotal")
+      return(
+        this.sumData(net.assetTotal) - this.sumData(net.commitTotal)
+      )
     }
     return false
   }
@@ -180,7 +168,8 @@ class App extends React.Component {
     const data = {
       asset: this.state.asset,
       commit: this.state.commits,
-      net:  this.state.net
+      net:  this.state.net,
+      subtotal: this.state.total
     };
     return (      
       <BrowserRouter>
@@ -194,17 +183,16 @@ class App extends React.Component {
                 <Route exact to="/user/dash_board" render={
                   (props)=> <Dashboard {...props} 
                     updateCurrentUser = { updateCurrentUser } 
-                    toggleLogin = { toggleLogin }
-                    currentUser = { currentUser }
-                    signedIn = { signedIn }
-                    tokenHandler = { this.tokenHandler }
-                    fetchUserData = { fetchUserData }
-                    getUserData = { getUserData }
-                    data = { data }
-                    createUserData = { createUserData }
-                    updateUserData = { updateUserData }
-                    removeUserData = { removeUserData }
-                    networthCalc = { networthCalc }
+                    toggleLogin       = { toggleLogin }
+                    currentUser       = { currentUser }
+                    signedIn          = { signedIn }
+                    fetchUserData     = { fetchUserData }
+                    getUserData       = { getUserData }
+                    data              = { data }
+                    createUserData    = { createUserData }
+                    updateUserData    = { updateUserData }
+                    removeUserData    = { removeUserData }
+                    networthCalc      = { networthCalc }
                     />
                   }
                 />

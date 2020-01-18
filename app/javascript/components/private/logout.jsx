@@ -19,9 +19,7 @@ class Logout extends React.Component {
     const signedIn = this.props.signedIn
     console.warn('now user is ', curentUser);
     return (
-      <div className="exit form">
-        <button className="btn-out" onClick={this.handleLogout}>Sign Out</button>
-      </div>
+      <i className="exit" onClick={this.handleLogout}></i>
     );
   };
 }

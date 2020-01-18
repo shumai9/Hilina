@@ -30,6 +30,10 @@ class Assets extends React.Component {
     if (this.props.data) {
       return (
         <div className="assets">
+          <button 
+            onClick={this.props.renderForm}
+            className="btn-add"> Add {this.state.component}
+          </button>
           <h2>Financial Assets: :Total amount </h2>
           <ul onClick={this.props.getSingleData}>
             {

@@ -8,7 +8,13 @@ RSpec.describe 'API V1 networth Controller', type: :request do
   end
   let(:invalid_headers){{ 'Authorization' => token_generator(65) }}
   let(:no_token){{ }}
-  let!(:networth){ create(:networth, user_id: user.id)}
+  let!(:data){
+    5.times do
+      create(:asset, user_id: user.id);
+      create(:commitment, user_id: user.id)
+    end
+  }
+  let!(:net){ create( :networth, user_id: user.id) }
   #Index action
   describe 'GET api/v1/networth' do
     context "when valid request with correct user id" do
@@ -16,8 +22,13 @@ RSpec.describe 'API V1 networth Controller', type: :request do
       it "should responds with status 200" do
         expect(response).to have_http_status(200)
       end
-      it "displays networths" do
-        expect(json["net"]["total_amount"]).to eq("0.0")
+      it "returns an object with asset and commit as keys" do
+        p json["total"]
+        expect(json["total"].keys).to eq(["asset", "commit"])
+      end
+      it "returns networth" do
+        p json["net"]["current_networth"]
+        expect(json["net"]["current_networth"]).not_to eq("0.0")
       end
     end
   end

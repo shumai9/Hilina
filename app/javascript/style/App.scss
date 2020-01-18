@@ -9,7 +9,7 @@ body {
   background-size: cover;
   .route {
     padding: 1% 5%;
-    margin: 15px;
+    margin: 9px;
     width: auto;
     height: 100vh;
     background: rgba(49, 49, 49, 0.38);
@@ -40,21 +40,21 @@ body {
         left: 4%;
       }
       .assets{
-        background: #13702d;
+        background:#9c7b7b;
         padding: 4rem;
         ul li {
           list-style: none;
         }        
       }
       .commitments{
-        background: rgb(236, 102, 102);
+        background: #9c7b7b;
         padding: 4rem;
         ul li {
           list-style: none;
         }
       }
       .networth div {
-        background: rgb(255, 217, 160);
+        background:#9c7b7b;
         padding: 4rem;
         ul li {
           list-style: none;
@@ -62,21 +62,23 @@ body {
       }
       .section{
         position: absolute;
-        top: 15%;
+        top: 6rem;
         right: 0%;
-        background: #000a11;
+        background:radial-gradient(#ff6197e8, #607D8B);
         box-shadow: 0px 10px 2rem 1px #011d0a;
-        padding: 1rem;
+        padding: 4rem;
         height: 100%;
-        width: 450px;
+        width: 350px;
         ul li {
           list-style: none;
         }
         span{
           position: absolute;
           right: 0;
+          top: 1rem;
           button {
-            width: 60px;
+            width: 7rem;
+            height: 2rem;
             padding: 4px;
             margin: 4px;
           }
@@ -98,7 +100,7 @@ body {
 }
 div.nav, .nav-bar{
   position: relative;
-  background:  #02243d;
+  background:radial-gradient(#ff6197e8, #607D8B);/*#02243d;*/
   height: 6rem;
   width: 100%;
   box-shadow: 13px 1px 1rem 8px #011d0a;
@@ -132,6 +134,16 @@ ul a {
   position: relative;
      
 }
+form::before {
+  content: "";
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background: rgba(112, 255, 112, 0.5);
+}
 .form{
   background: transparent;
   background: linear-gradient(transparent,#02243d);
@@ -162,7 +174,10 @@ button {
   padding: 5px;
   border-radius: 5rem;
   background: orange;
-  width:100%; 
+  background-size: contain;
+  background-position: left;
+  background-repeat: no-repeat;
+  width: 100%; 
   a {
     text-decoration: none;
   }
@@ -170,21 +185,60 @@ button {
 button.btn-signup, .btn-login{
   margin: 6px 4px 0 0;
 }
-
+button.btn-delete{
+  background-image: url('../img/big-bin.svg');
+  width: 9rem;
+}
+button.btn-close,button.btn-cancel{
+  background-image: url('../img/round-delete.svg');
+  width: 2rem;
+  height: 2rem;
+}
+button.btn-cancel{
+  width: 7rem;
+}
+button.btn-signup, .btn-save{
+  background: radial-gradient(#fcff2e,#9100ff);
+}
+button.btn-create{
+  background-image: linear-gradient(
+    115deg,
+    rgba(58, 58, 58, 0.8),
+    rgba(136, 136, 165, 0.7)
+  ), url('../img/edit-button.svg');
+}
+.btn-edit{
+  background-image: url('../img/edit-button.svg');  
+  width: 8rem;
+}
+button.btn-add{
+  background-image: url('../img/add-button.svg');
+  width: 14%;
+}
+button.btn-close {
+  position: absolute;
+  top: 1rem;
+  width: 2rem;
+  left: 1rem;
+}
 h1,h2,p, label, li, a {
   color: #fff;
   font-size: 20px;
   font-weight: bold;
   font-family: 'Poiret One', cursive;
 }
-
 #alert {
   background: red;
 }
-div.exit.form {
+i.exit {
+  background-image: url('../img/logout.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 2rem ;
+  width: 2rem;
   position: absolute;
   right: 2%;
-  top: 3rem;
+  top: 2rem;
 }
 .user_links {
   a:hover {

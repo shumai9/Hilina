@@ -25,6 +25,9 @@ class Commitments extends React.Component {
     if (data) {
       return (
         <div className="commitments">
+          <button onClick={this.props.renderForm} className="btn-add">
+              Add {this.state.component}
+            </button>
           <h2>Financial commitment : Total amount</h2>
           <ul onClick={this.props.getSingleData} >
             {

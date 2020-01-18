@@ -34,7 +34,7 @@ class Login extends React.Component {
 
   render(){
     const currentUser = this.props.currentUser;    
-    return(
+    return( 
       currentUser ? (
         <Redirect push={true} to="/user/dashboard"/>
       ) : (

@@ -6,8 +6,9 @@ const Section = (props) => {
       props.data ?
       <div className="section">
         <span>
-          <button onClick={props.renderEditor} >Edit</button>
-          <button onClick={props.removeHandler}>Delete</button>
+          <button className="btn-edit" onClick={props.renderEditor} >Edit</button>
+          <button className="btn-delete" onClick={props.removeHandler}>
+            <i className="icon-delete"></i>Delete</button>
         </span>
         <h1>Type: { props.data[ component + "_type" ] }</h1>
         <ul>
@@ -16,7 +17,7 @@ const Section = (props) => {
           <li>In held since {props.data.acquired}</li>
           <li>Terminated since {props.data.ceased}</li>
         </ul>
-        <button onClick={props.closeSection}>X</button>
+        <button className="btn-close" onClick={props.closeSection}></button>
       </div>
     :  null
   )

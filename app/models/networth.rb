@@ -17,11 +17,14 @@ class Networth < ApplicationRecord
   #attr_reader :total_assets, :total_commitment
   
   def self.get_total_amount(collection)
-    sum = collection.map{ |item| item.amount.to_f }
-    sum.reduce(:+)
+    sum = collection.map{ |item| item.amount }
+    #sum.reduce(:+)
+    sum.inject(BigDecimal.new(0)) do |total, val|
+      total += val
+    end
   end
   
-  def self.current_networth(total)
-    net = total[:asset] - total[:commit]
+  def self.current_networth(subtotal)
+    net = (subtotal[:asset] - subtotal[:commit])
   end
 end
