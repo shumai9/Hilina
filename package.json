@@ -7,13 +7,8 @@
   "author": "shumai",
   "license": "MIT",
   "engines": {
-    "node": "12.13.0",
-    "yarn": "1.19.1"
-  },
-  "scripts": {
-    "build": "webpack ./javascript/packs/application.js",
-    "deploy": "cp -a Hilina/. public/",
-    "heroku-postbuild": "yarn build && yarn deploy"
+    "node": "^10.15.3",
+    "yarn": "^1.16.0"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-0",
