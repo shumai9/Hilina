@@ -7,11 +7,11 @@
   "author": "shumai",
   "license": "MIT",
   "engines": {
-    "node": "^10.15.3",
-    "yarn": "^1.15.2"
+    "node": "12.13.0",
+    "yarn": "1.19.1"
   },
   "scripts": {
-    "build": "yarn install && yarn build",
+    "build": "webpack ./javascript/packs/application.js",
     "deploy": "cp -a Hilina/. public/",
     "heroku-postbuild": "yarn build && yarn deploy"
   },
