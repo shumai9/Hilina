@@ -27,7 +27,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 gem 'react-rails'
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+#gem 'bootsnap', '>= 1.1.0', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors', require: 'rack/cors'
@@ -39,9 +39,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails', '~> 4.10'
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
-end
-
-group :test do
   gem 'capybara', '~> 3.2'
   gem 'database_cleaner', '~> 1.7'
   gem 'cucumber', '~> 3.1'
