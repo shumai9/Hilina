@@ -39,15 +39,14 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails', '~> 4.10'
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
-end
-
-group :test do
   gem 'capybara', '~> 3.2'
   gem 'database_cleaner', '~> 1.7'
   gem 'cucumber', '~> 3.1'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end
+
+
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
