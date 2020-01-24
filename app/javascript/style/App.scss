@@ -5,25 +5,25 @@
 }
 body {
   font-family: 'Poiret One', cursive;
-  background: url('../img/bro.jpg');
+  background: radial-gradient(#ff6197e8, #607D8B);
+  background-image: radial-gradient(rgba(255, 97, 151, 0.5), #607D8B), url('../img/bro.jpg');
   background-size: cover;
-  .route {
+  background-repeat: no-repeat;
+.route {
     padding: 1% 5%;
-    margin: 9px;
-    width: auto;
     height: 100vh;
-    background: rgba(49, 49, 49, 0.38);
   }
   .dashboard{
     div.login_signup{
-      width: 350px;
+      padding: 0 15%;
       position: relative;
-      left: 30%;
+      top: 10rem;
       div.links {
-        background: #000;
-        padding: 1rem;
-        border-radius: 1rem 1rem 1rem 0;
+        background: rgb(59, 8, 68);
+        border-radius: 1rem 1rem 0 0;
         border-bottom: hidden;
+        display: flex;
+        min-width: 200px;
       }
       a {
         margin: 1rem;
@@ -87,21 +87,19 @@ body {
     }
   }
 }
-
  #logo {
-  position: fixed;
+  position: absolute;
   left: 15px;
-  top: 15px;
+  top: 2px;  
+  height: 3rem;
+  width: 3rem;
   background: no-repeat url('../img/svlogo.png');
   background-size: contain;
-  height: 3rem ;
-  width: 3rem;
-  z-index: 100;
 }
 div.nav, .nav-bar{
   position: relative;
   background:radial-gradient(#ff6197e8, #607D8B);/*#02243d;*/
-  height: 6rem;
+  height: 4rem;
   width: 100%;
   box-shadow: 13px 1px 1rem 8px #011d0a;
   li, a {
@@ -114,9 +112,7 @@ div.nav, .nav-bar{
   }
   .link {
     position: relative;
-    top: 1rem;
     text-align: center;
-    
     a:hover{
       background: rgba(193, 193, 193, 0.8);
       margin: 5px;      
@@ -124,6 +120,11 @@ div.nav, .nav-bar{
     }
   }
 }
+// @media (max-width: 650px) {
+//   div.nav, .nav-bar, .link  {
+//     display: none;
+//   }
+// }
 .active {
   background-color: #fdaa12;
   border-radius: 5%;
@@ -148,7 +149,8 @@ form::before {
   background: transparent;
   background: linear-gradient(transparent,#02243d);
   padding: 1rem;
-  border-radius: 1rem;
+  border-radius: 0 0 1rem 1rem;
+  min-width: 200px;
   input, select, select option {
     outline: none;
     font-weight: 1000;
@@ -213,7 +215,7 @@ button.btn-create{
 }
 button.btn-add{
   background-image: url('../img/add-button.svg');
-  width: 14%;
+  width: 6rem;
 }
 button.btn-close {
   position: absolute;

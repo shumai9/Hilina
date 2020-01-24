@@ -9,6 +9,7 @@ procfile;
 api: bundle exec rails s -p 3000
 web: ./bin/webpack-dev-server -p 3035
 * Ruby version
+# <%= favicon_link_tag 'public/favicon.ico' %>
 
 * System dependencies
 
