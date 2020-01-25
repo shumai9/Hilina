@@ -180,7 +180,7 @@ class App extends React.Component {
                 <Route exact path="/" render= { (props)=> <Home { ...props}/>}/>
                 <Route exact path="/about_us" render={ (props)=><About { ...props}/>}/>
                 <Route exact path="/contact_us" render={ (props)=><Contact { ...props}/>}/>
-                <Route exact to="/user/dash_board" render={
+                <Route exact to="/dash_board" render={
                   (props)=> <Dashboard {...props} 
                     updateCurrentUser = { updateCurrentUser } 
                     toggleLogin       = { toggleLogin }
