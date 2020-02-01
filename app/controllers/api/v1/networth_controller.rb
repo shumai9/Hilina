@@ -1,26 +1,21 @@
 module Api::V1
   class NetworthController < ApplicationController
     def index
-      @user_networth = user_data
-      @data = set_total
-      record_current_networth
-      json_response({ net: @user_networth, total: @data })
+      response = { main: user_data, subtotal: get_total.subtotal}
+      json_response(response)
     end
     private
-    def set_total
-      asset_data = Asset.where(user_id: @current_user.id)
-      commit_data = Commitment.where(user_id: @current_user.id)
-      return data = {
-        asset:  Networth.get_total_amount(asset_data),
-        commit: Networth.get_total_amount(commit_data)
-      }
+    def get_total
+      init_data = Networth.new(user_id: @current_user.id)
+      if user_data && user_data.current_networth != init_data.current_net
+        user_data.update!(current_networth: init_data.current_net)
+      end
+      init_data 
     end
-    def record_current_networth
-      net =  Networth.current_networth(@data)
-      user_data.current_networth = net
-    end
-    def user_data 
-      @networth ||= Networth.where(user_id: @current_user.id).first
+    def user_data
+      Networth.find_by(user_id: @current_user.id) ||
+      Networth.create!( user_id: @current_user.id, 
+      current_networth: Networth.new(user_id: @current_user.id).current_net )
     end
   end
 end

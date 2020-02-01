@@ -3,23 +3,21 @@
   padding: 0px;
   box-sizing: border-box;
 }
-body {
+.route  {
   font-family: 'Poiret One', cursive;
   background: radial-gradient(#ff6197e8, #607D8B);
   background-image: radial-gradient(rgba(255, 97, 151, 0.5), #607D8B), url('../img/bro.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-.route {
-    padding: 1% 5%;
-    height: 100vh;
-  }
+  padding: 1% 5%;
+  height: 100vh;
   .dashboard{
     div.login_signup{
       padding: 0 15%;
       position: relative;
       top: 10rem;
       div.links {
-        background: rgb(59, 8, 68);
+        background:#da729b;
         border-radius: 1rem 1rem 0 0;
         border-bottom: hidden;
         display: flex;
@@ -62,7 +60,6 @@ body {
       }
       .section{
         position: absolute;
-        top: 6rem;
         right: 0%;
         background:radial-gradient(#ff6197e8, #607D8B);
         box-shadow: 0px 10px 2rem 1px #011d0a;
@@ -95,13 +92,14 @@ body {
   width: 3rem;
   background: no-repeat url('../img/svlogo.png');
   background-size: contain;
+  z-index: 1;
 }
 div.nav, .nav-bar{
   position: relative;
   background:radial-gradient(#ff6197e8, #607D8B);/*#02243d;*/
   height: 4rem;
   width: 100%;
-  box-shadow: 13px 1px 1rem 8px #011d0a;
+  box-shadow: 0px 5px 1rem -6px #011d0a;
   li, a {
     display: inline-block;
     text-decoration: none;
@@ -147,7 +145,7 @@ form::before {
 }
 .form{
   background: transparent;
-  background: linear-gradient(transparent,#02243d);
+  background: linear-gradient(#f3a3a3c7,#012c4c);
   padding: 1rem;
   border-radius: 0 0 1rem 1rem;
   min-width: 200px;
@@ -240,7 +238,7 @@ i.exit {
   width: 2rem;
   position: absolute;
   right: 2%;
-  top: 2rem;
+  top: 1rem;
 }
 .user_links {
   a:hover {
