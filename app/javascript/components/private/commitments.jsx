@@ -9,10 +9,14 @@ class Commitments extends React.Component {
   }
   valueHandler = () =>{
     const ary = [];
-    this.props.data.map( (k,v) => {
-      ary.push(k.amount)
-    });
-    return this.props.sumData(ary)
+    if(this.props.data.length > 0){
+      this.props.data.map( (k,v) => {
+        ary.push(k.amount)
+      });
+      return(- this.props.sumData(ary))
+    }else{
+      return 0
+    }
   }
   componentDidMount() {
     console.log('COMit mounted');
@@ -39,7 +43,7 @@ class Commitments extends React.Component {
               })
             }
           </ul>
-          <h1>Total: £  - <strong>{this.valueHandler()}</strong> </h1>
+          <h1>Total: £ <strong>{this.valueHandler()}</strong> </h1>
         </div>
       );
     } else {

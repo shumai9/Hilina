@@ -8,13 +8,16 @@ class Assets extends React.Component {
   }
   valueHandler = () =>{
     const ary = [];
-    this.props.data.map( (k,v) => {
-      ary.push(
-        typeof(k) === "string" ? parseInt(k.amount) :  k.amount
-      )
-    });
-    //this.setState({ value: ary })
-    return this.props.sumData(ary)
+    if(this.props.data.length > 0){
+      this.props.data.map( (k,v) => {
+        ary.push(
+          typeof(k) === "string" ? parseInt(k.amount) :  k.amount
+        )
+      });
+      return this.props.sumData(ary)
+    }else{
+      return 0
+    }
   }
   
   componentDidMount() {

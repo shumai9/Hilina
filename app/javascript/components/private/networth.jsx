@@ -17,19 +17,23 @@ class Networth extends React.Component {
   render() { 
     const data = this.props.data.net;
     const net = this.props.getNetworth;
+    const subAsset = this.props.data.subtotal;
+    const subComit = this.props.data.subtotal;
     console.log(this.props.data, data)
-    if (data) {
+    if (this.props.data) {
       return (
         <div className="networth">
           <h1>Net worth</h1>
-            <div key={data.id}>
-              <h3>Total Asset : {this.props.data.subtotal.asset}</h3>
-              <h3> Totals Commits: { this.props.data.subtotal.commit }</h3>
-              <br/>
-              <h3> Net Worth Now: {data.current_networth}</h3>
-              <h3> Total amount: {data.total_amount}</h3>
-              <h3> Total Net Worth value : {data.total_current_value}</h3>
-            </div>              
+            { data ? 
+              (<div>
+                <h3>Total Asset : { subAsset ? subAsset.asset : 0 }</h3>
+                <h3> Totals Commits: { subComit ? subComit.commit : 0 }</h3>
+                <br/>
+                <h3> Net Worth Now: { data.current_networth  }</h3>
+                <h3> Total amount: { data.total_amount  }</h3>
+                <h3> Total Net Worth value : { data.total_current_value }</h3>
+              </div>) : (null)
+            }              
           <h1>Net : {net()}</h1>
         </div>
       );

@@ -141,18 +141,20 @@ class App extends React.Component {
     return total 
   }
   networthCalc = () =>{
-    const net = { assetTotal: [], commitTotal: []};
-    const collectAmounts = (data, netItem) => {
+    if(this.state.net) {
+      const net = { assetTotal: [], commitTotal: []};
+      const collectAmounts = (data, netItem) => {
       data.map((item) =>{ net[netItem].push(item.amount);})
-    }
-    if (this.state.asset && this.state.commits){
-      collectAmounts(this.state.asset, "assetTotal")
-      collectAmounts(this.state.commits, "commitTotal")
-      return(
-        this.sumData(net.assetTotal) - this.sumData(net.commitTotal)
-      )
-    }
-    return false
+      }
+      if (this.state.asset.length && this.state.commits.length){
+        collectAmounts(this.state.asset, "assetTotal")
+        collectAmounts(this.state.commits, "commitTotal")
+        return(
+          this.sumData(net.assetTotal) - this.sumData(net.commitTotal)
+        )
+      }
+    }    
+    return 0
   }
   render(){
     const currentUser       = this.state.current_user;
@@ -168,8 +170,8 @@ class App extends React.Component {
     const data = {
       asset: this.state.asset,
       commit: this.state.commits,
-      net:  this.state.net,
-      subtotal: this.state.total
+      net:  this.state.main,
+      subtotal: this.state.subtotal
     };
     return (      
       <BrowserRouter>

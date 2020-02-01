@@ -44,13 +44,16 @@ class Signup extends React.Component{
         })
         .then((res)=> res.json())
         .then((result) =>{ 
-          if (result.status == '200') {
-            self.props.updateCurrentUser(email);
-          }else{ console.log(result.errors)}
-          })
-        .catch(function(error){
-          console.log(data)
+          if (result.auth_token) {
+            this.props.updateCurrentUser(data.user.email, result.auth_token.token );
+            this.props.updateUid(result.auth_token.uid) 
+          } else { console.log(result.errors) }
+        })
+        .catch( (error)=> {
+          console.log(error)
         })    
+      } else {
+        console.log("Password does not match");
       }
     }
   }

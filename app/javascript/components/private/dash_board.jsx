@@ -58,9 +58,12 @@ class DashBoard extends React.Component {
     }
     //this.props.fetchUserData(`assets/${id}`, "GET");         
   }
+  updateUid=(uid)=>{ 
+    this.setState({uid: uid})
+  }
   submitHandler = (form_data) =>{
     const endPoint = this.state.component + 's';
-    form_data["user_id"] = this.props.data.asset[0].user_id;   
+    form_data["user_id"] = this.state.uid;   
     this.props.createUserData(endPoint, form_data);
     this.renderForm()
     console.log("Create", form_data)
@@ -120,7 +123,8 @@ class DashBoard extends React.Component {
     const createUserData    = this.props.createUserData;
     const updateUserData    = this.props.updateUserData;
     const removeUserData    = this.props.removeUserData;
-    const closeSection    = this.closeSection;    
+    const closeSection      = this.closeSection;
+    const updateUid         = this.updateUid;  
     return (
       <div className='dashboard'>
         {
@@ -233,8 +237,9 @@ class DashBoard extends React.Component {
               render={
                 (props)=> <Signup 
                   { ...props } 
-                  toggleLogin={ toggleLogin }
-                  updateCurrentUser={ updateCurrentUser }
+                  toggleLogin       = { toggleLogin }
+                  updateCurrentUser = { updateCurrentUser }
+                  updateUid   = { updateUid }
                 />
               }
             />
@@ -242,9 +247,10 @@ class DashBoard extends React.Component {
               render={
                 (props)=> <Login { ...props} 
                   updateCurrentUser={ updateCurrentUser } 
-                  toggleLogin={ toggleLogin }
-                  currentUser={ currentUser }
-                  getUserData={ getUserData } 
+                  toggleLogin = { toggleLogin }
+                  currentUser = { currentUser }
+                  getUserData = { getUserData }
+                  updateUid   = { updateUid }
                 />
               } 
             /> 
