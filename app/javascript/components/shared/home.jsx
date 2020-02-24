@@ -1,19 +1,47 @@
 import React from 'react'
+import {home,mainPg,largeFont,flexer,flexChild} from '../../style/style.module.css'
 
 class Home extends React.Component {
   constructor(props) {
-    super(props);
-    this.state ={
-      isLoaded: false,
-      text: {}
-    }       
+    super(props);    
   }
   render() {
-    const data = this.state.text;
     return(
-      <div className="home">  
-        <h1>Home sweet Home</h1>
-          <p>{data.body}</p>     
+      <div className={mainPg, home}>
+        <h1 className={largeFont}>Home sweet Home</h1>
+        <div className={flexer}>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          <article className={flexChild}> <a hrfe="#">THis is all the content </a></article>
+          
+        </div>          
       </div>
     )
   }

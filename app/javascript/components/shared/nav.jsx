@@ -1,6 +1,12 @@
 import React from 'react'
-import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom'
-
+import { NavLink } from 'react-router-dom'
+import { 
+  navBar, 
+  navChild, 
+  logoIcon,
+  navItem,
+  navLink
+} from '../../style/style.module.css'
 
 class Nav extends React.Component {
   constructor(props) {
@@ -8,13 +14,15 @@ class Nav extends React.Component {
   }
   render(){ 
     return( 
-      <div className="nav nav-bar">
-        <NavLink exact to={"/"} id="logo"/>
-          <ul className="link" >
-            <li><NavLink exact to={"/"}>Home</NavLink></li>
-            <li><NavLink exact to={"/about_us"}>About</NavLink></li>
-            <li><NavLink exact to={"/contact_us"}>Contact</NavLink></li>            
-            <li><NavLink exact to={"/dash_board"}>Dash Board</NavLink></li>
+      <div className={navBar}>
+        <NavLink exact to={"/"}>
+            <i className={logoIcon}></i>
+        </NavLink>
+          <ul className={navLink} >
+            <li className={navChild}><NavLink className={navItem} exact to={"/"}>Home</NavLink></li>
+            <li className={navChild}><NavLink className={navItem} exact to={"/about_us"}>About</NavLink></li>
+            <li className={navChild}><NavLink className={navItem} exact to={"/contact_us"}>Contact</NavLink></li>            
+            <li className={navChild}><NavLink className={navItem} exact to={"/dash_board"}>Dash Board</NavLink></li>
           </ul>
       </div> 
     )

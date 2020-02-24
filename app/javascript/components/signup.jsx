@@ -1,4 +1,5 @@
 import React from 'react'
+import {signUp, formFormat} from 'style/style.module.css';
 
 class Signup extends React.Component{
   constructor(props){
@@ -60,7 +61,7 @@ class Signup extends React.Component{
   
   render() {
     return (
-      <div className="form form-signup">
+      <div className={signUp}>
         <form className="form-field " 
           onSubmit={this.handleSignup} >     
           <label>User Name 

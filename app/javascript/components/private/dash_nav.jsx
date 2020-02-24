@@ -1,21 +1,42 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import Logout from './logout';
+import { 
+  navLink, 
+  navBar, 
+  navChild, 
+  logoIcon ,
+  navItem,
+  nav
+} from '../../style/style.module.css'
 
 
 class DashNav extends React.Component {
   constructor(props) {
     super(props)  
   }
-  render(){ 
-    return( 
-      <div className="nav nav-bar">
-        <NavLink exact to={"/"} id="logo"/>
-          <ul className="link" >
-            <li><NavLink to={ "/assets" }>Assets</NavLink></li>              
-            <li><NavLink to={ "/commits" }>Commitments</NavLink></li>
-            <li><NavLink to={ "/networth" }>Net Worth</NavLink></li>
+  render(){
+    const currentUser       = this.props.currentUser;
+    const toggleLogin       = this.props.toggleLogin;
+    const updateCurrentUser = this.props.updateCurrentUser;
+    const signedIn          = this.props.signedIn;
+    return(
+      <div className={nav}>
+        <NavLink exact to={"/"}>
+            <i className={logoIcon}></i>
+        </NavLink>
+          <ul className={navLink} >
+            <li className={navChild}><NavLink className={navItem} to={ "/assets" }>Assets</NavLink></li>              
+            <li className={navChild}><NavLink className={navItem} to={ "/commits" }>Commitments</NavLink></li>
+            <li className={navChild}><NavLink className={navItem} to={ "/networth" }>Net Worth</NavLink></li>
           </ul>
-      </div> 
+          <Logout
+            signedIn = { signedIn }
+            toggleLogin={ toggleLogin }
+            updateCurrentUser = { updateCurrentUser }
+            user={ currentUser }
+          />
+      </div>
     )
   }
 }

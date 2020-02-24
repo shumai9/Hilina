@@ -6,7 +6,8 @@ import About from '../components/shared/about';
 import Contact from '../components/shared/contact';
 import Nav from '../components/shared/nav';
 import DashNav from '../components/private/dash_nav';
-require('../style/App.scss');
+import styles from '../style/style.module.css'
+import '../style/main.scss'
 
 class App extends React.Component {
   constructor(){
@@ -53,6 +54,8 @@ class App extends React.Component {
     if(Array.isArray(detail)){
       Object.values(data)[0].map((item) =>{
         item.amount = parseInt(item.amount)
+        item.acquired = new Date(item.acquired)
+        item.ceased = new Date(item.ceased)
       });
       this.setState(data)
     } else {
@@ -175,32 +178,55 @@ class App extends React.Component {
     };
     return (      
       <BrowserRouter>
-        <div className="content" > 
-          {currentUser ? <DashNav/> : <Nav />}                           
-            <div className="route">
-              <Switch>
-                <Route exact path="/" render= { (props)=> <Home { ...props}/>}/>
-                <Route exact path="/about_us" render={ (props)=><About { ...props}/>}/>
-                <Route exact path="/contact_us" render={ (props)=><Contact { ...props}/>}/>
-                <Route exact to="/dash_board" render={
-                  (props)=> <Dashboard {...props} 
-                    updateCurrentUser = { updateCurrentUser } 
-                    toggleLogin       = { toggleLogin }
-                    currentUser       = { currentUser }
-                    signedIn          = { signedIn }
-                    fetchUserData     = { fetchUserData }
-                    getUserData       = { getUserData }
-                    data              = { data }
-                    createUserData    = { createUserData }
-                    updateUserData    = { updateUserData }
-                    removeUserData    = { removeUserData }
-                    networthCalc      = { networthCalc }
-                    />
-                  }
-                />
-              </Switch>
-            </div>    
-          <div id="footer"></div>
+        <div className={styles.app} >
+          { 
+            currentUser ? 
+              <DashNav 
+                updateCurrentUser = { updateCurrentUser }
+                toggleLogin       = { toggleLogin }
+                currentUser       = { currentUser }
+                signedIn          = { signedIn }
+              />
+            : <Nav/>
+          }
+          <div className={styles.appSection}>
+            <Switch>
+              <Route exact path="/" render= { (props)=> <Home { ...props}/>}/>
+              <Route exact path="/about_us" render={ (props)=><About { ...props}/>}/>
+              <Route exact path="/contact_us" render={ (props)=><Contact { ...props}/>}/>
+              <Route exact to="/dash_board" render={
+                (props)=> <Dashboard {...props} 
+                  updateCurrentUser = { updateCurrentUser } 
+                  toggleLogin       = { toggleLogin }
+                  currentUser       = { currentUser }
+                  signedIn          = { signedIn }
+                  fetchUserData     = { fetchUserData }
+                  getUserData       = { getUserData }
+                  data              = { data }
+                  createUserData    = { createUserData }
+                  updateUserData    = { updateUserData }
+                  removeUserData    = { removeUserData }
+                  networthCalc      = { networthCalc }
+                  />
+                }
+              />
+            </Switch>
+          </div>
+          < div className={styles.footer} id="footer">
+            <section >
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem est, 
+              itaque cumque nulla distinctio eveniet voluptatem tempore alias magni
+              natus. Quibusdam, vero! Ducimus a laborum sint, nobis soluta illum nostrum?</p>
+            </section>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+            Nemo libero ab doloremque consectetur quis voluptates neque similique 
+            quidem quisquam quod ipsam reiciendis tenetur incidunt nulla, temporibus,
+            qui, illo nobis? Quos!</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+            Quos voluptas molestias veniam, accusamus et quisquam, corporis soluta laudantium 
+            voluptatum possimus quas iusto porro odio blanditiis ipsa,
+            perferendis qui? Consequuntur, sed! </p>
+          </div>    
         </div>        
       </BrowserRouter>        
     )

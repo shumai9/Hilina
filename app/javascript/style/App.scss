@@ -5,23 +5,24 @@
 }
 .route  {
   font-family: 'Poiret One', cursive;
-  background: radial-gradient(#ff6197e8, #607D8B);
+  //background: radial-gradient(#ff6197e8, #607D8B);
   background-image: radial-gradient(rgba(255, 97, 151, 0.5), #607D8B), url('../img/bro.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 1% 5%;
-  height: 100vh;
   .dashboard{
     div.login_signup{
-      padding: 0 15%;
-      position: relative;
-      top: 10rem;
+      padding: 7% 32% 0px 34%;
+      background: #2312128a;
+      height: 100vh;
       div.links {
         background:#da729b;
-        border-radius: 1rem 1rem 0 0;
+        border-radius: 0 0 1rem 1rem;
         border-bottom: hidden;
         display: flex;
         min-width: 200px;
+        position: absolute;
+        top: 65px;
+        left: 40%;
       }
       a {
         margin: 1rem;
@@ -32,52 +33,48 @@
     }
     .user_board{
       width: 100%;
+      padding: 1rem 7rem;
+      display: flex;
+      flex-direction: column;
+      align-self: center;
       .user_links{
         position: absolute;
         top: 7rem;
         left: 4%;
       }
-      .assets{
-        background:#9c7b7b;
-        padding: 4rem;
+      .networth{
+        background:#e9cece;
+        margin: 1rem;
+        border-radius: 3px;
+            
+      }
+      .assets,.commitments, .networth{
+        background:#e9cece;
+        margin: 1rem;
+        border-radius: 3px;
         ul li {
           list-style: none;
         }        
-      }
-      .commitments{
-        background: #9c7b7b;
-        padding: 4rem;
-        ul li {
-          list-style: none;
-        }
-      }
-      .networth div {
-        background:#9c7b7b;
-        padding: 4rem;
-        ul li {
-          list-style: none;
-        }
       }
       .section{
         position: absolute;
         right: 0%;
         background:radial-gradient(#ff6197e8, #607D8B);
-        box-shadow: 0px 10px 2rem 1px #011d0a;
-        padding: 4rem;
+        box-shadow: 0px 0px 5px 0px #011d0a;
+        padding: 5rem 2rem;
         height: 100%;
-        width: 350px;
+        width: 50%;
+        top: 4.3rem;
+        border-radius: 3px;
         ul li {
           list-style: none;
         }
         span{
-          position: absolute;
-          right: 0;
+          position: relative;
           top: 1rem;
           button {
             width: 7rem;
-            height: 2rem;
-            padding: 4px;
-            margin: 4px;
+            margin: 0 2.5rem;
           }
         }
       }
@@ -133,22 +130,24 @@ ul a {
   position: relative;
      
 }
-form::before {
-  content: "";
-  position: relative;
-  top: 0;
-  left: 0;
-  height: 100%;
+.form-wrapper{
+  background: #dd90ac;
   width: 100%;
-  z-index: -1;
-  background: rgba(112, 255, 112, 0.5);
+  height: 100%;
+  position: absolute;
+  padding: 0rem 5rem;
+  top: 3.91rem;
+  left: 0px;
+  margin: 3px 0;
 }
 .form{
   background: transparent;
   background: linear-gradient(#f3a3a3c7,#012c4c);
-  padding: 1rem;
-  border-radius: 0 0 1rem 1rem;
-  min-width: 200px;
+  padding: 4rem 1rem;
+  border-radius: 4px;
+  box-shadow: 6rem 5rem 7rem 4rem rgba(255, 255, 255, 0.66);
+  min-width: 20rem;
+  margin: 3rem;
   input, select, select option {
     outline: none;
     font-weight: 1000;
@@ -156,10 +155,10 @@ form::before {
     color: #000;
     border: solid 1px #f06d06;
     padding: 3px;
-    margin: 2px;
+    margin:0.5rem 0;
     height: 2rem;
     width: 100%; 
-    border-radius: 5rem;
+    border-radius: 4px;
     background-clip: content-box;
     background-color: white;
     line-height: 1.5;
@@ -172,7 +171,7 @@ button {
   font-weight: bold;
   font-family: 'Poiret One', cursive;
   padding: 5px;
-  border-radius: 5rem;
+  border-radius: 4px;
   background: orange;
   background-size: contain;
   background-position: left;
@@ -186,19 +185,21 @@ button.btn-signup, .btn-login{
   margin: 6px 4px 0 0;
 }
 button.btn-delete{
-  background-image: url('../img/big-bin.svg');
+  background-image: linear-gradient(to right,transparent, #ff5500), url('../img/big-bin.svg');
   width: 9rem;
 }
-button.btn-close,button.btn-cancel{
-  background-image: url('../img/round-delete.svg');
+button.btn-close{
+  background-image: linear-gradient(transparent, #ff5500), url('../img/round-delete.svg');
   width: 2rem;
   height: 2rem;
 }
 button.btn-cancel{
-  width: 7rem;
+  width: 6rem;
+  position: absolute;
+  margin: 4rem;
 }
 button.btn-signup, .btn-save{
-  background: radial-gradient(#fcff2e,#9100ff);
+  background: linear-gradient(#ffffffbd, #1872f5);
 }
 button.btn-create{
   background-image: linear-gradient(
@@ -208,24 +209,29 @@ button.btn-create{
   ), url('../img/edit-button.svg');
 }
 .btn-edit{
-  background-image: url('../img/edit-button.svg');  
+  background-image: linear-gradient(to right,transparent, #abfc68),url('../img/edit-button.svg');  
   width: 8rem;
 }
 button.btn-add{
-  background-image: url('../img/add-button.svg');
-  width: 6rem;
+  background-image: linear-gradient(to right,transparent, #abfc68),url('../img/add-button.svg');
+  width: 10rem;
+  position: absolute;
+  top: 4.5rem;
+  left: 0.5rem;
+  width: 12rem;
 }
 button.btn-close {
-  position: absolute;
-  top: 1rem;
-  width: 2rem;
-  left: 1rem;
+  position: relative;
+  left: -1rem;
+  top: -4rem;
 }
-h1,h2,p, label, li, a {
-  color: #fff;
+h1,h2,h3,h4,h5,h6,p,li, a {
+  color: #534c4c;
   font-size: 20px;
   font-weight: bold;
   font-family: 'Poiret One', cursive;
+  line-height: 1.5rem;
+  padding: 1rem;
 }
 #alert {
   background: red;
@@ -234,8 +240,8 @@ i.exit {
   background-image: url('../img/logout.svg');
   background-size: contain;
   background-repeat: no-repeat;
-  height: 2rem ;
-  width: 2rem;
+  height: 1.5rem ;
+  width: 1.5rem;
   position: absolute;
   right: 2%;
   top: 1rem;
@@ -249,7 +255,21 @@ i.exit {
   margin: 1rem;
   }
 }
-
-footer{
+#footer{
   background: #000;
+  width: 100%;
+  height: 10rem;
+}
+button:hover {
+  box-shadow: 0rem 1rem 3rem 0rem rgba(255, 255, 255, 0.66);
+}
+.title{
+  background-color: #bdbcbc;
+  color: black;
+  padding: 15px 0;
+  width: 100%;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 5px 5px 0 0;
 }
