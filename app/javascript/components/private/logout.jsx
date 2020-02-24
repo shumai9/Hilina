@@ -1,26 +1,18 @@
 import React from 'react';
-import {BrowserRouter as Redirect} from "react-router-dom";
+import {signOut} from '../../style/style.module.css'
 
 class Logout extends React.Component {  
   constructor(props){
     super(props);
   }
-  
   handleLogout = (e) => {
-    const data= { email: `${this.props.user}`}  
-    console.log('check data in logout ',data.email);
     sessionStorage.clear();
     this.props.updateCurrentUser();      
     this.props.toggleLogin();
+    Redirect.path("/");
   }
-
   render() {
-    const curentUser = this.props.user;
-    const signedIn = this.props.signedIn
-    console.warn('now user is ', curentUser);
-    return (
-      <i className="exit" onClick={this.handleLogout}></i>
-    );
+    return (<i className={signOut} onClick={this.handleLogout}></i>);
   };
 }
 

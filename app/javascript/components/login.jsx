@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRoute as Route, Redirect} from 'react-router-dom';
+import {logIn, formFormat} from 'style/style.module.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class Login extends React.Component {
       currentUser ? (
         <Redirect push={true} to="/user/dashboard"/>
       ) : (
-        <div className="form form-login">
+        <div className={logIn}>
         <form onSubmit = { this.handleLogin } >
           <span className = "form-field">
             <input autoComplete="on" type="text" id="email" name="email" placeholder="Email"/>          

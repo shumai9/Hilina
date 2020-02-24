@@ -1,4 +1,5 @@
 import React from 'react';
+import {formFormat,sectionEdit, closeIcon, saveIcon,links} from '../../style/style.module.css';
 
 class EditForm extends React.Component {
   constructor(props){
@@ -27,13 +28,14 @@ class EditForm extends React.Component {
   }
   render(){
     const compo = this.props.component;
+    const eData = this.state.edited;
+    const aqDate = eData.acquired.toISOString().substr(0,10) | eData.acquired;
+    const ceDate = eData.ceased ? 
+      eData.ceased.toISOString().substr(0,10) | eData.ceased : '' ;
     return(
-      <div className="section">
-        <button 
-          className="btn-cancel" 
-          onClick={ this.props.renderEditor }
-        >Cancel</button>
-        <form onSubmit={ this.onSaveForm } className="form">
+      <div className={sectionEdit}>
+        <h2>Edit {this.props.component}</h2>
+        <form className={formFormat}>
           <label>
             <input
               value={ this.state.edited[compo + "_name"] }
@@ -46,9 +48,9 @@ class EditForm extends React.Component {
           </label>
           <select  
             onChange ={ this.onEdit }
-            value={ this.state.edited[compo + "_type"] | ''}
+            selected={ this.state.edited[compo + "_type"] | ''}
             name={ compo + "_type" } form="form">
-            <option value=''>--sellect type--</option>
+            <option disabled >--sellect type--</option>
             <option>Financial</option>
             <option>Non-Financial</option>
           </select>
@@ -63,20 +65,28 @@ class EditForm extends React.Component {
           </label>
           <label>
             <input
-              value={ this.state.edited.acquired.substr(0,10) }
+              value={ aqDate }
               onChange ={this.onEdit}
               type="date" 
               name="acquired"/>
           </label>
           <label>
             <input
-              value={ this.state.edited.ceased ? this.state.edited.ceased.substr(0,10) : '' }
+              value={ ceDate}
               onChange ={this.onEdit}
               type="date" 
               name="ceased"/>
           </label>
-          <button className="btn-save" type="submit">Save</button>
-        </form>
+          <span className={links}>
+            <button 
+              className={saveIcon} 
+              onSubmit={ this.onSaveForm }
+              type="submit">Save</button>
+            <button 
+              className="btn-cancel"
+              onClick={ this.props.renderEditor }>Cancel</button>
+          </span>
+        </form>        
       </div>
     )
   }

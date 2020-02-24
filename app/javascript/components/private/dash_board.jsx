@@ -3,13 +3,12 @@ import { Route, Link, Switch } from "react-router-dom";
 import Assets from './assets';
 import Commitments from './commitments';
 import Networth from './networth';
-import Logout from './logout';
 import Login from '../login';
 import Signup from '../signup';
 import Form from './form';
 import Section from './section';
 import EditForm from './edit_section';
-
+import {authPage,mainContent, dashbord, links, flexChild, addIcon} from '../../style/style.module.css'
 class DashBoard extends React.Component {
   constructor(props) {
     super(props);
@@ -62,8 +61,10 @@ class DashBoard extends React.Component {
     this.setState({uid: uid})
   }
   submitHandler = (form_data) =>{
+    console.log(this.props.data.net["user_id"])
     const endPoint = this.state.component + 's';
-    form_data["user_id"] = this.state.uid;   
+    const uId = this.props.data.net["user_id"];
+    form_data["user_id"] = uId;   
     this.props.createUserData(endPoint, form_data);
     this.renderForm()
     console.log("Create", form_data)
@@ -124,19 +125,19 @@ class DashBoard extends React.Component {
     const updateUserData    = this.props.updateUserData;
     const removeUserData    = this.props.removeUserData;
     const closeSection      = this.closeSection;
-    const updateUid         = this.updateUid;  
+    const updateUid         = this.updateUid;
+    // const edData = {
+    //   ...this.state.singleData, 
+    //   [this.state.singleData.acquired]: this.state.singleData.acquired.toISOString(),
+    //   [this.state.singleData.ceased]: this.state.singleData.ceased.toISOString()
+    // }
+    // this.state.singleData ? console.log (edData) : null
     return (
-      <div className='dashboard'>
+      <div className={mainContent}>
         {
           currentUser ? (
-          <div className="user_board">
-            <Logout
-              signedIn = { signedIn }
-              toggleLogin={ toggleLogin }
-              updateCurrentUser = { updateCurrentUser }
-              user={ currentUser }
-            />
-            {
+          <div className={dashbord}>
+              {
                 this.state.section_on ?
                 <Section 
                   component={ this.state.component }
@@ -159,15 +160,7 @@ class DashBoard extends React.Component {
                   />
                 : null
               }
-              { 
-                this.state.formOpen ?
-                  <Form 
-                    submitHandler={ this.submitHandler }
-                    component={ this.state.component }
-                  />
-                : null
-              }          
-            <Switch>
+        
               <Route exact path="/assets" 
                 render={
                   (props)=> <Assets { ...props }
@@ -219,17 +212,33 @@ class DashBoard extends React.Component {
                   />
                 } 
               />
-            </Switch>
+            
+            { 
+              this.state.formOpen ?
+                <Form 
+                  submitHandler={ this.submitHandler }
+                  component={ this.state.component }
+                  renderForm = {this.renderForm}
+                />
+              : 
+              this.state.component !== 'networth' ?  
+                <i 
+                  onClick={this.renderForm}
+                  className={addIcon}></i> 
+              : null 
+            }
           </div>           
           ) : (
-          <div className="login_signup">
-            <div className="links">
+          <div className={authPage}>
+            <div className={links} >
               <Link 
                 onMouseDown={this.handleStyleChange}
+                className={flexChild}
                 id="signup"
                 to={"/signup"}> Sign up </Link>
               <Link 
                 onMouseDown={this.handleStyleChange}
+                className={flexChild}
                 id="login"
                 to={"/auth/login"}> Login </Link>
             </div>               

@@ -1,4 +1,5 @@
 import React from 'react';
+import {flexChild, commit } from '../../style/style.module.css'
 
 class Commitments extends React.Component {
   constructor(props) {
@@ -28,17 +29,16 @@ class Commitments extends React.Component {
     const updateUserData = this.props.updateUserData;
     if (data) {
       return (
-        <div className="commitments">
-          <button onClick={this.props.renderForm} className="btn-add">
-              Add {this.state.component}
-            </button>
-          <h2>Financial commitment : Total amount</h2>
+        <div className={commit}>
+          <h2 className="title">List of Commitments </h2>
           <ul onClick={this.props.getSingleData} >
             {
               [...data].map((k,v)=>{
                 this.state.value.push(parseInt(k.amount));
                 return (
-                  <li id={k.id} key={"commit" + v}> {k.commitment_name}: £  - {k.amount}</li>             
+                  <li  
+                  className={flexChild}
+                  id={k.id} key={"commit" + v}> {k.commitment_name}: £  - {k.amount}</li>             
                 );
               })
             }

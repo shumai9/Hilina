@@ -1,0 +1,79 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  width: inherit;
+}
+.active {
+  border-bottom: 8px solid rgb(255, 165, 0);
+  border-radius: 5%;
+}
+// h1,h2,h3,h4,h5,h6,p,li, a {
+//   color: #534c4c;
+//   font-size: 20px;
+//   font-weight: bold;
+//   font-family: 'Poiret One', cursive;
+//   line-height: 1.5rem;
+//   padding: 1rem;
+// }
+// div#app{
+//   font-family: 'Poiret One', cursive;
+//   width: 100%;
+//   height: 100vh;
+//   background:grey;
+// }
+// .content{
+//   background-image: radial-gradient(rgba(255, 97, 151, 0.5),
+//    #607D8B), url('../img/bro.jpg');
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   width: inherit;
+//   height: inherit;
+//   display: grid;
+//   grid-template-rows: 5rem 1fr 3rem;
+//   grid-template-columns: 1fr;
+// }
+// .nav.nav-bar {
+//   grid-row: 1/2;
+//   box-shadow: 0px 5px 1rem -6px #011d0a;
+//   background:radial-gradient(#ff6197e8, #607D8B);
+// }
+// .route {
+//   background: none;
+//   grid-row: 2/3;
+//   height: max-content;
+// }
+// div#footer {
+//   grid-row: 3/4;
+//   background: chocolate;
+// }
+// ul.link{
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-evenly;
+//   margin: 1.5rem 0;
+//   li, li > a {
+//     margin: 0 1rem;
+//     list-style: none;
+//     align-items: center;
+//     display: inline-block;
+//     text-decoration: none;
+//     list-style: none;
+//     color: #fff;
+//   }
+//   li:hover{
+//     background: rgb(206, 189, 189);
+//     border-radius: 4px;
+//     a{color: black;}
+//   }
+// }
+// i.exit {
+//   background-image: url('../img/logout.svg');
+//   background-size: contain;
+//   background-repeat: no-repeat;
+//   height: 1.5rem ;
+//   width: 1.5rem;
+//   position: absolute;
+//   right: 2%;
+//   top: 1rem;
+// }

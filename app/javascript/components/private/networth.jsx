@@ -1,4 +1,5 @@
 import React from 'react'
+import {flexChild, netWorth } from '../../style/style.module.css'
 
 class Networth extends React.Component {
   constructor(props) {
@@ -22,10 +23,10 @@ class Networth extends React.Component {
     console.log(this.props.data, data)
     if (this.props.data) {
       return (
-        <div className="networth">
-          <h1>Net worth</h1>
+        <div className={netWorth}>
+          <h2 className="title">Networth </h2>
             { data ? 
-              (<div>
+              (<div className={flexChild}>
                 <h3>Total Asset : { subAsset ? subAsset.asset : 0 }</h3>
                 <h3> Totals Commits: { subComit ? subComit.commit : 0 }</h3>
                 <br/>

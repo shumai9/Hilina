@@ -1,9 +1,11 @@
 import React from 'react';
+import {flexChild, asset, gridCol, gridRow } from '../../style/style.module.css'
 
 class Assets extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      gridData: {}
     }
   }
   valueHandler = () =>{
@@ -32,22 +34,46 @@ class Assets extends React.Component {
     console.log("ASSEt");
     if (this.props.data) {
       return (
-        <div className="assets">
-          <button 
-            onClick={this.props.renderForm}
-            className="btn-add"> Add {this.state.component}
-          </button>
-          <h2>Financial Assets: :Total amount </h2>
+        <div className={asset}>
+          <h2 className="title">List of Assets </h2>
+            <div className={gridCol}>
+              <h2>Asset name</h2>
+              <h2>Asset type</h2>
+              <h2>Amount</h2>
+              <h2>Held</h2>
+              <h2>Ceased</h2>
+            </div>
+            {
+              [...data].map((k,v)=>{       
+                return (
+                  <div
+                    className={gridCol}
+                    onClick={this.props.getSingleData}                    
+                    id={k.id} key={`${k.id}`}>
+                      <li className={flexChild} id={k.id}>{k.asset_name}</li>
+                      <li className={flexChild} id={k.id}>{k.asset_type}</li>
+                      <li className={flexChild} id={k.id}> £ {k.amount}</li>                    
+                      <li className={flexChild} id={k.id}>
+                        {k.acquired.getDate()} / {k.acquired.getMonth()} / {k.acquired.getFullYear()}</li>
+                      <li className={flexChild} id={k.id} >
+                      {k.ceased.getDate()} / {k.ceased.getMonth()} / {k.ceased.getFullYear()}</li>
+                  </div>
+                );
+              })
+            }
           <ul onClick={this.props.getSingleData}>
             {
               [...data].map((k,v)=>{
                 return (
-                  <li id={k.id} key={`${k.id}`}>  {k.asset_name} : £  {k.amount}</li>
+                  <li className={flexChild} id={k.id} key={`${k.id}`}>
+                    {k.asset_name} 
+                  : £  {k.amount}
+                  </li>
                 );
               })
             }
           </ul>
-          <h1>Total:  <strong> £{this.valueHandler()}</strong></h1>
+          <h2>Total:  <strong> £ {this.valueHandler()}</strong></h2>
         </div>
       );
     } else {
