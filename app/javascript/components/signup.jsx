@@ -64,15 +64,7 @@ class Signup extends React.Component{
       <div className={signUp}>
         <form className="form-field " 
           onSubmit={this.handleSignup} >     
-          <label>User Name 
-            <input value={this.state.user_name} 
-              onChange={this.handleChange}
-              type="text" id="user_name" 
-              name="user_name" 
-              placeholder="User name"
-              autoComplete="on"
-            />
-          </label>
+          <span>
             <label>First name 
               <input value={this.state.first_name} 
               onChange={this.handleChange}
@@ -82,7 +74,7 @@ class Signup extends React.Component{
               autoComplete="on"
             />
             </label>   
-            <label>Last name</label>     
+            <label>Last name     
               <input value={this.state.last_name} 
                 onChange={this.handleChange}
                 type="text" id="last_name" 
@@ -90,38 +82,53 @@ class Signup extends React.Component{
                 placeholder="Last name"
                 autoComplete="on"
               />
-          <label>Email 
-            <input className="border"
-              value={this.state.email} 
-              onChange={this.handleChange}
-              type="text" id="email" name="email" 
-              placeholder="Email"
-              autoComplete="on"
-            />
-          </label>  
-          <label >Password 
-            <input value={this.state.password} 
-              onChange={this.handleChange}
-              type="password"
-              id="password" 
-              name="password"
-              placeholder="Password"
-              autoComplete="off"
-            />
-          </label>               
-          <label >Confirm password 
-            <input value={ this.state.password_confirmation }
-              onChange={ this.handleChange }
-              type="password"
-              id="password_confirmation"
-              name="password_confirmation"
-              placeholder="Retype password"
-              autoComplete="off"
-            />
-          </label>
+            </label>
+          </span>
+          <span>
+            <label>User Name 
+              <input value={this.state.user_name} 
+                onChange={this.handleChange}
+                type="text" id="user_name" 
+                name="user_name" 
+                placeholder="User name"
+                autoComplete="on"
+              />
+            </label>
+            <label>Email 
+              <input className="border"
+                value={this.state.email} 
+                onChange={this.handleChange}
+                type="text" id="email" name="email" 
+                placeholder="Email"
+                autoComplete="on"
+              />
+            </label>
+          </span> 
+          <span>
+            <label >Password 
+              <input value={this.state.password} 
+                onChange={this.handleChange}
+                type="password"
+                id="password" 
+                name="password"
+                placeholder="Password"
+                autoComplete="off"
+              />
+            </label>               
+            <label >Confirm password 
+              <input value={ this.state.password_confirmation }
+                onChange={ this.handleChange }
+                type="password"
+                id="password_confirmation"
+                name="password_confirmation"
+                placeholder="Retype password"
+                autoComplete="off"
+              />
+            </label>
+          </span>
             <button className="btn-signup"
               onChange={this.handleSignup}>
-               Create Account
+               Create account
             </button>
         </form> 
       </div>        

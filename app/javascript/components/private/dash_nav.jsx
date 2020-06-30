@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom'
 import Logout from './logout';
 import { 
   navLink, 
-  navBar, 
   navChild, 
-  logoIcon ,
   navItem,
-  nav
+  assetIcon,
+  comitIcon,
+  netIcon
 } from '../../style/style.module.css'
 
 
@@ -21,22 +21,40 @@ class DashNav extends React.Component {
     const updateCurrentUser = this.props.updateCurrentUser;
     const signedIn          = this.props.signedIn;
     return(
-      <div className={nav}>
-        <NavLink exact to={"/"}>
-            <i className={logoIcon}></i>
-        </NavLink>
-          <ul className={navLink} >
-            <li className={navChild}><NavLink className={navItem} to={ "/assets" }>Assets</NavLink></li>              
-            <li className={navChild}><NavLink className={navItem} to={ "/commits" }>Commitments</NavLink></li>
-            <li className={navChild}><NavLink className={navItem} to={ "/networth" }>Net Worth</NavLink></li>
-          </ul>
-          <Logout
-            signedIn = { signedIn }
-            toggleLogin={ toggleLogin }
-            updateCurrentUser = { updateCurrentUser }
-            user={ currentUser }
-          />
-      </div>
+      <>
+        <ul id="manu" className={navLink} >
+          <i className="arr">></i>
+          <li className={navChild}>
+          <NavLink 
+            className={navItem} 
+            to={ "/assets" }>
+            <i className={assetIcon}></i>
+            Assets
+          </NavLink>
+          </li>              
+          <li className={navChild}>
+            <NavLink 
+              className={navItem} 
+              to={ "/commits" }>
+            <i className={comitIcon}></i>
+            Commits</NavLink>
+          </li>
+          <li className={navChild}>
+            <NavLink 
+              className={navItem} 
+              to={ "/networth" }>
+              <i className={netIcon}></i>
+              Networth
+            </NavLink>
+          </li>
+        </ul>
+        <Logout
+          signedIn = { signedIn }
+          toggleLogin={ toggleLogin }
+          updateCurrentUser = { updateCurrentUser }
+          user={ currentUser }
+        />
+      </>
     )
   }
 }

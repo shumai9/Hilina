@@ -5,6 +5,7 @@ application up and running.
 
 Things you may want to cover:
 to run:
+ 'foreman start -f Procfile.dev'
 procfile;
 api: bundle exec rails s -p 3000
 web: ./bin/webpack-dev-server -p 3035

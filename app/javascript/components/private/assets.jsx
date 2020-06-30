@@ -36,14 +36,14 @@ class Assets extends React.Component {
       return (
         <div className={asset}>
           <h2 className="title">List of Assets </h2>
-            <div className={gridCol}>
+            {/* <div className={gridCol}>
               <h2>Asset name</h2>
               <h2>Asset type</h2>
               <h2>Amount</h2>
               <h2>Held</h2>
               <h2>Ceased</h2>
-            </div>
-            {
+            </div> */}
+            {/* {
               [...data].map((k,v)=>{       
                 return (
                   <div
@@ -60,7 +60,7 @@ class Assets extends React.Component {
                   </div>
                 );
               })
-            }
+            } */}
           <ul onClick={this.props.getSingleData}>
             {
               [...data].map((k,v)=>{

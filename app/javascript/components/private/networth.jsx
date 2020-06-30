@@ -1,5 +1,18 @@
 import React from 'react'
-import {flexChild, netWorth } from '../../style/style.module.css'
+import {
+  flexChild,
+  netWorth,
+  viewContainer,
+  viewDisplay,
+  circle,
+  circleSvg, 
+  circleProgressPath,
+  circleProgressFill,
+  percentage,
+  perInt,
+  perDec,
+  label
+} from '../../style/style.module.css'
 
 class Networth extends React.Component {
   constructor(props) {
@@ -9,7 +22,6 @@ class Networth extends React.Component {
       isLoaded: false
     }  
   }
-  
   componentDidMount() {
     this.props.loadedComponent("networth"); 
     //this.props.fetchUserData("networth", "GET");
@@ -25,6 +37,21 @@ class Networth extends React.Component {
       return (
         <div className={netWorth}>
           <h2 className="title">Networth </h2>
+            <ul className={viewContainer}>
+              <div className={circle}>
+                <li className={viewDisplay}>
+                  <svg className={circleSvg}>
+                    <circle className={circleProgressPath} />
+                    <circle className={circleProgressFill} />
+                  </svg>
+                  <div className={percentage}>
+                    <span className={perInt}>0</span>
+                    <span className={perDec}>.00</span>
+                  </div>
+                  <span className={label}>Compo</span>
+                </li>
+                </div>
+              </ul>
             { data ? 
               (<div className={flexChild}>
                 <h3>Total Asset : { subAsset ? subAsset.asset : 0 }</h3>

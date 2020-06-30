@@ -9,7 +9,6 @@ class Logout extends React.Component {
     sessionStorage.clear();
     this.props.updateCurrentUser();      
     this.props.toggleLogin();
-    Redirect.path("/");
   }
   render() {
     return (<i className={signOut} onClick={this.handleLogout}></i>);

@@ -129,8 +129,11 @@ class App extends React.Component {
     }    
   }
   getUserData() {
-    ["assets","commitments","networth"].forEach(
-      (item) => { this.fetchUserData(item, "GET")})
+    Promise.all([
+      this.fetchUserData("assets"),
+      this.fetchUserData("commitments"),
+      this.fetchUserData("networth"),
+    ])
   }
   componentDidUpdate(prevState, prevProps){
     if (this.state.current_user !== prevProps.current_user) {
@@ -179,6 +182,7 @@ class App extends React.Component {
     return (      
       <BrowserRouter>
         <div className={styles.app} >
+          <Link title="Hilina Logo" className={styles.logoIcon} to={"/"}/>
           { 
             currentUser ? 
               <DashNav 
@@ -213,11 +217,6 @@ class App extends React.Component {
             </Switch>
           </div>
           < div className={styles.footer} id="footer">
-            <section >
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem est, 
-              itaque cumque nulla distinctio eveniet voluptatem tempore alias magni
-              natus. Quibusdam, vero! Ducimus a laborum sint, nobis soluta illum nostrum?</p>
-            </section>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
             Nemo libero ab doloremque consectetur quis voluptates neque similique 
             quidem quisquam quod ipsam reiciendis tenetur incidunt nulla, temporibus,
@@ -226,6 +225,11 @@ class App extends React.Component {
             Quos voluptas molestias veniam, accusamus et quisquam, corporis soluta laudantium 
             voluptatum possimus quas iusto porro odio blanditiis ipsa,
             perferendis qui? Consequuntur, sed! </p>
+            <section >
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem est, 
+              itaque cumque nulla distinctio eveniet voluptatem tempore alias magni
+              natus. Quibusdam, vero! Ducimus a laborum sint, nobis soluta illum nostrum?</p>
+            </section>
           </div>    
         </div>        
       </BrowserRouter>        
